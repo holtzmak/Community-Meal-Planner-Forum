@@ -1,0 +1,3 @@
+# Project files to be ignored
+/.idea/
+.DS_Store
