@@ -22,9 +22,9 @@ This project's main source of background information, process- and requirements-
 
 Deliverables assigned by the post-secondary course:
 1. Community Research & Understanding (February 3, 2021)
-* [Technology Steward Activity](Technology%20Steward%20Activity.pdf) - an activity for self-understanding the problem being approached
-* [Technology Configuration Inventory](Technolofy%20Configuration%20Inventory.pdf) - an activity for cataloging platforms and tools already on the market
-* [Community Characteristics Orientation](Community%20Characteristics%20Orientation.pdf) - an activity for self-understanding what it is consumers want
+* [Technology Steward Activity](https://github.com/holtzmak/Community-Meal-Planner/blob/main/documentation/community%20research%20%26%20understanding/Technology%20Steward%20Activity.pdf) - an activity for self-understanding the problem being approached
+* [Technology Configuration Inventory](https://github.com/holtzmak/Community-Meal-Planner/blob/main/documentation/community%20research%20%26%20understanding/Technology%20Configuration%20Inventory.pdf) - an activity for cataloging platforms and tools already on the market
+* [Community Characteristics Orientation](https://github.com/holtzmak/Community-Meal-Planner/blob/main/documentation/community%20research%20%26%20understanding/Community%20Characteristics%20Orientation.pdf) - an activity for self-understanding what it is consumers want
 2. Drafting an Emerging Picture & Project Management (February 10, 2021)
 * TBA
 
