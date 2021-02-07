@@ -21,7 +21,10 @@ This project's main source of background information, process- and requirements-
 ## Project Deliverables
 
 Deliverables assigned by the post-secondary course:
-1. Community Research & Understanding (February 3, 2021)
+
+0. Project Proposal ([scrum slides](https://github.com/holtzmak/Community-Meal-Planner/blob/main/documentation/scrum%20slides/Community%20Research%20%26%20Understanding.pdf)) (Feburary 3, 2021)
+
+1. Community Research & Understanding ([scrum slides](https://github.com/holtzmak/Community-Meal-Planner/blob/main/documentation/scrum%20slides/Community%20Research%20%26%20Understanding.pdf)) (February 3, 2021)
 * [Technology Steward Activity](https://github.com/holtzmak/Community-Meal-Planner/blob/main/documentation/community%20research%20%26%20understanding/Technology%20Steward%20Activity.pdf) - an activity for self-understanding the problem being approached
 * [Technology Configuration Inventory](https://github.com/holtzmak/Community-Meal-Planner/blob/main/documentation/community%20research%20%26%20understanding/Technology%20Configuration%20Inventory.pdf) - an activity for cataloging platforms and tools already on the market
 * [Community Characteristics Orientation](https://github.com/holtzmak/Community-Meal-Planner/blob/main/documentation/community%20research%20%26%20understanding/Community%20Characteristics%20Orientation.pdf) - an activity for self-understanding what it is consumers want
