@@ -32,6 +32,7 @@ Deliverables assigned by the post-secondary course:
 * [Stakeholder Analysis](https://github.com/holtzmak/Community-Meal-Planner/blob/main/documentation/project%20management/Stakeholder%20Analysis.pdf) - an activity for understanding who the customers are
 * [Project Scope Statement](https://github.com/holtzmak/Community-Meal-Planner/blob/main/documentation/project%20management/Project%20Scope%20Statement.pdf) - an activity to define what work the project consists of
 * [Project Requirements](https://github.com/holtzmak/Community-Meal-Planner/blob/main/documentation/project%20management/Project%20Requirements.pdf) - an activity to define what the project shall do
+* An early structure of the expected Sprint schedule, and the work expected in each Sprint, is available under the [Projects tab](https://github.com/holtzmak/Community-Meal-Planner-Forum/projects)
 
 ***
 
