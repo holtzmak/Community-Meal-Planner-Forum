@@ -1,5 +1,3 @@
-> This project is under construction, details not final
-
 # Community of Meal Planners Forums
 
 A forum application to support community discussion for meal planning, sustainable practices, and education.
@@ -26,7 +24,7 @@ Deliverables assigned by the post-secondary course:
 * [Technology Steward Activity](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/community%20research%20%26%20understanding/Technology%20Steward%20Activity.pdf) - an activity for self-understanding the problem being approached
 * [Technology Configuration Inventory](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/community%20research%20%26%20understanding/Technology%20Configuration%20Inventory.pdf) - an activity for cataloging platforms and tools already on the market
 * [Community Characteristics Orientation](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/community%20research%20%26%20understanding/Community%20Characteristics%20Orientation.pdf) - an activity for self-understanding what it is consumers want
-2. Drafting an Emerging Picture & Project Management ([scrum slides](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/scrum%20slides/Project%20Management.pdf) (February 10, 2021)
+2. Drafting an Emerging Picture & Project Management ([scrum slides](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/scrum%20slides/Project%20Management.pdf)) (February 10, 2021)
 * [Drafting an emerging picture document](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/project%20management/Drafting%20an%20emerging%20picture.pdf) - an activity to understand how the application should benefit the community orientation
 * [Business Case](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/project%20management/Business%20Case.pdf) - an activity for grasping what the application should do
 * [Stakeholder Analysis](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/project%20management/Stakeholder%20Analysis.pdf) - an activity for understanding who the customers are
