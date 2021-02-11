@@ -14,25 +14,24 @@ The meal planning market consists of convenience tools rather than educational t
 
 This project aims to provide members of the meal planning community with a space (forum) for relevant discussion and critique of recipes, practices, and tools that can be received by meal planning companies/tool developers so as to incite community-led change in the status quo.
 
-**This project's main source of process-related documentation is the [Wiki](https://github.com/holtzmak/Community-Meal-Planner/wiki).**
+**This project's main source of process-related documentation is the [Wiki](https://github.com/holtzmak/Community-Meal-Planner-Forum/wiki).**
 
 ## Project Deliverables
 
 Deliverables assigned by the post-secondary course:
 
-0. Project Proposal ([scrum slides](https://github.com/holtzmak/Community-Meal-Planner/blob/main/documentation/scrum%20slides/Community%20Research%20%26%20Understanding.pdf)) (Feburary 3, 2021)
+0. Project Proposal ([scrum slides](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/scrum%20slides/Community%20Research%20%26%20Understanding.pdf)) (Feburary 3, 2021)
 
-1. Community Research & Understanding ([scrum slides](https://github.com/holtzmak/Community-Meal-Planner/blob/main/documentation/scrum%20slides/Community%20Research%20%26%20Understanding.pdf)) (February 3, 2021)
-* [Technology Steward Activity](https://github.com/holtzmak/Community-Meal-Planner/blob/main/documentation/community%20research%20%26%20understanding/Technology%20Steward%20Activity.pdf) - an activity for self-understanding the problem being approached
-* [Technology Configuration Inventory](https://github.com/holtzmak/Community-Meal-Planner/blob/main/documentation/community%20research%20%26%20understanding/Technology%20Configuration%20Inventory.pdf) - an activity for cataloging platforms and tools already on the market
-* [Community Characteristics Orientation](https://github.com/holtzmak/Community-Meal-Planner/blob/main/documentation/community%20research%20%26%20understanding/Community%20Characteristics%20Orientation.pdf) - an activity for self-understanding what it is consumers want
-2. Drafting an Emerging Picture & Project Management (February 10, 2021)
-* [Drafting an emerging picture document](https://github.com/holtzmak/Community-Meal-Planner/blob/main/documentation/project%20management/Drafting%20an%20emerging%20picture.pdf) - an activity to understand how the application should benefit the community orientation
-* [Business Case](https://github.com/holtzmak/Community-Meal-Planner/blob/main/documentation/project%20management/Business%20Case.pdf) - an activity for grasping what the application should do
-* [Stakeholder Analysis](https://github.com/holtzmak/Community-Meal-Planner/blob/main/documentation/project%20management/Stakeholder%20Analysis.pdf) - an activity for understanding who the customers are
-* [Project Scope Statement](https://github.com/holtzmak/Community-Meal-Planner/blob/main/documentation/project%20management/Project%20Scope%20Statement.pdf) - an activity to define what work the project consists of
-* [Project Requirements](https://github.com/holtzmak/Community-Meal-Planner/blob/main/documentation/project%20management/Project%20Requirements.pdf) - an activity to define what the project shall do
-* An early structure of the expected Sprint schedule, and the work expected in each Sprint, is available under the [Projects tab](https://github.com/holtzmak/Community-Meal-Planner-Forum/projects)
+1. Community Research & Understanding ([scrum slides](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/scrum%20slides/Community%20Research%20%26%20Understanding.pdf)) (February 3, 2021)
+* [Technology Steward Activity](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/community%20research%20%26%20understanding/Technology%20Steward%20Activity.pdf) - an activity for self-understanding the problem being approached
+* [Technology Configuration Inventory](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/community%20research%20%26%20understanding/Technology%20Configuration%20Inventory.pdf) - an activity for cataloging platforms and tools already on the market
+* [Community Characteristics Orientation](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/community%20research%20%26%20understanding/Community%20Characteristics%20Orientation.pdf) - an activity for self-understanding what it is consumers want
+2. Drafting an Emerging Picture & Project Management ([scrum slides](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/scrum%20slides/Project%20Management.pdf) (February 10, 2021)
+* [Drafting an emerging picture document](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/project%20management/Drafting%20an%20emerging%20picture.pdf) - an activity to understand how the application should benefit the community orientation
+* [Business Case](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/project%20management/Business%20Case.pdf) - an activity for grasping what the application should do
+* [Stakeholder Analysis](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/project%20management/Stakeholder%20Analysis.pdf) - an activity for understanding who the customers are
+* [Project Scope Statement](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/project%20management/Project%20Scope%20Statement.pdf) - an activity to define what work the project consists of
+* [Project Requirements](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/project%20management/Project%20Requirements.pdf) - an activity to define what the project shall do
 
 ***
 
