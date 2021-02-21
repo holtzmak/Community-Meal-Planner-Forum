@@ -38,6 +38,8 @@ Deliverables assigned by the post-secondary course:
 * [Context Diagram](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/add-client-server-arch-drawings/documentation/software%20design/client-server-database%20architecture/Context%20Diagram.pdf) - a diagram for identifying where the application fits among external software systems
 * [Container Diagram](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/add-client-server-arch-drawings/documentation/software%20design/client-server-database%20architecture/Container%20Diagram.pdf) - a diagram for identifying the different application interfaces (mobile & web) among external software systems
 * [Component Diagram](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/add-client-server-arch-drawings/documentation/software%20design/client-server-database%20architecture/Component%20Diagram.pdf) - a diagram for offering insight to the internal software design of the application (mobile & web)
+* [Database Conceptual Data Models](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/add-database-concept-models/documentation/software%20design/client-server-database%20architecture/Database%20Conceptual%20Data%20Models.pdf) - a diagram identifying the collections and documents of the database (NoSQL database)
+
 ***
 
 ## Legal Notices
