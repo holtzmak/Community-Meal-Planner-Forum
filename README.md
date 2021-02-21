@@ -33,6 +33,7 @@ Deliverables assigned by the post-secondary course:
 3. Software Design (scrum slides TBA) (February 22, 2021)
 > (Due to high-quality file sizes, it's recommended to zoom in/out as needed when viewing the following drawings)
 * [Lo-fi GUI Prototypes](https://raw.githubusercontent.com/holtzmak/Community-Meal-Planner-Forum/db4d818b13afb5196ab916fee6d15c0b69cd18a3/documentation/software%20design/Lo-Fi%20GUI%20Prototypes.svg) - an activity for quickly drafting up the general appearance of the application
+* [Application Workflow Diagrams](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/software%20design/Application%20Workflow%20Diagrams.pdf) - diagrams identifying the different application routes between screens
 > The following client-server-database architecture drawings use the [C4 Model for diagramming](https://c4model.com/). They are UML-like.
 * [Persona (Roles) Diagram](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/software%20design/client-server-database%20architecture/Persona%20(Roles)%20Diagram.pdf) - a diagram for identifying the workflow differences of the persons (roles) using the application
 * [Context Diagram](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/software%20design/client-server-database%20architecture/Context%20Diagram.pdf) - a diagram for identifying where the application fits among external software systems
