@@ -30,7 +30,7 @@ Deliverables assigned by the post-secondary course:
 * [Stakeholder Analysis](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/project%20management/Stakeholder%20Analysis.pdf) - an activity for understanding who the customers are
 * [Project Scope Statement](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/project%20management/Project%20Scope%20Statement.pdf) - an activity to define what work the project consists of
 * [Project Requirements](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/project%20management/Project%20Requirements.pdf) - an activity to define what the project shall do
-3. Software Design (scrum slides TBA) (February 22, 2021)
+3. Software Design ([scrum slides](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/scrum%20slides/Software%20Design.pdf)) (February 22, 2021)
 > (Due to high-quality file sizes, it's recommended to zoom in/out as needed when viewing the following drawings)
 * [Lo-fi GUI Prototypes](https://raw.githubusercontent.com/holtzmak/Community-Meal-Planner-Forum/db4d818b13afb5196ab916fee6d15c0b69cd18a3/documentation/software%20design/Lo-Fi%20GUI%20Prototypes.svg) - an activity for quickly drafting up the general appearance of the application
 * [Mid-fi GUI Prototype](https://xd.adobe.com/view/262b07e0-7a00-4e45-a4ed-4d4036fc88d5-7378/) - an activity for previewing the appearance and some interaction of the application
