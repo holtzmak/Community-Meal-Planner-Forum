@@ -1,4 +1,7 @@
 # Community of Meal Planners Forums
+![Build and integration tests](https://github.com/holtzmak/Community-Meal-Planner-Forum/actions/workflows/flutter-build-and-integration-test.yml/badge.svg)
+![Unit tests](https://github.com/holtzmak/Community-Meal-Planner-Forum/actions/workflows/flutter-unit-test.yml/badge.svg)
+![Formatting and Dart analysis](https://github.com/holtzmak/Community-Meal-Planner-Forum/actions/workflows/flutter-formatting-and-dart-analysis.yml/badge.svg)
 
 A forum application to support community discussion for meal planning, sustainable practices, and education.
 
