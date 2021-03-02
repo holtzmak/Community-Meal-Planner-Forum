@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "594857006245",
+    "project_id": "community-meal-planner-forum",
+    "storage_bucket": "community-meal-planner-forum.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:594857006245:android:9305cea34252b32265a94c",
+        "android_client_info": {
+          "package_name": "com.communitymealplannerforum.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "594857006245-q6q60bh357hvgh518l8blfthdc16cn6k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCklLTh61IvSpowA97aYFhyfZAWnFUsZqg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "594857006245-q6q60bh357hvgh518l8blfthdc16cn6k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
