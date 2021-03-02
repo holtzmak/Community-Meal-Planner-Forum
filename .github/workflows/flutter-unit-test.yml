@@ -26,7 +26,7 @@ jobs:
       - name: Set up Flutter actions
         uses: subosito/flutter-action@v1
         with:
-          flutter-version: '1.22.6'
-          channel: 'stable'
+          flutter-version: '1.26.0-17.8.pre'
+          channel: 'beta'
       - run: flutter pub get
       - run: flutter test
