@@ -20,7 +20,6 @@ dev_dependencies:
     sdk: flutter
   flutter_test:
     sdk: flutter
-  integration_test: ^1.0.0
   mockito: ^4.1.4
 
 flutter:
