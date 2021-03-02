@@ -48,6 +48,8 @@ jobs:
           )
           xcrun simctl boot ${UDID:?No Simulator with this name found}
       - run: flutter pub get
-      - run: flutter build apk
+      # Build both as per bug https://stackoverflow.com/a/62603296
+      - run: flutter build apk --debug
+      - run: flutter build apk --release
       - run: flutter build ios --release --no-codesign
       # List integration tests here (until a command that runs them all is discovered)
