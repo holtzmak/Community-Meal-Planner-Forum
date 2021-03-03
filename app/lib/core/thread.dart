@@ -5,15 +5,12 @@ import 'package:app/core/utility/nullable_json_converter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 
-import 'account.dart';
-
 @immutable
 class Thread {
-  final int threadId;
   final String title;
   final List<Topic> topics;
   final List<SubTopic> subTopics;
-  final Account author;
+  final String authorUsername;
   final DateTime startDate;
   final DateTime? completionDate;
   final Post? completionPost;
@@ -21,11 +18,10 @@ class Thread {
   final bool canBeRepliedTo;
 
   Thread(
-      {required this.threadId,
-      required this.title,
+      {required this.title,
       required this.topics,
       required this.subTopics,
-      required this.author,
+      required this.authorUsername,
       required this.startDate,
       required this.completionDate,
       required this.completionPost,
@@ -33,15 +29,15 @@ class Thread {
       required this.canBeRepliedTo});
 
   Thread.fromJson(Map<String, dynamic> json)
-      : threadId = json['threadId'],
-        title = json['title'],
+      : title = json['title'],
         topics = json['topics']
-            .map((topic) => TopicDeserializer.fromString(topic))
+            .map<Topic>((topic) => TopicDeserializer.fromString(topic))
             .toList(),
         subTopics = json['subTopics']
-            .map((subTopic) => SubTopicDeserializer.fromString(subTopic))
+            .map<SubTopic>(
+                (subTopic) => SubTopicDeserializer.fromString(subTopic))
             .toList(),
-        author = Account.fromJson(json['author']),
+        authorUsername = json['authorUsername'],
         startDate = json['startDate'].toDate(),
         completionDate = NullableJsonConverter().getFromJsonMaybe(
             json: json['completionDate'], transform: (it) => it.toDate()),
@@ -51,11 +47,10 @@ class Thread {
         canBeRepliedTo = json['canBeRepliedTo'];
 
   Map<String, dynamic> toJson() => {
-        'threadId': threadId,
         'title': title,
         'topics': topics.map((it) => it.toString()).toList(),
         'subTopics': subTopics.map((it) => it.toString()).toList(),
-        'author': author.toJson(),
+        'authorUsername': authorUsername,
         'startDate': startDate,
         'completionDate': completionDate,
         'completionPost': completionPost?.toJson(),
@@ -65,11 +60,10 @@ class Thread {
 
   @override
   int get hashCode =>
-      threadId.hashCode ^
       title.hashCode ^
       topics.hashCode ^
       subTopics.hashCode ^
-      author.hashCode ^
+      authorUsername.hashCode ^
       startDate.hashCode ^
       completionDate.hashCode ^
       completionPost.hashCode ^
@@ -79,11 +73,10 @@ class Thread {
   @override
   bool operator ==(other) {
     return (other is Thread) &&
-        other.threadId == threadId &&
         other.title == title &&
         listEquals(other.topics, topics) &&
         listEquals(other.subTopics, subTopics) &&
-        other.author == author &&
+        other.authorUsername == authorUsername &&
         other.startDate == startDate &&
         other.completionDate == completionDate &&
         other.completionPost == completionPost &&
@@ -92,18 +85,17 @@ class Thread {
   }
 
   String toString() =>
-      'Thread($threadId, $title, $topics, $subTopics, $author, $startDate, $completionDate, $completionPost, $posts, $canBeRepliedTo)';
+      'Thread($title, $topics, $subTopics, $authorUsername, $startDate, $completionDate, $completionPost, $posts, $canBeRepliedTo)';
 
   Thread withTopics(List<Topic> newTopics) {
     if (completionDate == null) {
       throw Exception("Cannot add topics to a completed Thread");
     }
     return Thread(
-        threadId: threadId,
         title: title,
         topics: newTopics,
         subTopics: subTopics,
-        author: author,
+        authorUsername: authorUsername,
         startDate: startDate,
         completionDate: completionDate,
         completionPost: completionPost,
@@ -116,11 +108,10 @@ class Thread {
       throw Exception("Cannot add sub topics to a completed Thread");
     }
     return Thread(
-        threadId: threadId,
         title: title,
         topics: topics,
         subTopics: newSubTopics,
-        author: author,
+        authorUsername: authorUsername,
         startDate: startDate,
         completionDate: completionDate,
         completionPost: completionPost,
@@ -132,11 +123,10 @@ class Thread {
           {required DateTime newCompletionDate,
           required Post? newCompletionPost}) =>
       Thread(
-          threadId: threadId,
           title: title,
           topics: topics,
           subTopics: subTopics,
-          author: author,
+          authorUsername: authorUsername,
           startDate: startDate,
           completionDate: newCompletionDate,
           completionPost: newCompletionPost,
@@ -144,11 +134,10 @@ class Thread {
           canBeRepliedTo: false);
 
   Thread restoredAsIncomplete({required bool canBeRepliedTo}) => Thread(
-      threadId: threadId,
       title: title,
       topics: topics,
       subTopics: subTopics,
-      author: author,
+      authorUsername: authorUsername,
       startDate: startDate,
       completionDate: null,
       completionPost: null,
@@ -160,11 +149,10 @@ class Thread {
       throw Exception("Cannot add posts to a completed Thread");
     }
     return Thread(
-        threadId: threadId,
         title: title,
         topics: topics,
         subTopics: subTopics,
-        author: author,
+        authorUsername: authorUsername,
         startDate: startDate,
         completionDate: completionDate,
         completionPost: completionPost,
