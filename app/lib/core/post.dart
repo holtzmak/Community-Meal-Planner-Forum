@@ -15,7 +15,31 @@ class Post {
       required this.message,
       required this.postDate});
 
-// factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
+  Post.fromJson(Map<String, dynamic> json)
+      : postId = json['postId'],
+        author = Account.fromJson(json['author']),
+        message = json['message'],
+        postDate = json['postDate'].toDate();
 
-// Map<String, dynamic> toJson() => _$PostToJson(this);
+  Map<String, dynamic> toJson() => {
+        'postId': postId,
+        'author': author.toJson(),
+        'message': message,
+        'postDate': postDate
+      };
+
+  @override
+  int get hashCode =>
+      postId.hashCode ^ author.hashCode ^ message.hashCode ^ postDate.hashCode;
+
+  @override
+  bool operator ==(other) {
+    return (other is Post) &&
+        other.postId == postId &&
+        other.author == author &&
+        other.message == message &&
+        other.postDate == postDate;
+  }
+
+  String toString() => 'Post($postId, $author, $message, $postDate)';
 }

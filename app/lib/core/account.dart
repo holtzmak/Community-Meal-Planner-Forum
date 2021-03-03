@@ -1,5 +1,6 @@
 import 'package:app/core/thread.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 
 @immutable
 class Account {
@@ -18,10 +19,47 @@ class Account {
       required this.joinDate,
       required this.threads});
 
-  // factory Account.fromJson(Map<String, dynamic> json) =>
-  //     _$AccountFromJson(json);
+  Account.fromJson(Map<String, dynamic> json)
+      : username = json['username'],
+        name = json['name'],
+        titles = List<String>.from(json['titles']),
+        aboutMeDescription = json['aboutMeDescription'],
+        joinDate = json['joinDate'].toDate(),
+        threads = json['threads']
+            .map<Thread>((thread) => Thread.fromJson(thread))
+            .toList();
 
-  // Map<String, dynamic> toJson() => _$AccountToJson(this);
+  Map<String, dynamic> toJson() => {
+        'username': username,
+        'name': name,
+        'titles': titles,
+        'aboutMeDescription': aboutMeDescription,
+        'joinDate': joinDate,
+        "threads": threads.map((thread) => thread.toJson()).toList()
+      };
+
+  @override
+  int get hashCode =>
+      username.hashCode ^
+      name.hashCode ^
+      titles.hashCode ^
+      aboutMeDescription.hashCode ^
+      joinDate.hashCode ^
+      threads.hashCode;
+
+  @override
+  bool operator ==(other) {
+    return (other is Account) &&
+        other.username == name &&
+        other.name == name &&
+        listEquals(other.titles, titles) &&
+        other.aboutMeDescription == aboutMeDescription &&
+        other.joinDate == joinDate &&
+        listEquals(other.threads, threads);
+  }
+
+  String toString() =>
+      'Account($username, $name, $titles, $aboutMeDescription, $joinDate, $threads)';
 
   Account withTitles(List<String> newTitles) => Account(
       username: username,

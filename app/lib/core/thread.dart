@@ -1,7 +1,9 @@
 import 'package:app/core/post.dart';
 import 'package:app/core/subtopic.dart';
 import 'package:app/core/topic.dart';
+import 'package:app/core/utility/nullable_json_converter.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 
 import 'account.dart';
 
@@ -30,9 +32,67 @@ class Thread {
       required this.posts,
       required this.canBeRepliedTo});
 
-  // factory Thread.fromJson(Map<String, dynamic> json) => _$ThreadFromJson(json);
+  Thread.fromJson(Map<String, dynamic> json)
+      : threadId = json['threadId'],
+        title = json['title'],
+        topics = json['topics']
+            .map((topic) => TopicDeserializer.fromString(topic))
+            .toList(),
+        subTopics = json['subTopics']
+            .map((subTopic) => SubTopicDeserializer.fromString(subTopic))
+            .toList(),
+        author = Account.fromJson(json['author']),
+        startDate = json['startDate'].toDate(),
+        completionDate = NullableJsonConverter().getFromJsonMaybe(
+            json: json['completionDate'], transform: (it) => it.toDate()),
+        completionPost = NullableJsonConverter().getFromJsonMaybe(
+            json: json['completionPost'], transform: (it) => Post.fromJson(it)),
+        posts = json['posts'].map<Post>((post) => Post.fromJson(post)).toList(),
+        canBeRepliedTo = json['canBeRepliedTo'];
 
-  // Map<String, dynamic> toJson() => _$ThreadToJson(this);
+  Map<String, dynamic> toJson() => {
+        'threadId': threadId,
+        'title': title,
+        'topics': topics.map((it) => it.toString()).toList(),
+        'subTopics': subTopics.map((it) => it.toString()).toList(),
+        'author': author.toJson(),
+        'startDate': startDate,
+        'completionDate': completionDate,
+        'completionPost': completionPost?.toJson(),
+        'posts': posts.map((post) => post.toJson()).toList(),
+        'canBeRepliedTo': canBeRepliedTo
+      };
+
+  @override
+  int get hashCode =>
+      threadId.hashCode ^
+      title.hashCode ^
+      topics.hashCode ^
+      subTopics.hashCode ^
+      author.hashCode ^
+      startDate.hashCode ^
+      completionDate.hashCode ^
+      completionPost.hashCode ^
+      posts.hashCode ^
+      canBeRepliedTo.hashCode;
+
+  @override
+  bool operator ==(other) {
+    return (other is Thread) &&
+        other.threadId == threadId &&
+        other.title == title &&
+        listEquals(other.topics, topics) &&
+        listEquals(other.subTopics, subTopics) &&
+        other.author == author &&
+        other.startDate == startDate &&
+        other.completionDate == completionDate &&
+        other.completionPost == completionPost &&
+        listEquals(other.posts, posts) &&
+        other.canBeRepliedTo == canBeRepliedTo;
+  }
+
+  String toString() =>
+      'Thread($threadId, $title, $topics, $subTopics, $author, $startDate, $completionDate, $completionPost, $posts, $canBeRepliedTo)';
 
   Thread withTopics(List<Topic> newTopics) {
     if (completionDate == null) {
