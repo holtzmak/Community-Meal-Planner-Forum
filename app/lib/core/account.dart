@@ -1,87 +1,75 @@
-import 'package:app/core/thread.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 
 @immutable
 class Account {
-  final String username;
+  final String id; // Firebase Firestore ID
   final String name;
   final List<String> titles;
   final String aboutMeDescription;
   final DateTime joinDate;
-  final List<Thread> threads;
 
   Account(
-      {required this.username,
+      {required this.id,
       required this.name,
       required this.titles,
       required this.aboutMeDescription,
-      required this.joinDate,
-      required this.threads});
+      required this.joinDate});
+
+  Account.empty()
+      : id = "",
+        name = "",
+        titles = [],
+        aboutMeDescription = "",
+        joinDate = DateTime.now();
 
   Account.fromJson(Map<String, dynamic> json)
-      : username = json['username'],
+      : id = json['username'],
         name = json['name'],
         titles = List<String>.from(json['titles']),
         aboutMeDescription = json['aboutMeDescription'],
-        joinDate = json['joinDate'].toDate(),
-        threads = json['threads']
-            .map<Thread>((thread) => Thread.fromJson(thread))
-            .toList();
+        joinDate = json['joinDate'].toDate();
 
   Map<String, dynamic> toJson() => {
-        'username': username,
+        'username': id,
         'name': name,
         'titles': titles,
         'aboutMeDescription': aboutMeDescription,
         'joinDate': joinDate,
-        "threads": threads.map((thread) => thread.toJson()).toList()
       };
 
   @override
   int get hashCode =>
-      username.hashCode ^
+      id.hashCode ^
       name.hashCode ^
       titles.hashCode ^
       aboutMeDescription.hashCode ^
-      joinDate.hashCode ^
-      threads.hashCode;
+      joinDate.hashCode;
 
   @override
   bool operator ==(other) {
     return (other is Account) &&
-        other.username == name &&
+        other.id == name &&
         other.name == name &&
         listEquals(other.titles, titles) &&
         other.aboutMeDescription == aboutMeDescription &&
-        other.joinDate == joinDate &&
-        listEquals(other.threads, threads);
+        other.joinDate == joinDate;
   }
 
   String toString() =>
-      'Account($username, $name, $titles, $aboutMeDescription, $joinDate, $threads)';
+      'Account(id: $id, name: $name, titles: $titles, aboutMeDescription: $aboutMeDescription, joinDate: $joinDate)';
 
   Account withTitles(List<String> newTitles) => Account(
-      username: username,
+      id: id,
       name: name,
       titles: newTitles,
       aboutMeDescription: aboutMeDescription,
-      joinDate: joinDate,
-      threads: threads);
+      joinDate: joinDate);
 
   Account withAboutMeDescription(String newDescription) => Account(
-      username: username,
+      id: id,
       name: name,
       titles: titles,
       aboutMeDescription: newDescription,
-      joinDate: joinDate,
-      threads: threads);
-
-  Account withThreads(List<Thread> newThreads) => Account(
-      username: username,
-      name: name,
-      titles: titles,
-      aboutMeDescription: aboutMeDescription,
-      joinDate: joinDate,
-      threads: newThreads);
+      joinDate: joinDate);
 }
