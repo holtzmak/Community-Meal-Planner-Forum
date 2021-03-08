@@ -99,9 +99,6 @@ class Thread {
       'Thread(id: $id, title: $title, topics: $topics, subTopics: $subTopics, authorId: $authorId, startDate: $startDate, completionDate: $completionDate, completionPost: $completionPost, canBeRepliedTo: $canBeRepliedTo)';
 
   Thread withDocumentId(String newId) {
-    if (completionDate == null) {
-      throw Exception("Cannot add topics to a completed Thread");
-    }
     return Thread(
         id: newId,
         title: title,
@@ -115,7 +112,7 @@ class Thread {
   }
 
   Thread withTopics(List<Topic> newTopics) {
-    if (completionDate == null) {
+    if (completionDate != null) {
       throw Exception("Cannot add topics to a completed Thread");
     }
     return Thread(
@@ -131,7 +128,7 @@ class Thread {
   }
 
   Thread withSubTopics(List<SubTopic> newSubTopics) {
-    if (completionDate == null) {
+    if (completionDate != null) {
       throw Exception("Cannot add sub topics to a completed Thread");
     }
     return Thread(
