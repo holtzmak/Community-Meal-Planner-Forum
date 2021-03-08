@@ -12,9 +12,6 @@ class FirebaseAuthService {
   final _databaseService = ServiceLocator.it<FirebaseDatabaseService>();
   final _firebaseAuth = ServiceLocator.it<FirebaseAuth>();
 
-  // Not disposed of in destructor because FirebaseAuthService goes out of scope when
-  // app is destroyed. The disposal is handled by garbage cleanup. Also, Dart
-  // does not define destructors https://github.com/dart-lang/sdk/issues/3691
   late StreamSubscription<User?> _authStateChanges;
 
   // The current user information is the same as the Account information
@@ -29,6 +26,9 @@ class FirebaseAuthService {
   final StreamController<User?> _currentUserChangesStream =
       StreamController<User?>.broadcast();
 
+  // Not disposed of in destructor because FirebaseAuthService goes out of scope
+  // when app is destroyed. The disposal is handled by garbage cleanup. Also,
+  // Dart does not define destructors https://github.com/dart-lang/sdk/issues/3691
   void dispose() async {
     _currentUserChangesStream.close();
     _authStateChanges.cancel();
