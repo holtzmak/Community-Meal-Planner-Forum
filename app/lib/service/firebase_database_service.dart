@@ -18,10 +18,9 @@ class FirebaseDatabaseService {
   Future<void> removeAccount(String id) async =>
       _firestore.collection('account').doc(id).delete();
 
-  Future<Thread> addThread(Thread placeholder) async => _firestore
-      .collection('thread')
-      .add(placeholder.toJson())
-      .then((docRef) => placeholder.withDocumentId(docRef.id));
+  Future<Thread> addThread(Thread placeholder) async =>
+      _firestore.collection('thread').add(placeholder.toJson()).then(
+          (DocumentReference docRef) => placeholder.withDocumentId(docRef.id));
 
   Future<void> updateThread(Thread thread) async =>
       _firestore.collection('thread').doc(thread.id).update(thread.toJson());
@@ -32,7 +31,8 @@ class FirebaseDatabaseService {
           .doc(thread.id)
           .collection('post')
           .add(placeholder.toJson())
-          .then((docRef) => placeholder.withDocumentId(docRef.id));
+          .then((DocumentReference docRef) =>
+              placeholder.withDocumentId(docRef.id));
 
   Future<void> updatePostInThread(Thread thread, Post post) async => _firestore
       .collection('thread')

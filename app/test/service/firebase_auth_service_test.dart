@@ -10,7 +10,7 @@ import 'package:mockito/mockito.dart';
 
 import 'firebase_auth_service_test.mocks.dart';
 
-final testLocator = GetIt.instance;
+final testServiceLocator = GetIt.instance;
 
 @GenerateMocks([UserCredential, User, FirebaseAuth, FirebaseDatabaseService])
 void main() {
@@ -42,9 +42,10 @@ void main() {
 
   group('Firebase Authentication Service', () {
     setUpAll(() async {
-      testLocator.registerLazySingleton<FirebaseDatabaseService>(
+      testServiceLocator.registerLazySingleton<FirebaseDatabaseService>(
           () => mockFirebaseDatabaseService);
-      testLocator.registerLazySingleton<FirebaseAuth>(() => mockFirebaseAuth);
+      testServiceLocator
+          .registerLazySingleton<FirebaseAuth>(() => mockFirebaseAuth);
     });
     tearDownAll(() async => mockAuthStateChangesController.close());
 
