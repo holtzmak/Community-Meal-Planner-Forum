@@ -6,6 +6,7 @@ import 'package:app/core/thread.dart';
 import 'package:app/service/service_locator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+/// A service wrapping Firebase Firestore, specifically for the app
 class FirebaseDatabaseService {
   final _firestore = ServiceLocator.it<FirebaseFirestore>();
 
