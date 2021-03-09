@@ -33,7 +33,7 @@ jobs:
       - name: Set up Flutter actions
         uses: subosito/flutter-action@v1
         with:
-          flutter-version: '1.26.0-17.8.pre'
+          flutter-version: '2.0.1'
           channel: 'beta'
       - name: List all available devices
         run: xcrun instruments -s
@@ -53,4 +53,3 @@ jobs:
       - run: flutter build apk --profile
       - run: flutter build apk --release
       - run: flutter build ios --release --no-codesign
-      # List integration tests here (until a command that runs them all is discovered)
