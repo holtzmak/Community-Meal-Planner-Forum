@@ -16,7 +16,7 @@ class TemplateViewModel<T extends ViewModel> extends StatefulWidget {
 
 class _TemplateViewModelState<T extends ViewModel>
     extends State<TemplateViewModel<T>> {
-  T model = ServiceLocator.it<T>();
+  T model = ServiceLocator.get<T>();
 
   @override
   void initState() {

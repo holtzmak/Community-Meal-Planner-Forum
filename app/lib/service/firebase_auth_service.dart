@@ -9,8 +9,8 @@ import 'firebase_database_service.dart';
 /// A service wrapping FirebaseAuth
 /// Sign in persistence is guaranteed default as per https://firebase.flutter.dev/docs/auth/usage/#persisting-authentication-state
 class FirebaseAuthService {
-  final _databaseService = ServiceLocator.it<FirebaseDatabaseService>();
-  final _firebaseAuth = ServiceLocator.it<FirebaseAuth>();
+  final _databaseService = ServiceLocator.get<FirebaseDatabaseService>();
+  final _firebaseAuth = ServiceLocator.get<FirebaseAuth>();
 
   late StreamSubscription<User?> _authStateChanges;
 

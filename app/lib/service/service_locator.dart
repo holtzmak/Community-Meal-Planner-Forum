@@ -1,3 +1,4 @@
+import 'package:app/service/dialog_service.dart';
 import 'package:app/service/firebase_auth_service.dart';
 import 'package:app/service/firebase_database_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -5,14 +6,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 
 class ServiceLocator {
-  static final it = GetIt.instance;
+  static final get = GetIt.instance;
 
   static void setup() {
-    it.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
-    it.registerLazySingleton<FirebaseFirestore>(
+    get.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
+    get.registerLazySingleton<FirebaseFirestore>(
         () => FirebaseFirestore.instance);
-    it.registerLazySingleton<FirebaseDatabaseService>(
+    get.registerLazySingleton<FirebaseDatabaseService>(
         () => FirebaseDatabaseService());
-    it.registerLazySingleton<FirebaseAuthService>(() => FirebaseAuthService());
+    get.registerLazySingleton<FirebaseAuthService>(() => FirebaseAuthService());
+    get.registerLazySingleton<DialogService>(() => DialogService());
   }
 }
