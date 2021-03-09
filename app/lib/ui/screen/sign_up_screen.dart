@@ -145,7 +145,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         TextFormField(
                           key: ObjectKey("Your password?"),
-                          obscureText: true,
                           validator: ValidatorService.passwordValidator,
                           decoration: InputDecoration(
                               errorStyle:
