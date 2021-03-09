@@ -107,6 +107,7 @@ class _LogInScreenState extends State<LogInScreen> {
                         ),
                         TextFormField(
                           key: ObjectKey("Your password?"),
+                          obscureText: true,
                           validator: ValidatorService.passwordValidator,
                           decoration: InputDecoration(
                               errorStyle:
