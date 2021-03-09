@@ -24,14 +24,14 @@ class Account {
         joinDate = DateTime.now();
 
   Account.fromJson(Map<String, dynamic> json)
-      : id = json['username'],
+      : id = json['id'],
         name = json['name'],
         titles = List<String>.from(json['titles']),
         aboutMeDescription = json['aboutMeDescription'],
         joinDate = json['joinDate'].toDate();
 
   Map<String, dynamic> toJson() => {
-        'username': id,
+        'id': id,
         'name': name,
         'titles': titles,
         'aboutMeDescription': aboutMeDescription,
