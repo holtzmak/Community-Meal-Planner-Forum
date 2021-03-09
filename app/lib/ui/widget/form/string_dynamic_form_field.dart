@@ -1,4 +1,4 @@
-import 'package:app/ui/widgets/form/string_form_field.dart';
+import 'package:app/ui/widget/form/string_form_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:uuid/uuid.dart';
 

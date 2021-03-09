@@ -8,7 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 /// A service wrapping Firebase Firestore, specifically for the app
 class FirebaseDatabaseService {
-  final _firestore = ServiceLocator.it<FirebaseFirestore>();
+  final _firestore = ServiceLocator.get<FirebaseFirestore>();
 
   Future<void> addAccount(Account account) async =>
       _firestore.collection('account').doc(account.id).set(account.toJson());

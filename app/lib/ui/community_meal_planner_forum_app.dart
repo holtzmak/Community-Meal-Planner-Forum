@@ -8,7 +8,6 @@ class CommunityMealPlannerForumApp extends StatelessWidget {
     return MaterialApp(
       title: 'Community of Meal Planners Forums',
       theme: ThemeData(
-        primarySwatch: Colors.teal,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: HomeScreen(),

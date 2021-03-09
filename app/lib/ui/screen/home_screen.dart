@@ -1,4 +1,4 @@
-import 'package:app/ui/widgets/custom_app_bar.dart';
+import 'package:app/ui/widget/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
