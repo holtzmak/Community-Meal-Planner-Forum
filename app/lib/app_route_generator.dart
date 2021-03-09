@@ -1,6 +1,7 @@
 import 'package:app/service/firebase_auth_service.dart';
 import 'package:app/service/service_locator.dart';
 import 'package:app/ui/screen/home_screen.dart';
+import 'package:app/ui/screen/log_in_screen.dart';
 import 'package:app/ui/screen/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -19,6 +20,8 @@ class AppRouteGenerator {
             return HomeScreen();
           case SignUpScreen.route:
             return SignUpScreen();
+          case LogInScreen.route:
+            return LogInScreen();
           // Account-required screens, only available if logged in
 
           default:

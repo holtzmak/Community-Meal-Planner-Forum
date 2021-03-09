@@ -43,3 +43,15 @@ ElevatedButton elevatedButton(
       )),
       child: Text(text),
     );
+
+TextButton textButton(
+        {required String text,
+        required VoidCallback onPressed,
+        required Color color,
+        double? fontSize}) =>
+    TextButton(
+        onPressed: onPressed,
+        child: Text(
+          text,
+          style: TextStyle(fontSize: fontSize ?? MediumTextSize, color: color),
+        ));
