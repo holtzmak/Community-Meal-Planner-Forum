@@ -2,7 +2,7 @@ import 'package:app/app_route_generator.dart';
 import 'package:app/service/dialog_service.dart';
 import 'package:app/service/navigation_service.dart';
 import 'package:app/service/service_locator.dart';
-import 'package:app/ui/screen/sign_up_screen.dart';
+import 'package:app/ui/screen/home_screen.dart';
 import 'package:app/ui/widget/dialog_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +14,7 @@ class CommunityMealPlannerForumApp extends StatelessWidget {
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      initialRoute: SignUpScreen.route,
+      initialRoute: HomeScreen.route,
       onGenerateRoute: AppRouteGenerator.onGenerateRoute,
       navigatorKey: ServiceLocator.get<NavigationService>().navigationKey,
       // As per FilledStacks suggestion, this must be wrapped with Navigator.
