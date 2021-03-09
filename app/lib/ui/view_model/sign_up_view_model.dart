@@ -1,6 +1,5 @@
 import 'package:app/service/dialog_service.dart';
 import 'package:app/service/firebase_auth_service.dart';
-import 'package:app/service/navigation_service.dart';
 import 'package:app/service/service_locator.dart';
 import 'package:app/ui/widget/template_view_model.dart';
 
@@ -8,8 +7,6 @@ class SignUpViewModel extends ViewModel {
   final FirebaseAuthService _firebaseAuthService =
       ServiceLocator.get<FirebaseAuthService>();
   final DialogService _dialogService = ServiceLocator.get<DialogService>();
-  final NavigationService _navigationService =
-      ServiceLocator.get<NavigationService>();
 
   void navigateToSignInScreen() => throw UnimplementedError("TODO");
 

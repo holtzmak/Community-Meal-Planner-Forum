@@ -12,8 +12,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-          preferredSize: Size.fromHeight(175.0), child: CustomAppBar()),
+      appBar: CustomAppBar.get(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

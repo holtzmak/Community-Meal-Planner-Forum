@@ -1,3 +1,4 @@
+import 'package:app/service/validator_service.dart';
 import 'package:app/ui/widget/form/string_form_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:uuid/uuid.dart';
@@ -19,9 +20,11 @@ DynamicFormField<String, StringFormField> dynamicStringFormField(
         fieldCreator: (int index, String it, Function(int, String?) onSaved,
                 Function(int) onDelete) =>
             StringFormField(
-                // Must have unique keys in rebuilding widget lists
-                key: ObjectKey(Uuid().v4()),
-                initial: it,
-                title: titles,
-                onSaved: (String? changed) => onSaved(index, changed),
-                onDelete: () => onDelete(index)));
+              // Must have unique keys in rebuilding widget lists
+              key: ObjectKey(Uuid().v4()),
+              initial: it,
+              title: titles,
+              onSaved: (String? changed) => onSaved(index, changed),
+              onDelete: () => onDelete(index),
+              validator: ValidatorService.emptyValidator,
+            ));

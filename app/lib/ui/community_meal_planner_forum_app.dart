@@ -1,6 +1,5 @@
+import 'package:app/ui/screen/sign_up_screen.dart';
 import 'package:flutter/material.dart';
-
-import 'screen/home_screen.dart';
 
 class CommunityMealPlannerForumApp extends StatelessWidget {
   @override
@@ -10,7 +9,7 @@ class CommunityMealPlannerForumApp extends StatelessWidget {
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomeScreen(),
+      home: SignUpScreen(),
     );
   }
 }
