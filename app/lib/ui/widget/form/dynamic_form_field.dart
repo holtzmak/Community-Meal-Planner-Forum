@@ -10,6 +10,7 @@ class DynamicFormField<T, W extends StatefulWidget> extends StatefulWidget {
   final T Function() blankFieldCreator;
   final W Function(int, T, Function(int, T?), Function(int)) fieldCreator;
 
+  // TODO: Rework this class so as to be able to call validate, save on children
   final formKey = GlobalKey<FormState>();
 
   DynamicFormField(
@@ -71,7 +72,7 @@ class _DynamicFormFieldState<T, W extends StatefulWidget>
         child: Column(
           children: [
             _fields.isEmpty
-                ? Text("No ${widget.titles}, add some using the + button")
+                ? Text("No ${widget.titles}(s), add some using the + button")
                 : Container(
                     child: ListView.builder(
                         // Make the List take minimum possible space
@@ -82,7 +83,7 @@ class _DynamicFormFieldState<T, W extends StatefulWidget>
                         itemBuilder: (_, index) => _createField(index))),
             ListTile(
               trailing: IconButton(
-                icon: Icon(Icons.add),
+                icon: Icon(Icons.add_circle_rounded),
                 onPressed: _addField,
               ),
             ),

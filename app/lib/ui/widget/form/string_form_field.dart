@@ -1,4 +1,6 @@
+import 'package:app/ui/style.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 /// A custom FormField<String> with onSaved and onDelete callback
 class StringFormField extends StatefulWidget {
@@ -7,12 +9,15 @@ class StringFormField extends StatefulWidget {
   final bool isMultiline;
   final FormFieldSetter<String> onSaved;
   final Function()? onDelete;
+  final FormFieldValidator<String> validator;
 
+  // TODO: Rework this class so as to be able to call validate, save on it
   StringFormField(
       {Key? key,
       required this.initial,
       required this.title,
       required this.onSaved,
+      required this.validator,
       this.onDelete,
       this.isMultiline = false})
       : super(key: key);
@@ -22,35 +27,22 @@ class StringFormField extends StatefulWidget {
 }
 
 class _StringFormFieldState extends State<StringFormField> {
-  late TextEditingController controller;
-
-  @override
-  void initState() {
-    controller = TextEditingController(text: widget.initial);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return widget.onDelete != null
         ? ListTile(
-            title: Text(widget.title),
-            subtitle: TextFormField(
+            title: TextFormField(
+              validator: widget.validator,
+              decoration: InputDecoration(
+                  errorStyle: GoogleFonts.roboto(color: TerraCottaPink),
+                  border: OutlineInputBorder(),
+                  labelText: widget.title),
               keyboardType: widget.isMultiline
                   ? TextInputType.multiline
                   : TextInputType.text,
               // Needed for the text field to expand
               maxLines: null,
-              controller: controller,
-              // TODO: This is intensive to do, and should be refactored sometime
-              // This is the same as onSaved, so we can avoid needing an
-              // explicit save button in dynamic forms
+              initialValue: widget.initial,
               onChanged: widget.onSaved,
               onSaved: widget.onSaved,
             ),
@@ -60,13 +52,18 @@ class _StringFormFieldState extends State<StringFormField> {
             ),
           )
         : ListTile(
-            title: Text(widget.title),
-            subtitle: TextFormField(
+            title: TextFormField(
+              validator: widget.validator,
+              decoration: InputDecoration(
+                  errorStyle: GoogleFonts.roboto(color: TerraCottaPink),
+                  border: OutlineInputBorder(),
+                  labelText: widget.title),
               keyboardType: widget.isMultiline
                   ? TextInputType.multiline
                   : TextInputType.text,
+              // Needed for the text field to expand
               maxLines: null,
-              controller: controller,
+              initialValue: widget.initial,
               onSaved: widget.onSaved,
               onChanged: widget.onSaved,
             ),

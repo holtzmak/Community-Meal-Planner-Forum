@@ -1,3 +1,5 @@
+import 'package:app/service/validator_service.dart';
+import 'package:app/ui/style.dart';
 import 'package:app/ui/view_model/sign_up_view_model.dart';
 import 'package:app/ui/widget/custom_app_bar.dart';
 import 'package:app/ui/widget/form/dynamic_form_field.dart';
@@ -36,67 +38,68 @@ class _SignUpScreenState extends State<SignUpScreen> {
     super.initState();
   }
 
-  // TODO: Extract validators into their own service
-  String? emptyFieldValidation(String? value) {
-    if (value == null || value.isEmpty) {
-      return "* Required";
-    } else
-      return null;
-  }
-
-  String? validatePassword(String? value) {
-    if (value == null || value.isEmpty) {
-      return "* Required";
-    } else if (value.length < 6) {
-      return "Password should be at least 6 characters";
-    } else if (value.length > 10) {
-      return "Password should not be greater than 10 characters";
-    } else
-      return null;
-  }
-
-  String? validateEmail(String? value) {
-    if (value == null || value.isEmpty) {
-      return '* Required';
+  void _validateAndSave(SignUpViewModel model) {
+    if (widget.formKey.currentState!.validate() &&
+        _titlesFormField.formKey.currentState!.validate()) {
+      _titlesFormField.formKey.currentState!.save();
+      model.signUp(
+          name: _nameController.text.trim(),
+          titles: _titles,
+          aboutMeDescription: _aboutMeDescController.text.trim(),
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim());
     }
-    if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(value)) {
-      return '* Please enter a valid Email';
-    }
-    return null;
   }
 
   @override
   Widget build(BuildContext context) {
     return TemplateViewModel<SignUpViewModel>(
         builder: (context, model, child) => Scaffold(
-              appBar: PreferredSize(
-                  preferredSize: Size.fromHeight(175.0), child: CustomAppBar()),
+              appBar: CustomAppBar.get(),
               body: SingleChildScrollView(
                   child: Form(
                 key: widget.formKey,
                 child: Padding(
-                  padding: const EdgeInsets.all(40),
+                  padding: EdgeInsets.all(40),
                   child: Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Padding(padding: EdgeInsets.all(5.0)),
-                        Text(
-                          'Signup',
-                          style: GoogleFonts.raleway(
-                              fontWeight: FontWeight.bold,
-                              color: Color.fromRGBO(61, 64, 91, 1),
-                              fontSize: 24),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            '''This is an application for meal planners, educators, sustainability practicers, educators, and more!\n\nBy signing up, you agree to our Terms of Service and Privacy Policy.''',
+                            style: GoogleFonts.raleway(
+                                color: IndependencePurple,
+                                fontSize: MediumTextSize),
+                          ),
                         ),
                         Padding(
                           padding: EdgeInsets.only(
-                            top: 40.0,
+                            top: 20.0,
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Signup',
+                            style: GoogleFonts.raleway(
+                                fontWeight: FontWeight.bold,
+                                color: IndependencePurple,
+                                fontSize: LargeTextSize),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                            top: 20.0,
                           ),
                         ),
                         TextFormField(
                           key: ObjectKey("Your display name?"),
-                          validator: emptyFieldValidation,
+                          validator: ValidatorService.emptyValidator,
                           decoration: InputDecoration(
+                              errorStyle:
+                                  GoogleFonts.roboto(color: TerraCottaPink),
                               border: OutlineInputBorder(),
                               labelText: "Your display name?"),
                           controller: _nameController,
@@ -108,8 +111,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         TextFormField(
                           key: ObjectKey("Your email?"),
-                          validator: validateEmail,
+                          validator: ValidatorService.emailValidator,
                           decoration: InputDecoration(
+                              errorStyle:
+                                  GoogleFonts.roboto(color: TerraCottaPink),
                               border: OutlineInputBorder(),
                               labelText: "Your email?"),
                           controller: _emailController,
@@ -121,8 +126,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         TextFormField(
                           key: ObjectKey("Your password?"),
-                          validator: validatePassword,
+                          validator: ValidatorService.passwordValidator,
                           decoration: InputDecoration(
+                              errorStyle:
+                                  GoogleFonts.roboto(color: TerraCottaPink),
                               border: OutlineInputBorder(),
                               labelText: "Your password?"),
                           controller: _passwordController,
@@ -132,17 +139,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             top: 20.0,
                           ),
                         ),
+                        Text(
+                          "Add some titles for yourself if you like!",
+                          style: GoogleFonts.roboto(color: IndependencePurple),
+                        ),
                         _titlesFormField,
                         Padding(
                           padding: EdgeInsets.only(
-                            top: 0.5,
+                            top: 20.0,
                           ),
                         ),
                         TextFormField(
                           key: ObjectKey("Describe yourself"),
                           decoration: InputDecoration(
+                              errorStyle:
+                                  GoogleFonts.roboto(color: TerraCottaPink),
                               border: OutlineInputBorder(),
                               labelText: "Describe yourself"),
+                          keyboardType: TextInputType.multiline,
+                          maxLines: 5,
                           controller: _aboutMeDescController,
                         ),
                         Padding(
@@ -150,36 +165,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             top: 0.5,
                           ),
                         ),
-                        TextButton(
-                          child: Text('Already have an account?'),
-                          onPressed: () => model.navigateToSignInScreen(),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                            top: 20.0,
-                          ),
-                        ),
                         ButtonBar(
                           children: [
-                            ElevatedButton(
-                              onPressed: () {
-                                if (widget.formKey.currentState!.validate()) {
-                                  model.signUp(
-                                      name: _nameController.text.trim(),
-                                      titles: _titles,
-                                      aboutMeDescription:
-                                          _aboutMeDescController.text.trim(),
-                                      email: _emailController.text.trim(),
-                                      password:
-                                          _passwordController.text.trim());
-                                }
-                              },
-                              child: Text("Signup"),
-                            ),
-                            OutlinedButton(
-                              onPressed: () => model.navigateToSignInScreen(),
-                              child: Text("Already have an account? Login"),
-                            )
+                            elevatedButton(
+                                text: "Signup",
+                                onPressed: () => _validateAndSave(model),
+                                color: GreenSheen,
+                                pressedColor: GreenSheenOpaque),
+                            outlinedButton(
+                                text: "Have an account? Login!",
+                                onPressed: model.navigateToSignInScreen,
+                                color: IndependencePurple)
                           ],
                         )
                       ],
