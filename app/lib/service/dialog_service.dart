@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+/// Useful types created by FilledStacks:
+/// https://www.filledstacks.com/post/manager-your-flutter-dialogs-with-a-dialog-manager/
 class DialogRequest {
   final String title;
   final String description;

@@ -2,6 +2,8 @@ import 'package:app/service/dialog_service.dart';
 import 'package:app/service/service_locator.dart';
 import 'package:flutter/material.dart';
 
+/// A useful screen created by FilledStacks:
+/// https://www.filledstacks.com/post/manager-your-flutter-dialogs-with-a-dialog-manager/
 class DialogScreen extends StatefulWidget {
   final Widget child;
 
