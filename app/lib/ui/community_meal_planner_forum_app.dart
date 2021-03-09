@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'home_screen.dart';
+import 'screen/home_screen.dart';
 
 class CommunityMealPlannerForumApp extends StatelessWidget {
   @override
