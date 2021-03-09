@@ -31,7 +31,7 @@ class DialogResponse {
 /// https://www.filledstacks.com/post/manager-your-flutter-dialogs-with-a-dialog-manager/
 class DialogService {
   final _dialogNavigationKey = GlobalKey<NavigatorState>();
-  late Function(DialogRequest) _showDialogListener;
+  Function(DialogRequest)? _showDialogListener;
   Completer<DialogResponse>? _dialogCompleter;
 
   GlobalKey<NavigatorState> get dialogNavigationKey => _dialogNavigationKey;
@@ -46,11 +46,13 @@ class DialogService {
     String buttonText = 'Ok',
   }) {
     _dialogCompleter = Completer<DialogResponse>();
-    _showDialogListener(DialogRequest(
-      title: title,
-      description: description,
-      buttonText: buttonText,
-    ));
+    if (_showDialogListener != null) {
+      _showDialogListener!(DialogRequest(
+        title: title,
+        description: description,
+        buttonText: buttonText,
+      ));
+    }
     return _dialogCompleter!.future;
   }
 
@@ -60,11 +62,13 @@ class DialogService {
       String confirmationText = 'Ok',
       String cancelText = 'Cancel'}) {
     _dialogCompleter = Completer<DialogResponse>();
-    _showDialogListener(DialogRequest(
-        title: title,
-        description: description,
-        buttonText: confirmationText,
-        cancelText: cancelText));
+    if (_showDialogListener != null) {
+      _showDialogListener!(DialogRequest(
+          title: title,
+          description: description,
+          buttonText: confirmationText,
+          cancelText: cancelText));
+    }
     return _dialogCompleter!.future;
   }
 

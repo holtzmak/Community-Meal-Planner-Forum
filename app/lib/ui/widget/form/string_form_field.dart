@@ -47,7 +47,7 @@ class _StringFormFieldState extends State<StringFormField> {
               onSaved: widget.onSaved,
             ),
             trailing: IconButton(
-              icon: Icon(Icons.delete),
+              icon: Icon(Icons.delete_forever, size: 40.0),
               onPressed: widget.onDelete,
             ),
           )

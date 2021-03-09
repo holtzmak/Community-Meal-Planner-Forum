@@ -141,7 +141,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         Text(
                           "Add some titles for yourself if you like!",
-                          style: GoogleFonts.roboto(color: IndependencePurple),
+                          style: GoogleFonts.roboto(
+                              color: IndependencePurple,
+                              fontSize: BodyTextSize),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                            top: 15.0,
+                          ),
                         ),
                         _titlesFormField,
                         Padding(
@@ -166,6 +173,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                         ),
                         ButtonBar(
+                          buttonPadding: const EdgeInsets.only(right: 40.0),
                           children: [
                             elevatedButton(
                                 text: "Signup",

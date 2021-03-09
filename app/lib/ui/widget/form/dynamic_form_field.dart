@@ -71,19 +71,24 @@ class _DynamicFormFieldState<T, W extends StatefulWidget>
         key: widget.formKey,
         child: Column(
           children: [
-            _fields.isEmpty
-                ? Text("No ${widget.titles}(s), add some using the + button")
-                : Container(
-                    child: ListView.builder(
-                        // Make the List take minimum possible space
-                        shrinkWrap: true,
-                        // Intended to be used inside existing scroll-ables
-                        primary: false,
-                        itemCount: _fields.length,
-                        itemBuilder: (_, index) => _createField(index))),
+            if (_fields.isEmpty == false)
+              Container(
+                  child: ListView.builder(
+                      // Make the List take minimum possible space
+                      shrinkWrap: true,
+                      // Intended to be used inside existing scroll-ables
+                      primary: false,
+                      itemCount: _fields.length,
+                      itemBuilder: (_, index) => _createField(index))),
+            Padding(
+              padding: EdgeInsets.only(top: 10),
+            ),
             ListTile(
-              trailing: IconButton(
-                icon: Icon(Icons.add_circle_rounded),
+              leading: IconButton(
+                icon: Icon(
+                  Icons.add_circle_rounded,
+                  size: 30.0,
+                ),
                 onPressed: _addField,
               ),
             ),

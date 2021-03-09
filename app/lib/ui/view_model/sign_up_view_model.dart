@@ -29,7 +29,7 @@ class SignUpViewModel extends ViewModel {
     }).catchError((error) {
       _dialogService.showDialog(
         title: 'Sign up failed!',
-        description: "Here's what we think went wrong: ${error.message}",
+        description: "Here's what we think went wrong:\n${error.message}",
       );
     });
   }
