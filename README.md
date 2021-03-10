@@ -3,7 +3,24 @@
 ![Unit tests](https://github.com/holtzmak/Community-Meal-Planner-Forum/actions/workflows/flutter-unit-test.yml/badge.svg)
 ![Formatting and Dart analysis](https://github.com/holtzmak/Community-Meal-Planner-Forum/actions/workflows/flutter-formatting-and-dart-analysis.yml/badge.svg)
 
-A forum application to support community discussion for meal planning, sustainable practices, and education.
+A [Flutter](https://flutter.dev/) and [Firebase](https://firebase.google.com/) forum application to support community discussion for meal planning, sustainable practices, development, and education.
+
+For an interactable mock-up of the application, see [the Adobe XD Prototype](https://xd.adobe.com/view/262b07e0-7a00-4e45-a4ed-4d4036fc88d5-7378/). You can leave feedback if you like!
+
+**This project's main source of process-related documentation is the [Wiki](https://github.com/holtzmak/Community-Meal-Planner-Forum/wiki).** See the Wiki for the following information and more:
+1. Project deliverables as set out by the post-secondary course
+2. Project presentation and progress slides
+3. Application architecture and software design documents
+
+Further documentation and diagrams are available in the [`documentation` folder in the codebase](https://github.com/holtzmak/Community-Meal-Planner-Forum/tree/main/documentation).
+
+***
+
+## Installation and Use
+
+ **_Instructions for installing and using this application TBD_** 
+
+## Project Abstract
 
 This application is intended to support the following sub-goals of the [UN's 17 Goal for Sustainable Development](https://www.un.org/sustainabledevelopment/). These sub-goals are part of [Goal 12: Ensure sustainable consumption and production patterns](https://www.un.org/sustainabledevelopment/sustainable-consumption-production/):
 1. _12.7_ Promote public procurement practices that are sustainable, in accordance with national policies and priorities
@@ -14,8 +31,6 @@ This application is intended to support the following sub-goals of the [UN's 17 
 The meal planning market consists of convenience tools rather than educational tools, limiting what platforms and content members of the community have available. There exists side platforms and content that only those “in the know” access and share. These two situations limit the demand for education and consumption practice change because there is no collective place for members to voice concerns and ask for change.
 
 This project aims to provide members of the meal planning community with a space (forum) for relevant discussion and critique of recipes, practices, and tools that can be received by meal planning companies/tool developers so as to incite community-led change in the status quo.
-
-**This project's main source of process-related documentation is the [Wiki](https://github.com/holtzmak/Community-Meal-Planner-Forum/wiki).**
 
 ## Project Deliverables
 
@@ -34,22 +49,21 @@ Deliverables assigned by the post-secondary course:
 * [Project Scope Statement](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/project%20management/Project%20Scope%20Statement.pdf) - an activity to define what work the project consists of
 * [Project Requirements](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/project%20management/Project%20Requirements.pdf) - an activity to define what the project shall do
 3. Software Design ([scrum slides](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/scrum%20slides/Software%20Design.pdf)) (February 22, 2021)
-> (Due to high-quality file sizes, it's recommended to zoom in/out as needed when viewing the following drawings)
 * [Lo-fi GUI Prototypes](https://raw.githubusercontent.com/holtzmak/Community-Meal-Planner-Forum/db4d818b13afb5196ab916fee6d15c0b69cd18a3/documentation/software%20design/Lo-Fi%20GUI%20Prototypes.svg) - an activity for quickly drafting up the general appearance of the application
 * [Mid-fi GUI Prototype](https://xd.adobe.com/view/262b07e0-7a00-4e45-a4ed-4d4036fc88d5-7378/) - an activity for previewing the appearance and some interaction of the application
 > See also the [PDF version](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/software%20design/gui%20prototypes/Mid-Fi%20GUI%20Prototype.pdf) and a [recording of the mid-fi prototype](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/software%20design/gui%20prototypes/Mid-Fi%20Prototype%20Recording.mp4)
 * [Application Workflow Diagrams](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/software%20design/Application%20Workflow%20Diagrams.pdf) - diagrams identifying the different application routes between screens
-> The following client-server-database architecture drawings use the [C4 Model for diagramming](https://c4model.com/). They are UML-like.
 * [Persona (Roles) Diagram](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/software%20design/client-server-database%20architecture/Persona%20(Roles)%20Diagram.pdf) - a diagram for identifying the workflow differences of the persons (roles) using the application
 * [Context Diagram](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/software%20design/client-server-database%20architecture/Context%20Diagram.pdf) - a diagram for identifying where the application fits among external software systems
 * [Container Diagram](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/software%20design/client-server-database%20architecture/Container%20Diagram.pdf) - a diagram for identifying the different application interfaces (mobile & web) among external software systems
 * [Component Diagram](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/software%20design/client-server-database%20architecture/Component%20Diagram.pdf) - a diagram for offering insight to the internal software design of the application (mobile & web)
 * [Database Conceptual Data Models](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/software%20design/client-server-database%20architecture/Database%20Conceptual%20Data%20Models.pdf) - a diagram identifying the collections and documents of the database (NoSQL database)
+4. MVP 1 Progress (as per project scope document above) ([scrum slides]()) (March 10, 2021)
 
 ***
 
 ## Legal Notices
 
-This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
+This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/). 
 
 ![license](https://licensebuttons.net/l/by-sa/4.0/88x31.png)
