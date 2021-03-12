@@ -40,59 +40,71 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: IndependencePurple,
+        color: BurntSienna,
         child: Padding(
             padding: EdgeInsets.only(top: 50.0),
             child: Column(mainAxisSize: MainAxisSize.min, children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Padding(padding: EdgeInsets.only(left: 40.0)),
-                  Icon(
-                    Icons.account_circle_outlined,
-                    color: DeepChampagneYellow,
-                    size: 75.0,
+              Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      BurntSienna,
+                      SandyBrown,
+                    ],
                   ),
-                  Flexible(
-                      child: Text(
-                    'Community of Meal Planners Forums',
-                    style: GoogleFonts.raleway(
-                        fontWeight: FontWeight.bold,
-                        color: DeepChampagneYellow,
-                        fontSize: LargeTextSize),
-                  )),
-                ],
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Padding(padding: EdgeInsets.only(left: 40.0)),
+                    Icon(
+                      Icons.account_circle_outlined,
+                      color: Colors.white,
+                      size: 75.0,
+                    ),
+                    Flexible(
+                        child: Text(
+                      'Community of Meal Planners Forums',
+                      style: GoogleFonts.cabin(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: LargeTextSize),
+                    )),
+                  ],
+                ),
               ),
               Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
                 Expanded(
                     child: Container(
                   decoration: BoxDecoration(
-                      color: TerraCottaPink,
-                      border: Border.all(color: IndependencePurple)),
+                      color: PersianGreenOpaque,
+                      border: Border.all(color: Colors.white)),
                   child: textButton(
                       text: leftButtonText,
                       onPressed: leftButtonAction,
-                      color: IndependencePurple),
+                      color: Colors.white),
                 )),
                 Expanded(
                     child: Container(
                   decoration: BoxDecoration(
-                      color: TerraCottaPink,
-                      border: Border.all(color: IndependencePurple)),
+                      color: PersianGreenOpaque,
+                      border: Border.all(color: Colors.white)),
                   child: textButton(
                       text: centreButtonText,
                       onPressed: centreButtonAction,
-                      color: IndependencePurple),
+                      color: Colors.white),
                 )),
                 Expanded(
                     child: Container(
                   decoration: BoxDecoration(
-                      color: TerraCottaPink,
-                      border: Border.all(color: IndependencePurple)),
+                      color: PersianGreenOpaque,
+                      border: Border.all(color: Colors.white)),
                   child: textButton(
                       text: rightButtonText,
                       onPressed: rightButtonAction,
-                      color: IndependencePurple),
+                      color: Colors.white),
                 ))
               ])
             ])));

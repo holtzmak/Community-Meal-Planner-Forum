@@ -11,19 +11,28 @@ class CustomBottomAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 75.0,
-      color: IndependencePurple,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            PersianGreen,
+            Charcoal,
+          ],
+        ),
+      ),
       child: Align(
         alignment: Alignment.center,
         child: ListTile(
           leading: Icon(
             Icons.help,
-            color: TerraCottaPink,
+            color: Colors.white,
             size: 45.0,
           ),
           title: textButton(
               text: "About this application",
               onPressed: () => throw UnimplementedError("TODO"),
-              color: DeepChampagneYellow),
+              color: Colors.white),
           // Creative Commons Attribution-ShareAlike 4.0 International License
           trailing: Image(image: AssetImage('assets/cc-by-sa-4.0.png')),
         ),

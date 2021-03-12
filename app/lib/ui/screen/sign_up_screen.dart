@@ -89,8 +89,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           child: Text(
                             '''This is an application for meal planners, educators, sustainability practicers, educators, and more!\n\nBy signing up, you agree to our Terms of Service and Privacy Policy.''',
                             style: GoogleFonts.raleway(
-                                color: IndependencePurple,
-                                fontSize: MediumTextSize),
+                                color: Charcoal, fontSize: MediumTextSize),
                           ),
                         ),
                         Padding(
@@ -104,7 +103,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             'Signup',
                             style: GoogleFonts.raleway(
                                 fontWeight: FontWeight.bold,
-                                color: IndependencePurple,
+                                color: Charcoal,
                                 fontSize: LargeTextSize),
                           ),
                         ),
@@ -118,7 +117,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           validator: ValidatorService.emptyValidator,
                           decoration: InputDecoration(
                               errorStyle:
-                                  GoogleFonts.roboto(color: TerraCottaPink),
+                                  GoogleFonts.notoSerif(color: BurntSienna),
                               border: OutlineInputBorder(),
                               labelText: "Your display name?"),
                           controller: _nameController,
@@ -133,7 +132,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           validator: ValidatorService.emailValidator,
                           decoration: InputDecoration(
                               errorStyle:
-                                  GoogleFonts.roboto(color: TerraCottaPink),
+                                  GoogleFonts.notoSerif(color: BurntSienna),
                               border: OutlineInputBorder(),
                               labelText: "Your email?"),
                           controller: _emailController,
@@ -148,7 +147,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           validator: ValidatorService.passwordValidator,
                           decoration: InputDecoration(
                               errorStyle:
-                                  GoogleFonts.roboto(color: TerraCottaPink),
+                                  GoogleFonts.notoSerif(color: BurntSienna),
                               border: OutlineInputBorder(),
                               labelText: "Your password?"),
                           controller: _passwordController,
@@ -160,9 +159,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         Text(
                           "Add some titles for yourself if you like!",
-                          style: GoogleFonts.roboto(
-                              color: IndependencePurple,
-                              fontSize: BodyTextSize),
+                          style: GoogleFonts.notoSerif(
+                              color: Charcoal, fontSize: BodyTextSize),
                         ),
                         Padding(
                           padding: EdgeInsets.only(
@@ -179,9 +177,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           key: ObjectKey("Describe yourself"),
                           decoration: InputDecoration(
                               errorStyle:
-                                  GoogleFonts.roboto(color: TerraCottaPink),
+                                  GoogleFonts.notoSerif(color: BurntSienna),
                               border: OutlineInputBorder(),
-                              labelText: "Describe yourself"),
+                              labelText: "Describe yourself, if you'd like"),
                           keyboardType: TextInputType.multiline,
                           maxLines: 5,
                           controller: _aboutMeDescController,
@@ -197,12 +195,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             elevatedButton(
                                 text: "Signup",
                                 onPressed: () => _validateAndSave(model),
-                                color: GreenSheen,
-                                pressedColor: GreenSheenOpaque),
+                                color: BurntSienna,
+                                pressedColor: BurntSiennaOpaque),
                             outlinedButton(
                                 text: "Have an account? Login!",
                                 onPressed: model.navigateToLoginScreen,
-                                color: IndependencePurple)
+                                color: Charcoal)
                           ],
                         )
                       ],

@@ -34,7 +34,7 @@ class _StringFormFieldState extends State<StringFormField> {
             title: TextFormField(
               validator: widget.validator,
               decoration: InputDecoration(
-                  errorStyle: GoogleFonts.roboto(color: TerraCottaPink),
+                  errorStyle: GoogleFonts.roboto(color: BurntSienna),
                   border: OutlineInputBorder(),
                   labelText: widget.title),
               keyboardType: widget.isMultiline
@@ -55,7 +55,7 @@ class _StringFormFieldState extends State<StringFormField> {
             title: TextFormField(
               validator: widget.validator,
               decoration: InputDecoration(
-                  errorStyle: GoogleFonts.roboto(color: TerraCottaPink),
+                  errorStyle: GoogleFonts.roboto(color: BurntSienna),
                   border: OutlineInputBorder(),
                   labelText: widget.title),
               keyboardType: widget.isMultiline
