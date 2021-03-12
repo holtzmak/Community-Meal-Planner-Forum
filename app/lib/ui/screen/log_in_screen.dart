@@ -66,8 +66,7 @@ class _LogInScreenState extends State<LogInScreen> {
                           child: Text(
                             '''This is an application for meal planners, educators, sustainability practicers, educators, and more!''',
                             style: GoogleFonts.raleway(
-                                color: IndependencePurple,
-                                fontSize: MediumTextSize),
+                                color: Charcoal, fontSize: MediumTextSize),
                           ),
                         ),
                         Padding(
@@ -81,7 +80,7 @@ class _LogInScreenState extends State<LogInScreen> {
                             'Login',
                             style: GoogleFonts.raleway(
                                 fontWeight: FontWeight.bold,
-                                color: IndependencePurple,
+                                color: Charcoal,
                                 fontSize: LargeTextSize),
                           ),
                         ),
@@ -95,7 +94,7 @@ class _LogInScreenState extends State<LogInScreen> {
                           validator: ValidatorService.emailValidator,
                           decoration: InputDecoration(
                               errorStyle:
-                                  GoogleFonts.roboto(color: TerraCottaPink),
+                                  GoogleFonts.notoSerif(color: BurntSienna),
                               border: OutlineInputBorder(),
                               labelText: "Your email?"),
                           controller: _emailController,
@@ -111,7 +110,7 @@ class _LogInScreenState extends State<LogInScreen> {
                           validator: ValidatorService.passwordValidator,
                           decoration: InputDecoration(
                               errorStyle:
-                                  GoogleFonts.roboto(color: TerraCottaPink),
+                                  GoogleFonts.notoSerif(color: BurntSienna),
                               border: OutlineInputBorder(),
                               labelText: "Your password?"),
                           controller: _passwordController,
@@ -127,12 +126,12 @@ class _LogInScreenState extends State<LogInScreen> {
                             elevatedButton(
                                 text: "Login",
                                 onPressed: () => _validateAndSubmit(model),
-                                color: GreenSheen,
-                                pressedColor: GreenSheenOpaque),
+                                color: BurntSienna,
+                                pressedColor: BurntSiennaOpaque),
                             outlinedButton(
                                 text: "New? Signup!",
                                 onPressed: model.navigateToSignUpScreen,
-                                color: IndependencePurple)
+                                color: Charcoal)
                           ],
                         )
                       ],
