@@ -5,7 +5,6 @@ import 'package:app/ui/widget/custom_app_bar.dart';
 import 'package:app/ui/widget/custom_bottom_app_bar.dart';
 import 'package:app/ui/widget/form/dynamic_form_field.dart';
 import 'package:app/ui/widget/form/string_dynamic_form_field.dart';
-import 'package:app/ui/widget/form/string_form_field.dart';
 import 'package:app/ui/widget/template_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -27,7 +26,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _passwordController = TextEditingController();
   final _emailController = TextEditingController();
   List<String> _titles = [];
-  late DynamicFormField<String, StringFormField> _titlesFormField;
+  late DynamicFormField<String> _titlesFormField;
   final _aboutMeDescController = TextEditingController();
 
   @override
