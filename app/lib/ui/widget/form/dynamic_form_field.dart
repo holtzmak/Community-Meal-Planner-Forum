@@ -10,8 +10,11 @@ class DynamicFormField<T> extends StatefulWidget {
   final T Function() blankFieldCreator;
   final FormField<T> Function(int, T, Function(int, T?), Function(int))
       fieldCreator;
+  final _formKey = GlobalKey<FormState>();
 
-  final formKey = GlobalKey<FormState>();
+  void save() => _formKey.currentState!.save();
+
+  bool validate() => _formKey.currentState!.validate();
 
   DynamicFormField(
       {Key? key,
@@ -29,8 +32,6 @@ class DynamicFormField<T> extends StatefulWidget {
 class _DynamicFormFieldState<T> extends State<DynamicFormField<T>> {
   final List<T> _fields = [];
 
-  void _saveAll() => widget.formKey.currentState!.save();
-
   void _saveIndividual(int index, T? field) {
     if (field != null) {
       _fields[index] = field;
@@ -39,12 +40,12 @@ class _DynamicFormFieldState<T> extends State<DynamicFormField<T>> {
   }
 
   void _deleteField(int index) => setState(() {
-        _saveAll();
+        widget.save();
         _fields.removeAt(index);
       });
 
   void _addField() => setState(() {
-        _saveAll();
+        widget.save();
         _fields.add(widget.blankFieldCreator());
       });
 
@@ -62,7 +63,7 @@ class _DynamicFormFieldState<T> extends State<DynamicFormField<T>> {
   @override
   Widget build(BuildContext context) {
     return Form(
-        key: widget.formKey,
+        key: widget._formKey,
         child: Column(
           children: [
             if (_fields.isEmpty == false)

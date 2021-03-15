@@ -9,7 +9,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 class LogInScreen extends StatefulWidget {
   static const route = '/login';
-  final formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
+
+  bool validate() => _formKey.currentState!.validate();
 
   LogInScreen({
     Key? key,
@@ -31,7 +33,7 @@ class _LogInScreenState extends State<LogInScreen> {
   }
 
   void _validateAndSubmit(LogInViewModel model) {
-    if (widget.formKey.currentState!.validate()) {
+    if (widget.validate()) {
       model.login(
           email: _emailController.text.trim(),
           password: _passwordController.text.trim());
@@ -54,7 +56,7 @@ class _LogInScreenState extends State<LogInScreen> {
               bottomNavigationBar: CustomBottomAppBar.get(),
               body: SingleChildScrollView(
                   child: Form(
-                key: widget.formKey,
+                key: widget._formKey,
                 child: Padding(
                   padding: EdgeInsets.all(40),
                   child: Center(

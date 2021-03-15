@@ -13,8 +13,6 @@ class StringFormField extends FormField<String> {
       bool isMultiline = false})
       : super(
             key: key,
-            onSaved: onSaved,
-            validator: validator,
             initialValue: initialValue,
             builder: (FormFieldState<String> state) {
               return CustomFormFieldState(
@@ -23,6 +21,7 @@ class StringFormField extends FormField<String> {
                 isMultiline: isMultiline,
                 onSaved: onSaved,
                 onDelete: onDelete,
+                validator: validator,
               );
             });
 }
@@ -33,6 +32,7 @@ class CustomFormFieldState extends StatelessWidget {
   final bool isMultiline;
   final Function()? onDelete;
   final FormFieldSetter<String> onSaved;
+  final FormFieldValidator<String> validator;
 
   CustomFormFieldState({
     required this.state,
@@ -40,40 +40,43 @@ class CustomFormFieldState extends StatelessWidget {
     required this.isMultiline,
     required this.onDelete,
     required this.onSaved,
+    required this.validator,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        ListTile(
-          title: TextFormField(
+    return onDelete != null
+        ? ListTile(
+            title: TextFormField(
+              validator: validator,
+              initialValue: state.value,
+              decoration: InputDecoration(
+                  errorStyle: GoogleFonts.notoSerif(color: BurntSienna),
+                  border: OutlineInputBorder(),
+                  labelText: title),
+              keyboardType:
+                  isMultiline ? TextInputType.multiline : TextInputType.text,
+              // Needed for the text field to expand
+              maxLines: null,
+              onSaved: onSaved,
+            ),
+            trailing: IconButton(
+              icon: Icon(Icons.delete_forever, size: 40.0),
+              onPressed: onDelete,
+            ))
+        : ListTile(
+            title: TextFormField(
+            validator: validator,
             initialValue: state.value,
-            decoration:
-                InputDecoration(border: OutlineInputBorder(), labelText: title),
+            decoration: InputDecoration(
+                errorStyle: GoogleFonts.notoSerif(color: BurntSienna),
+                border: OutlineInputBorder(),
+                labelText: title),
             keyboardType:
                 isMultiline ? TextInputType.multiline : TextInputType.text,
             // Needed for the text field to expand
             maxLines: null,
             onSaved: onSaved,
-          ),
-          trailing: onDelete != null
-              ? IconButton(
-                  icon: Icon(Icons.delete_forever, size: 40.0),
-                  onPressed: onDelete,
-                )
-              : Container(),
-        ),
-        if (state.hasError)
-          Padding(
-            padding: EdgeInsets.only(top: 65),
-            child: Text(
-              state.errorText!,
-              textAlign: TextAlign.left,
-              style: GoogleFonts.notoSerif(color: BurntSienna),
-            ),
-          ),
-      ],
-    );
+          ));
   }
 }
