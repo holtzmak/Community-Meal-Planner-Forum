@@ -11,7 +11,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 class SignUpScreen extends StatefulWidget {
   static const route = '/signup';
-  final formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
+
+  bool validate() => _formKey.currentState!.validate();
 
   SignUpScreen({
     Key? key,
@@ -48,9 +50,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   void _validateAndSave(SignUpViewModel model) {
-    if (widget.formKey.currentState!.validate() &&
-        _titlesFormField.formKey.currentState!.validate()) {
-      _titlesFormField.formKey.currentState!.save();
+    if (widget.validate() && _titlesFormField.validate()) {
+      _titlesFormField.save();
       model.signUp(
           name: _nameController.text.trim(),
           titles: _titles,
@@ -76,7 +77,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               bottomNavigationBar: CustomBottomAppBar.get(),
               body: SingleChildScrollView(
                   child: Form(
-                key: widget.formKey,
+                key: widget._formKey,
                 child: Padding(
                   padding: EdgeInsets.all(40),
                   child: Center(
