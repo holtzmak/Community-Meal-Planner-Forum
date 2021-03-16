@@ -187,6 +187,7 @@ void main() {
       final thread = Thread.empty("thread Id");
       final expectedPost = Post.empty("post Id");
       final expectedJson = {
+        'authorName': "",
         'authorId': "",
         'message': "",
         'postDate': Timestamp.fromDate(expectedPost.postDate),
