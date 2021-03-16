@@ -1,10 +1,12 @@
+import 'package:app/core/post.dart';
 import 'package:app/service/validator_service.dart';
 import 'package:app/ui/style.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 class PostWidget extends StatefulWidget {
-  final String initial;
+  final Post initial;
   final bool canBeEdited;
   final FormFieldSetter<String>? onSaved;
   final _formKey = GlobalKey<FormState>();
@@ -31,7 +33,7 @@ class _PostWidgetState extends State<PostWidget> {
 
   @override
   void initState() {
-    messageController = TextEditingController(text: widget.initial);
+    messageController = TextEditingController(text: widget.initial.message);
     super.initState();
   }
 
@@ -52,10 +54,12 @@ class _PostWidgetState extends State<PostWidget> {
           child: Column(children: [
             ListTile(
               title: Text(
-                "Message from: Account holder",
+                "Message from: ${widget.initial.authorName}",
                 style: GoogleFonts.raleway(color: Charcoal),
               ),
-              subtitle: Text("Datetime now",
+              subtitle: Text(
+                  DateFormat('yyyy-MM-dd hh:mm')
+                      .format(widget.initial.postDate),
                   style: GoogleFonts.raleway(color: CharcoalOpaque)),
             ),
             _buildTextField(),
@@ -85,8 +89,8 @@ class _PostWidgetState extends State<PostWidget> {
               readOnly: isReadOnly,
               controller: messageController,
               onSaved: widget.onSaved,
-              onEditingComplete: () {
-                widget.onSaved;
+              onFieldSubmitted: (String _) {
+                widget.save();
                 setState(() => isReadOnly = true);
               },
               validator: ValidatorService.emptyValidator,
