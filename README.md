@@ -58,7 +58,10 @@ Deliverables assigned by the post-secondary course:
 * [Container Diagram](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/software%20design/client-server-database%20architecture/Container%20Diagram.pdf) - a diagram for identifying the different application interfaces (mobile & web) among external software systems
 * [Component Diagram](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/software%20design/client-server-database%20architecture/Component%20Diagram.pdf) - a diagram for offering insight to the internal software design of the application (mobile & web)
 * [Database Conceptual Data Models](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/software%20design/client-server-database%20architecture/Database%20Conceptual%20Data%20Models.pdf) - a diagram identifying the collections and documents of the database (NoSQL database)
-4. MVP 1 Progress (as per project scope document above) ([progress status report (scrum) slides](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/scrum%20slides/MVP%201%20Progress%20Status%20Report.pdf)) (March 10, 2021)
+4. MVP 1 Progress (as per project scope document above) 
+* [Progress status report (scrum) slides](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/scrum%20slides/MVP%201%20Progress%20Status%20Report.pdf) (March 10, 2021)
+* [Progress vlog slides](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/scrum%20slides/MVP%201%20Progress%20Vlog.pdf) (March 17, 2021)
+* [Progress vlog video](https://youtu.be/QH4ZkjJSelE) (March 17, 2021)
 
 ***
 
