@@ -59,6 +59,13 @@ class FirebaseDatabaseService {
               Thread.fromJson(id: doc.id, json: doc.data()!))
           .toList());
 
+  Stream<Thread> getUpdatedSpecificThread(String id) => _firestore
+      .collection('thread')
+      .doc(id)
+      .snapshots()
+      .map((DocumentSnapshot snapshot) =>
+          Thread.fromJson(id: snapshot.id, json: snapshot.data()!));
+
   Stream<List<Post>> getUpdatedThreadSpecificPosts(Thread thread) => _firestore
       .collection('thread')
       .doc(thread.id)
