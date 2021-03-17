@@ -1,6 +1,6 @@
 import 'package:app/core/post.dart';
-import 'package:app/service/validator_service.dart';
 import 'package:app/ui/style.dart';
+import 'package:app/ui/widget/form/tap_to_edit_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -9,11 +9,6 @@ class PostWidget extends StatefulWidget {
   final Post initial;
   final bool canBeEdited;
   final FormFieldSetter<String>? onSaved;
-  final _formKey = GlobalKey<FormState>();
-
-  void save() => _formKey.currentState!.save();
-
-  bool validate() => _formKey.currentState!.validate();
 
   PostWidget(
       {Key? key,
@@ -27,30 +22,28 @@ class PostWidget extends StatefulWidget {
 }
 
 class _PostWidgetState extends State<PostWidget> {
-  late TextEditingController messageController;
+  late TextEditingController controller;
   final focusNode = FocusNode();
   bool isReadOnly = true;
 
   @override
   void initState() {
-    messageController = TextEditingController(text: widget.initial.message);
+    controller = TextEditingController(text: widget.initial.message);
     super.initState();
   }
 
   @override
   void dispose() {
     focusNode.dispose();
-    messageController.dispose();
+    controller.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Card(
-        child: Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Form(
-          key: widget._formKey,
+      child: Padding(
+          padding: const EdgeInsets.all(8.0),
           child: Column(children: [
             ListTile(
               title: Text(
@@ -62,44 +55,16 @@ class _PostWidgetState extends State<PostWidget> {
                       .format(widget.initial.postDate),
                   style: GoogleFonts.raleway(color: CharcoalOpaque)),
             ),
-            _buildTextField(),
+            buildTapToEditMultilineTextFormField(
+                isReadOnly: isReadOnly,
+                focusNode: focusNode,
+                controller: controller,
+                onSaved: (String? changed) {
+                  if (widget.onSaved != null) widget.onSaved!(changed);
+                  setState(() => isReadOnly = true);
+                },
+                onTap: () => setState(() => isReadOnly = false)),
           ])),
-    ));
-  }
-
-  Widget _buildTextField() {
-    return isReadOnly
-        ? GestureDetector(
-            onTap: () => setState(() => isReadOnly = false),
-            child: Container(
-              padding: EdgeInsets.all(16.0),
-              margin: EdgeInsets.fromLTRB(16.0, 0, 16.0, 16.0),
-              decoration: BoxDecoration(border: Border.all(color: Charcoal)),
-              child: Align(
-                  heightFactor: 5,
-                  alignment: Alignment.topLeft,
-                  child: Text(messageController.text)),
-            ))
-        : Container(
-            padding: EdgeInsets.fromLTRB(16.0, 0, 16.0, 16.0),
-            child: TextFormField(
-              autofocus: false,
-              focusNode: focusNode,
-              textInputAction: TextInputAction.done,
-              readOnly: isReadOnly,
-              controller: messageController,
-              onSaved: widget.onSaved,
-              onFieldSubmitted: (String _) {
-                widget.save();
-                setState(() => isReadOnly = true);
-              },
-              validator: ValidatorService.emptyValidator,
-              keyboardType: TextInputType.multiline,
-              maxLines: 5,
-              decoration: InputDecoration(
-                  errorStyle: GoogleFonts.notoSerif(color: BurntSienna),
-                  border: OutlineInputBorder(),
-                  labelText: "Type a message here"),
-            ));
+    );
   }
 }
