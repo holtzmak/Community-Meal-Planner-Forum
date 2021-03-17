@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 Widget buildTapToEditTextFormField({
+  required String label,
   required bool isReadOnly,
   required FocusNode focusNode,
   required TextEditingController controller,
@@ -30,11 +31,12 @@ Widget buildTapToEditTextFormField({
           decoration: InputDecoration(
               errorStyle: GoogleFonts.notoSerif(color: BurntSienna),
               border: OutlineInputBorder(),
-              labelText: "Type here"),
+              labelText: label),
         ));
 }
 
 Widget buildTapToEditMultilineTextFormField({
+  required String label,
   required bool isReadOnly,
   required FocusNode focusNode,
   required TextEditingController controller,
@@ -68,6 +70,6 @@ Widget buildTapToEditMultilineTextFormField({
             decoration: InputDecoration(
                 errorStyle: GoogleFonts.notoSerif(color: BurntSienna),
                 border: OutlineInputBorder(),
-                labelText: "Type here"),
+                labelText: label),
           ));
 }

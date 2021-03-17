@@ -56,6 +56,7 @@ class _PostWidgetState extends State<PostWidget> {
                   style: GoogleFonts.raleway(color: CharcoalOpaque)),
             ),
             buildTapToEditMultilineTextFormField(
+                label: "Type your message here",
                 isReadOnly: isReadOnly,
                 focusNode: focusNode,
                 controller: controller,
