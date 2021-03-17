@@ -48,7 +48,7 @@ class _CustomFormFieldState extends State<_CustomFormField> {
                 items: [
                   "Critique",
                   "Praise",
-                  "General Discussion",
+                  "General discussion",
                   "Suggestions",
                 ]
                     .map((label) => DropdownMenuItem(
@@ -70,7 +70,7 @@ class _CustomFormFieldState extends State<_CustomFormField> {
             items: [
               "Critique",
               "Praise",
-              "General Discussion",
+              "General discussion",
               "Suggestions",
             ]
                 .map((label) => DropdownMenuItem(

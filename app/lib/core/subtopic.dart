@@ -1,4 +1,4 @@
-import 'package:app/core/utility/to_camel_case.dart';
+import 'package:recase/recase.dart';
 
 enum SubTopic { critique, praise, generalDiscussion, suggestions, undefined }
 
@@ -15,8 +15,9 @@ extension SubTopicDeserializer on SubTopic {
 }
 
 extension SubTopicString on SubTopic {
-  static String toDisplayString(SubTopic it) => it.toString().split('.').last;
+  static String toDisplayString(SubTopic it) =>
+      ReCase(it.toString().split('.').last).sentenceCase;
 
   static SubTopic fromDisplayString(String it) =>
-      SubTopicDeserializer.fromString('SubTopic.${toCamelCase(it)}');
+      SubTopicDeserializer.fromString('SubTopic.${ReCase(it).camelCase}');
 }

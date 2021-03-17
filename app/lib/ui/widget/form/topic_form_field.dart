@@ -46,10 +46,10 @@ class _CustomFormFieldState extends State<_CustomFormField> {
                     border: OutlineInputBorder(), labelText: "Topic"),
                 value: TopicString.toDisplayString(widget.state.value!),
                 items: [
-                  "Sustainable Practices",
+                  "Sustainable practices",
                   "Tools",
                   "Recipes",
-                  "General Practices",
+                  "General practices",
                   "Education"
                 ]
                     .map((label) => DropdownMenuItem(
@@ -69,10 +69,10 @@ class _CustomFormFieldState extends State<_CustomFormField> {
                 border: OutlineInputBorder(), labelText: "Topic"),
             value: TopicString.toDisplayString(widget.state.value!),
             items: [
-              "Sustainable Practices",
+              "Sustainable practices",
               "Tools",
               "Recipes",
-              "General Practices",
+              "General practices",
               "Education"
             ]
                 .map((label) => DropdownMenuItem(
