@@ -64,4 +64,11 @@ class Post {
       authorId: authorId,
       message: message,
       postDate: postDate);
+
+  Post withMessage(String newMessage) => Post(
+      id: id,
+      authorName: authorName,
+      authorId: authorId,
+      message: newMessage,
+      postDate: postDate);
 }

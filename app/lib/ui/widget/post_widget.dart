@@ -8,7 +8,7 @@ import 'package:intl/intl.dart';
 class PostWidget extends StatefulWidget {
   final Post initial;
   final bool canBeEdited;
-  final FormFieldSetter<String>? onSaved;
+  final FormFieldSetter<Post>? onSaved;
 
   PostWidget(
       {Key? key,
@@ -60,7 +60,8 @@ class _PostWidgetState extends State<PostWidget> {
                 focusNode: focusNode,
                 controller: controller,
                 onSaved: (String? changed) {
-                  if (widget.onSaved != null) widget.onSaved!(changed);
+                  if (widget.onSaved != null && changed != null)
+                    widget.onSaved!(widget.initial.withMessage(changed));
                   setState(() => isReadOnly = true);
                 },
                 onTap: () => setState(() => isReadOnly = false)),
