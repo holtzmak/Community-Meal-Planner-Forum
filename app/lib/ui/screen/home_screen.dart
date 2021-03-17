@@ -1,3 +1,4 @@
+import 'package:app/core/subtopic.dart';
 import 'package:app/core/thread.dart';
 import 'package:app/core/topic.dart';
 import 'package:app/service/firebase_auth_service.dart';
@@ -39,21 +40,39 @@ class _HomeScreenState extends State<HomeScreen> {
                   }),
               bottomNavigationBar: CustomBottomAppBar.get(),
               body: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    ThreadWidget(
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      ThreadWidget(
                         initial: Thread(
                             id: "FR6hxL9qJim7hLlfbgdn",
                             title: "",
                             topics: [Topic.sustainablePractices],
-                            subTopics: [],
+                            subTopics: [SubTopic.critique],
                             authorId: _firebaseAuthService.currentUser!.uid,
                             startDate: DateTime.now(),
                             completionDate: null,
                             completionPost: null,
-                            canBeRepliedTo: false)),
-                  ],
+                            canBeRepliedTo: false),
+                        canBeEdited: true,
+                        onSaved: (Thread? it) => print("Saved! $it}"),
+                      ),
+                      ThreadWidget(
+                        initial: Thread(
+                            id: "FR6hxL9qJim7hLlfbgdn",
+                            title: "",
+                            topics: [Topic.sustainablePractices],
+                            subTopics: [SubTopic.critique],
+                            authorId: _firebaseAuthService.currentUser!.uid,
+                            startDate: DateTime.now(),
+                            completionDate: null,
+                            completionPost: null,
+                            canBeRepliedTo: false),
+                        canBeEdited: false,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ));

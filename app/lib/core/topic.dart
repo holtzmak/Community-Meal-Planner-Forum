@@ -1,4 +1,4 @@
-import 'package:app/core/utility/to_camel_case.dart';
+import 'package:recase/recase.dart';
 
 enum Topic {
   sustainablePractices,
@@ -22,8 +22,9 @@ extension TopicDeserializer on Topic {
 }
 
 extension TopicString on Topic {
-  static String toDisplayString(Topic it) => it.toString().split('.').last;
+  static String toDisplayString(Topic it) =>
+      ReCase(it.toString().split('.').last).sentenceCase;
 
   static Topic fromDisplayString(String it) =>
-      TopicDeserializer.fromString('Topic.${toCamelCase(it)}');
+      TopicDeserializer.fromString('Topic.${ReCase(it).camelCase}');
 }
