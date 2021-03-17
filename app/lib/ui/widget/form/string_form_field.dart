@@ -15,7 +15,7 @@ class StringFormField extends FormField<String> {
             key: key,
             initialValue: initialValue,
             builder: (FormFieldState<String> state) {
-              return CustomFormFieldState(
+              return _CustomFormFieldState(
                 state: state,
                 title: title,
                 isMultiline: isMultiline,
@@ -26,7 +26,7 @@ class StringFormField extends FormField<String> {
             });
 }
 
-class CustomFormFieldState extends StatelessWidget {
+class _CustomFormFieldState extends StatelessWidget {
   final FormFieldState<String> state;
   final String title;
   final bool isMultiline;
@@ -34,7 +34,7 @@ class CustomFormFieldState extends StatelessWidget {
   final FormFieldSetter<String> onSaved;
   final FormFieldValidator<String> validator;
 
-  CustomFormFieldState({
+  _CustomFormFieldState({
     required this.state,
     required this.title,
     required this.isMultiline,

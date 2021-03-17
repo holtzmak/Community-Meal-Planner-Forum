@@ -18,3 +18,10 @@ extension TopicDeserializer on Topic {
     return Topic.undefined;
   }
 }
+
+extension TopicString on Topic {
+  static String toDisplayString(Topic it) => it.toString().split('.').last;
+
+  static Topic fromDisplayString(String it) =>
+      TopicDeserializer.fromString('Topic.$it');
+}
