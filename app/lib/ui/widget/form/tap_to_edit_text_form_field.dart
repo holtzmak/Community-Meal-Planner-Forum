@@ -15,24 +15,32 @@ Widget buildTapToEditTextFormField({
       ? GestureDetector(
           onTap: onTap,
           child: Container(
+            padding: EdgeInsets.all(16.0),
+            margin: EdgeInsets.fromLTRB(16.0, 0, 16.0, 16.0),
             decoration: BoxDecoration(border: Border.all(color: Charcoal)),
             child: Align(
-                alignment: Alignment.topLeft, child: Text(controller.text)),
+                alignment: Alignment.topLeft,
+                child: Text(
+                  controller.text,
+                  style: GoogleFonts.raleway(
+                      color: Charcoal, fontSize: MediumTextSize),
+                )),
           ))
       : Container(
+          padding: EdgeInsets.fromLTRB(16.0, 0, 16.0, 16.0),
           child: TextFormField(
-          autofocus: false,
-          focusNode: focusNode,
-          textInputAction: TextInputAction.done,
-          readOnly: isReadOnly,
-          controller: controller,
-          onFieldSubmitted: onSaved,
-          validator: ValidatorService.emptyValidator,
-          decoration: InputDecoration(
-              errorStyle: GoogleFonts.notoSerif(color: BurntSienna),
-              border: OutlineInputBorder(),
-              labelText: label),
-        ));
+            autofocus: false,
+            focusNode: focusNode,
+            textInputAction: TextInputAction.done,
+            readOnly: isReadOnly,
+            controller: controller,
+            onFieldSubmitted: onSaved,
+            validator: ValidatorService.emptyValidator,
+            decoration: InputDecoration(
+                errorStyle: GoogleFonts.notoSerif(color: BurntSienna),
+                border: OutlineInputBorder(),
+                labelText: label),
+          ));
 }
 
 Widget buildTapToEditMultilineTextFormField({
@@ -51,9 +59,12 @@ Widget buildTapToEditMultilineTextFormField({
             margin: EdgeInsets.fromLTRB(16.0, 0, 16.0, 16.0),
             decoration: BoxDecoration(border: Border.all(color: Charcoal)),
             child: Align(
-                heightFactor: 5,
                 alignment: Alignment.topLeft,
-                child: Text(controller.text)),
+                child: Text(
+                  controller.text,
+                  style: GoogleFonts.raleway(
+                      color: Charcoal, fontSize: MediumTextSize),
+                )),
           ))
       : Container(
           padding: EdgeInsets.fromLTRB(16.0, 0, 16.0, 16.0),
@@ -66,7 +77,7 @@ Widget buildTapToEditMultilineTextFormField({
             onFieldSubmitted: onSaved,
             validator: ValidatorService.emptyValidator,
             keyboardType: TextInputType.multiline,
-            maxLines: 5,
+            maxLines: 3,
             decoration: InputDecoration(
                 errorStyle: GoogleFonts.notoSerif(color: BurntSienna),
                 border: OutlineInputBorder(),

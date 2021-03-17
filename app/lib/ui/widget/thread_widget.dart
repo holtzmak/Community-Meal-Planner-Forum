@@ -63,6 +63,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
   void saveAll() {
     if (widget.onSaved != null) {
       topicFormField.save();
+      subTopicFormField.save();
       widget.onSaved!(Thread(
           id: widget.initial.id,
           title: titleController.text.trim(),
@@ -111,6 +112,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
 
   Widget _buildThreadWidget() {
     return Column(children: [
+      ListTile(title: Text("Title")),
       buildTapToEditTextFormField(
           label: "Type your question title here",
           isReadOnly: isReadOnly || !widget.canBeEdited,
@@ -133,26 +135,39 @@ class _ThreadWidgetState extends State<ThreadWidget> {
         ListTile(title: Text("Sub-topics")),
         subTopicFormField,
         elevatedButton(
-            text: "Submit",
+            text: "Save any title or topic changes",
             onPressed: saveAll,
             color: PersianGreen,
             pressedColor: PersianGreenOpaque)
       ]);
     } else {
-      final List<Chip> children = [];
+      final List<Widget> children = [];
+      children.add(ListTile(title: Text("Topics")));
       children.addAll(
           List.generate(topics.length, (index) => _buildTopicChip(index)));
+      children.add(ListTile(title: Text("Sub-topics")));
       children.addAll(List.generate(
           subTopics.length, (index) => _buildSubTopicChip(index)));
       return Column(children: children);
     }
   }
 
-  Chip _buildTopicChip(int index) {
-    return Chip(label: Text(TopicString.toDisplayString(topics[index])));
+  Widget _buildTopicChip(int index) {
+    return Container(
+        margin: EdgeInsets.only(left: 16.0),
+        child: Align(
+            alignment: Alignment.centerLeft,
+            child:
+                Chip(label: Text(TopicString.toDisplayString(topics[index])))));
   }
 
-  Chip _buildSubTopicChip(int index) {
-    return Chip(label: Text(SubTopicString.toDisplayString(subTopics[index])));
+  Widget _buildSubTopicChip(int index) {
+    return Container(
+        margin: EdgeInsets.only(left: 16.0),
+        child: Align(
+            alignment: Alignment.centerLeft,
+            child: Chip(
+                label:
+                    Text(SubTopicString.toDisplayString(subTopics[index])))));
   }
 }

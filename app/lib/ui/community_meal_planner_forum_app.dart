@@ -3,8 +3,10 @@ import 'package:app/service/dialog_service.dart';
 import 'package:app/service/navigation_service.dart';
 import 'package:app/service/service_locator.dart';
 import 'package:app/ui/screen/home_screen.dart';
+import 'package:app/ui/style.dart';
 import 'package:app/ui/widget/dialog_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CommunityMealPlannerForumApp extends StatelessWidget {
   @override
@@ -12,8 +14,12 @@ class CommunityMealPlannerForumApp extends StatelessWidget {
     return MaterialApp(
       title: 'Community of Meal Planners Forums',
       theme: ThemeData(
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          textTheme: TextTheme(
+              bodyText2:
+                  GoogleFonts.raleway(color: Charcoal, fontSize: SmallTextSize),
+              subtitle1: GoogleFonts.cabin(
+                  color: Charcoal, fontSize: MediumTextSize))),
       initialRoute: HomeScreen.route,
       onGenerateRoute: AppRouteGenerator.onGenerateRoute,
       navigatorKey: ServiceLocator.get<NavigationService>().navigationKey,
