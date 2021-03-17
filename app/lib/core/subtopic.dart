@@ -1,3 +1,5 @@
+import 'package:app/core/utility/to_camel_case.dart';
+
 enum SubTopic { critique, praise, generalDiscussion, suggestions, undefined }
 
 /// Particularly used for JSON conversion
@@ -10,4 +12,11 @@ extension SubTopicDeserializer on SubTopic {
     }
     return SubTopic.undefined;
   }
+}
+
+extension SubTopicString on SubTopic {
+  static String toDisplayString(SubTopic it) => it.toString().split('.').last;
+
+  static SubTopic fromDisplayString(String it) =>
+      SubTopicDeserializer.fromString('SubTopic.${toCamelCase(it)}');
 }

@@ -1,3 +1,5 @@
+import 'package:app/core/utility/to_camel_case.dart';
+
 enum Topic {
   sustainablePractices,
   tools,
@@ -23,5 +25,5 @@ extension TopicString on Topic {
   static String toDisplayString(Topic it) => it.toString().split('.').last;
 
   static Topic fromDisplayString(String it) =>
-      TopicDeserializer.fromString('Topic.$it');
+      TopicDeserializer.fromString('Topic.${toCamelCase(it)}');
 }

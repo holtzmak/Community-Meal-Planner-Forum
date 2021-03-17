@@ -57,7 +57,7 @@ class _PostWidgetState extends State<PostWidget> {
             ),
             buildTapToEditMultilineTextFormField(
                 label: "Type your message here",
-                isReadOnly: isReadOnly,
+                isReadOnly: isReadOnly || !widget.canBeEdited,
                 focusNode: focusNode,
                 controller: controller,
                 onSaved: (String? changed) {
