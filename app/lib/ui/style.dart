@@ -37,20 +37,25 @@ OutlinedButton outlinedButton(
 
 ElevatedButton elevatedButton(
         {required String text,
+        Widget? trailing,
         required VoidCallback onPressed,
         required Color color,
         required Color pressedColor}) =>
     ElevatedButton(
-      onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-        minimumSize: Size(80.0, 50.0),
-        primary: color,
-      ),
-      child: Text(
-        text,
-        style: GoogleFonts.cabin(),
-      ),
-    );
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          minimumSize: Size(80.0, 50.0),
+          primary: color,
+        ),
+        child: Row(
+          children: [
+            Text(
+              text,
+              style: GoogleFonts.cabin(),
+            ),
+            if (trailing != null) trailing,
+          ],
+        ));
 
 TextButton textButton(
         {required String text,

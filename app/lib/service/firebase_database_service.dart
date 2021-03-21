@@ -19,6 +19,18 @@ class FirebaseDatabaseService {
   Future<void> removeAccount(String id) async =>
       _firestore.collection('account').doc(id).delete();
 
+  Future<Account> getAccount(String id) => _firestore
+      .collection('account')
+      .doc(id)
+      .get()
+      .then((DocumentSnapshot snapshot) => Account.fromJson(snapshot.data()!));
+
+  Stream<Account> getAccountUpdates(String id) => _firestore
+      .collection('account')
+      .doc(id)
+      .snapshots()
+      .map((DocumentSnapshot snapshot) => Account.fromJson(snapshot.data()!));
+
   Future<Thread> addThread(Thread placeholder) async =>
       _firestore.collection('thread').add(placeholder.toJson()).then(
           (DocumentReference docRef) => placeholder.withDocumentId(docRef.id));
