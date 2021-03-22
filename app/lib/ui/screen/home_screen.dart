@@ -1,5 +1,5 @@
 import 'package:app/ui/style.dart';
-import 'package:app/ui/view_model/home_screen_view_model.dart';
+import 'package:app/ui/view_model/home_view_model.dart';
 import 'package:app/ui/widget/custom_app_bar.dart';
 import 'package:app/ui/widget/custom_bottom_app_bar.dart';
 import 'package:app/ui/widget/template_view_model.dart';
@@ -17,7 +17,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return TemplateViewModel<HomeScreenViewModel>(
+    return TemplateViewModel<HomeViewModel>(
         builder: (context, model, child) => Scaffold(
               appBar: CustomAppBar.get(
                   leftButtonText: "Signup",

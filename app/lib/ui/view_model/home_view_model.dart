@@ -11,7 +11,7 @@ import 'package:app/ui/screen/new_question_screen.dart';
 import 'package:app/ui/screen/sign_up_screen.dart';
 import 'package:app/ui/widget/template_view_model.dart';
 
-class HomeScreenViewModel extends ViewModel {
+class HomeViewModel extends ViewModel {
   final _navigationService = ServiceLocator.get<NavigationService>();
   final _databaseService = ServiceLocator.get<FirebaseDatabaseService>();
   final _firebaseAuthService = ServiceLocator.get<FirebaseAuthService>();
