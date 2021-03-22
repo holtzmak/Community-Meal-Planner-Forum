@@ -3,6 +3,7 @@ import 'package:app/ui/view_model/my_questions_view_model.dart';
 import 'package:app/ui/widget/custom_app_bar.dart';
 import 'package:app/ui/widget/custom_bottom_app_bar.dart';
 import 'package:app/ui/widget/template_view_model.dart';
+import 'package:app/ui/widget/thread_preview_card.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 

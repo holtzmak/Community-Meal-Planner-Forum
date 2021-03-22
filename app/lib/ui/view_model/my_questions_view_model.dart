@@ -51,7 +51,7 @@ class MyQuestionsViewModel extends ViewModel {
       });
     } else {
       _dialogService.showDialog(
-        title: 'Launching the questions screen failed',
+        title: 'Launching My Questions screen failed',
         description: "You are not logged in!",
       );
     }

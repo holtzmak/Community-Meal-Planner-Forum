@@ -7,6 +7,7 @@ import 'package:app/service/firebase_auth_service.dart';
 import 'package:app/service/firebase_database_service.dart';
 import 'package:app/service/navigation_service.dart';
 import 'package:app/service/service_locator.dart';
+import 'package:app/ui/screen/my_questions_screen.dart';
 import 'package:app/ui/screen/new_question_screen.dart';
 import 'package:app/ui/screen/sign_up_screen.dart';
 import 'package:app/ui/widget/template_view_model.dart';
@@ -57,5 +58,17 @@ class HomeViewModel extends ViewModel {
         .catchError((_) {
       // do nothing, handled by createNewThread
     });
+  }
+
+  void navigateToMyQuestionsScreen() {
+    final thisUser = _firebaseAuthService.currentUser;
+    if (thisUser != null) {
+      _navigationService.navigateTo(MyQuestionsScreen.route);
+    } else {
+      _dialogService.showDialog(
+          title: "Cannot go to My Questions screen",
+          description:
+              "Cannot look at your questions if you're not logged in!");
+    }
   }
 }

@@ -31,7 +31,7 @@ OutlinedButton outlinedButton(
       onPressed: onPressed,
       child: Text(
         text,
-        style: GoogleFonts.cabin(),
+        style: GoogleFonts.cabin(fontSize: MediumTextSize),
       ),
     );
 
@@ -52,8 +52,31 @@ ElevatedButton elevatedButton(
           children: [
             Text(
               text,
-              style: GoogleFonts.cabin(),
+              style: GoogleFonts.cabin(fontSize: MediumTextSize),
             ),
+            if (trailing != null) trailing,
+          ],
+        ));
+
+ElevatedButton stretchedButton(
+        {required String text,
+        Widget? trailing,
+        required VoidCallback onPressed,
+        required Color color,
+        required Color pressedColor}) =>
+    ElevatedButton(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          minimumSize: Size(80.0, 50.0),
+          primary: color,
+        ),
+        child: Row(
+          children: [
+            Text(
+              text,
+              style: GoogleFonts.cabin(fontSize: LargeTextSize),
+            ),
+            Spacer(),
             if (trailing != null) trailing,
           ],
         ));

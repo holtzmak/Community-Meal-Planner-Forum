@@ -35,11 +35,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
+                      stretchedButton(
+                          text: "My Questions",
+                          trailing: Icon(Icons.arrow_forward_ios_outlined),
+                          onPressed: model.navigateToMyQuestionsScreen,
+                          color: PersianGreen,
+                          pressedColor: PersianGreenOpaque),
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 25.0),
+                      ),
                       elevatedButton(
                           text: "Ask a new question",
                           trailing: Icon(Icons.arrow_forward_ios_outlined),
                           onPressed: model.navigateToNewQuestionScreen,
-                          color: PersianGreen,
+                          color: BurntSienna,
                           pressedColor: PersianGreenOpaque)
                     ],
                   ),

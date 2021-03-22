@@ -190,7 +190,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                         ),
                         ButtonBar(
-                          buttonPadding: const EdgeInsets.only(right: 40.0),
+                          buttonPadding: EdgeInsets.only(left: 20.0),
+                          overflowButtonSpacing: 20.0,
                           children: [
                             elevatedButton(
                                 text: "Signup",

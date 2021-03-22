@@ -123,7 +123,7 @@ class _LogInScreenState extends State<LogInScreen> {
                           ),
                         ),
                         ButtonBar(
-                          buttonPadding: const EdgeInsets.only(right: 40.0),
+                          buttonPadding: EdgeInsets.only(left: 20.0),
                           children: [
                             elevatedButton(
                                 text: "Login",
