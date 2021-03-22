@@ -63,6 +63,17 @@ class FirebaseDatabaseService {
               Thread.fromJson(id: doc.id, json: doc.data()!))
           .toList());
 
+  Future<Thread> getLatestAccountSpecificThread(String id) => _firestore
+      .collection('thread')
+      .where('authorId', isEqualTo: id)
+      .orderBy("startDate")
+      .limitToLast(1)
+      .get()
+      .then((QuerySnapshot snapshot) => snapshot.docs
+          .map((QueryDocumentSnapshot doc) =>
+              Thread.fromJson(id: doc.id, json: doc.data()!))
+          .first);
+
   Stream<List<Thread>> getAllUpdatedThreads() => _firestore
       .collection('thread')
       .snapshots()
