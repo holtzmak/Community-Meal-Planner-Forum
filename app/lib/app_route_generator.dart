@@ -2,6 +2,7 @@ import 'package:app/service/firebase_auth_service.dart';
 import 'package:app/service/service_locator.dart';
 import 'package:app/ui/screen/home_screen.dart';
 import 'package:app/ui/screen/log_in_screen.dart';
+import 'package:app/ui/screen/my_questions_screen.dart';
 import 'package:app/ui/screen/new_question_screen.dart';
 import 'package:app/ui/screen/sign_up_screen.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +30,11 @@ class AppRouteGenerator {
           case NewQuestionScreen.route:
             return isLoggedIn()
                 ? NewQuestionScreen(initial: settings.arguments as Thread)
+                : throw Exception(
+                    'You must be logged in to view this screen: ${settings.name}');
+          case MyQuestionsScreen.route:
+            return isLoggedIn()
+                ? MyQuestionsScreen()
                 : throw Exception(
                     'You must be logged in to view this screen: ${settings.name}');
 
