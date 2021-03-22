@@ -48,6 +48,7 @@ ElevatedButton elevatedButton(
           primary: color,
         ),
         child: Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               text,

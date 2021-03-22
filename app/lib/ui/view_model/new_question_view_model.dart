@@ -10,47 +10,19 @@ import 'package:app/service/navigation_service.dart';
 import 'package:app/service/service_locator.dart';
 import 'package:app/ui/screen/home_screen.dart';
 import 'package:app/ui/widget/template_view_model.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 
 class NewQuestionViewModel extends ViewModel {
   final _navigationService = ServiceLocator.get<NavigationService>();
   final _firebaseAuthService = ServiceLocator.get<FirebaseAuthService>();
   final _databaseService = ServiceLocator.get<FirebaseDatabaseService>();
   final _dialogService = ServiceLocator.get<DialogService>();
-  StreamSubscription<User?>? _currentUserSubscription;
-  StreamSubscription<Account>? _accountSubscription;
-  Account? _account;
 
-  @mustCallSuper
-  void dispose() {
-    if (_currentUserSubscription != null) _currentUserSubscription!.cancel();
-    _cancelAccountSubscription();
-    super.dispose();
-  }
-
-  void _cancelAccountSubscription() {
-    if (_currentUserSubscription != null) _accountSubscription!.cancel();
-  }
-
-  NewQuestionViewModel() {
-    final thisUser = _firebaseAuthService.currentUser;
-    if (thisUser != null) {
-      _accountSubscription = _databaseService
-          .getAccountUpdates(thisUser.uid)
-          .listen((Account account) => _account = account);
-      _currentUserSubscription =
-          _firebaseAuthService.currentUserChanges.listen((User? user) {
-        // User has logged out or is no longer authenticated, lock the ViewModel
-        if (user == null) _cancelAccountSubscription();
-      });
-    } else {
-      _dialogService.showDialog(
-        title: 'Launching the new question screen failed',
-        description: "You are not logged in!",
-      );
-    }
-  }
+  Future<void> updateThread(Thread thread) async => _databaseService
+      .updateThread(thread)
+      .catchError((error) => _dialogService.showDialog(
+            title: 'Updating your question failed!',
+            description: "Here's what we think went wrong:\n${error.message}",
+          ));
 
   Future<void> updatePostInThread(Thread thread, Post post) async =>
       _databaseService
@@ -62,28 +34,21 @@ class NewQuestionViewModel extends ViewModel {
               ));
 
   Future<Post> addNewPostToThread(Thread thread) async {
-    if (_account != null) {
-      final placeholder = Post(
-          id: "",
-          authorName: _account!.name,
-          authorId: _account!.id,
-          message: "Type your question here",
-          postDate: DateTime.now());
-      return _databaseService
-          .addPostToThread(thread, placeholder)
-          .catchError((error) {
-        _dialogService.showDialog(
-          title: 'Updating your message failed!',
-          description: "Here's what we think went wrong:\n${error.message}",
-        );
-        return Future<Post>.error("Cannot create a post when not logged in!");
-      });
-    } else {
-      _dialogService.showDialog(
-          title: "Adding a new post to the thread failed",
-          description: "Cannot create a post when not logged in!");
-      return Future<Post>.error("Cannot create a post when not logged in!");
-    }
+    final thisUser = _firebaseAuthService.currentUser;
+    return thisUser != null
+        ? _databaseService
+            .getAccount(thisUser.uid)
+            .then((Account account) => _databaseService.addPostToThread(
+                thread,
+                Post(
+                    id: "",
+                    authorName: account.name,
+                    authorId: account.id,
+                    message: "Type your question here",
+                    postDate: DateTime.now())))
+            .catchError((error) => Future<Post>.error(
+                "Adding your message failed!\nHere's what we think went wrong:\n${error.message}"))
+        : Future<Post>.error("Cannot create a post when not logged in!");
   }
 
   void navigateToHomeScreen() =>
