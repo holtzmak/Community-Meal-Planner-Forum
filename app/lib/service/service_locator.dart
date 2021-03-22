@@ -2,8 +2,9 @@ import 'package:app/service/dialog_service.dart';
 import 'package:app/service/firebase_auth_service.dart';
 import 'package:app/service/firebase_database_service.dart';
 import 'package:app/service/navigation_service.dart';
-import 'package:app/ui/view_model/home_screen_view_model.dart';
+import 'package:app/ui/view_model/home_view_model.dart';
 import 'package:app/ui/view_model/log_in_view_model.dart';
+import 'package:app/ui/view_model/my_questions_view_model.dart';
 import 'package:app/ui/view_model/new_question_view_model.dart';
 import 'package:app/ui/view_model/sign_up_view_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -25,7 +26,8 @@ class ServiceLocator {
 
     get.registerFactory<SignUpViewModel>(() => SignUpViewModel());
     get.registerFactory<LogInViewModel>(() => LogInViewModel());
-    get.registerFactory<HomeScreenViewModel>(() => HomeScreenViewModel());
+    get.registerFactory<HomeViewModel>(() => HomeViewModel());
     get.registerFactory<NewQuestionViewModel>(() => NewQuestionViewModel());
+    get.registerFactory<MyQuestionsViewModel>(() => MyQuestionsViewModel());
   }
 }
