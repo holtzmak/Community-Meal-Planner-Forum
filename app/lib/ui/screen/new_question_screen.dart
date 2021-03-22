@@ -32,29 +32,20 @@ class _NewQuestionScreenState extends State<NewQuestionScreen> {
         },
       );
     } else if (snapshot.hasError) {
-      return Container(
-        padding: EdgeInsets.all(16.0),
-        margin: EdgeInsets.fromLTRB(16.0, 0, 16.0, 16.0),
-        decoration: BoxDecoration(border: Border.all(color: Colors.red)),
-        child: Align(
-            alignment: Alignment.center,
-            child: Text(
-              snapshot.error.toString(),
-              style: GoogleFonts.raleway(
-                  color: Colors.red, fontSize: MediumTextSize),
-            )),
-      );
+      return outlinedBox(
+          child: Text(
+            snapshot.error.toString(),
+            style: GoogleFonts.raleway(
+                color: Colors.red, fontSize: MediumTextSize),
+          ),
+          childAlignmentInBox: Alignment.center,
+          color: Colors.red);
     } else {
-      return Container(
-        padding: EdgeInsets.all(16.0),
-        margin: EdgeInsets.fromLTRB(16.0, 0, 16.0, 16.0),
-        decoration: BoxDecoration(border: Border.all(color: PersianGreen)),
-        child: Align(
-            alignment: Alignment.center,
-            child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation(PersianGreen),
-            )),
-      );
+      return outlinedBox(
+          child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation(PersianGreen)),
+          childAlignmentInBox: Alignment.center,
+          color: PersianGreen);
     }
   }
 

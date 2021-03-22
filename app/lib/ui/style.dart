@@ -93,3 +93,14 @@ TextButton textButton(
           style: GoogleFonts.raleway(
               fontSize: fontSize ?? MediumTextSize, color: color),
         ));
+
+Container outlinedBox(
+        {required Widget child,
+        required Alignment childAlignmentInBox,
+        required Color color}) =>
+    Container(
+      padding: EdgeInsets.all(16.0),
+      margin: EdgeInsets.fromLTRB(16.0, 0, 16.0, 16.0),
+      decoration: BoxDecoration(border: Border.all(color: color)),
+      child: Align(alignment: childAlignmentInBox, child: child),
+    );

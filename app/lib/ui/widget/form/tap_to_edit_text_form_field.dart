@@ -14,18 +14,14 @@ Widget buildTapToEditTextFormField({
   return isReadOnly
       ? GestureDetector(
           onTap: onTap,
-          child: Container(
-            padding: EdgeInsets.all(16.0),
-            margin: EdgeInsets.fromLTRB(16.0, 0, 16.0, 16.0),
-            decoration: BoxDecoration(border: Border.all(color: Charcoal)),
-            child: Align(
-                alignment: Alignment.topLeft,
-                child: Text(
-                  controller.text,
-                  style: GoogleFonts.raleway(
-                      color: Charcoal, fontSize: MediumTextSize),
-                )),
-          ))
+          child: outlinedBox(
+              child: Text(
+                controller.text,
+                style: GoogleFonts.raleway(
+                    color: Charcoal, fontSize: MediumTextSize),
+              ),
+              childAlignmentInBox: Alignment.topLeft,
+              color: Charcoal))
       : Container(
           padding: EdgeInsets.fromLTRB(16.0, 0, 16.0, 16.0),
           child: TextFormField(
@@ -54,18 +50,14 @@ Widget buildTapToEditMultilineTextFormField({
   return isReadOnly
       ? GestureDetector(
           onTap: onTap,
-          child: Container(
-            padding: EdgeInsets.all(16.0),
-            margin: EdgeInsets.fromLTRB(16.0, 0, 16.0, 16.0),
-            decoration: BoxDecoration(border: Border.all(color: Charcoal)),
-            child: Align(
-                alignment: Alignment.topLeft,
-                child: Text(
-                  controller.text,
-                  style: GoogleFonts.raleway(
-                      color: Charcoal, fontSize: MediumTextSize),
-                )),
-          ))
+          child: outlinedBox(
+              child: Text(
+                controller.text,
+                style: GoogleFonts.raleway(
+                    color: Charcoal, fontSize: MediumTextSize),
+              ),
+              childAlignmentInBox: Alignment.topLeft,
+              color: Charcoal))
       : Container(
           padding: EdgeInsets.fromLTRB(16.0, 0, 16.0, 16.0),
           child: TextFormField(

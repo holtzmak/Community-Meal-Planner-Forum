@@ -15,7 +15,7 @@ class MyQuestionsViewModel extends ViewModel {
   final _navigationService = ServiceLocator.get<NavigationService>();
   final _databaseService = ServiceLocator.get<FirebaseDatabaseService>();
   final _dialogService = ServiceLocator.get<DialogService>();
-  final _authenticationService = ServiceLocator.get<FirebaseAuthService>();
+  final _firebaseAuthService = ServiceLocator.get<FirebaseAuthService>();
   StreamSubscription<User?>? _currentUserSubscription;
   StreamSubscription<List<Thread>>? _threadSubscription;
 
@@ -36,7 +36,7 @@ class MyQuestionsViewModel extends ViewModel {
   }
 
   MyQuestionsViewModel() {
-    final thisUser = _authenticationService.currentUser;
+    final thisUser = _firebaseAuthService.currentUser;
     if (thisUser != null) {
       _threadSubscription = _databaseService
           .getUpdatedAccountSpecificThreads(thisUser.uid)
@@ -45,7 +45,7 @@ class MyQuestionsViewModel extends ViewModel {
         addAll(threads);
       });
       _currentUserSubscription =
-          _authenticationService.currentUserChanges.listen((User? user) {
+          _firebaseAuthService.currentUserChanges.listen((User? user) {
         // User has logged out or is no longer authenticated, lock the ViewModel
         if (user == null) _cancelThreadSubscription();
       });
@@ -72,5 +72,5 @@ class MyQuestionsViewModel extends ViewModel {
   }
 
   void navigateToHomeScreen() =>
-      _navigationService.navigateTo(HomeScreen.route);
+      _navigationService.navigateBackUntil(HomeScreen.route);
 }

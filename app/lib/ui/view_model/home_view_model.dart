@@ -11,12 +11,44 @@ import 'package:app/ui/screen/my_questions_screen.dart';
 import 'package:app/ui/screen/new_question_screen.dart';
 import 'package:app/ui/screen/sign_up_screen.dart';
 import 'package:app/ui/widget/template_view_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 
 class HomeViewModel extends ViewModel {
   final _navigationService = ServiceLocator.get<NavigationService>();
   final _databaseService = ServiceLocator.get<FirebaseDatabaseService>();
   final _firebaseAuthService = ServiceLocator.get<FirebaseAuthService>();
   final _dialogService = ServiceLocator.get<DialogService>();
+  StreamSubscription<User?>? _currentUserSubscription;
+  late Future<Thread> latestMyQuestion;
+
+  @mustCallSuper
+  void dispose() {
+    if (_currentUserSubscription != null) _currentUserSubscription!.cancel();
+    super.dispose();
+  }
+
+  HomeViewModel() {
+    _setLatestMyQuestion(_firebaseAuthService.currentUser);
+    notifyListeners();
+    _currentUserSubscription =
+        _firebaseAuthService.currentUserChanges.listen((User? user) {
+      _setLatestMyQuestion(user);
+      notifyListeners();
+    });
+  }
+
+  void _setLatestMyQuestion(User? user) => latestMyQuestion = user != null
+      ? _databaseService
+          .getLatestAccountSpecificThread(user.uid)
+          .catchError((error) {
+          _dialogService.showDialog(
+              title: "Getting the latest question failed!",
+              description: "Here's what we think went wrong\n${error.message}");
+          return Future<Thread>.error("Getting the latest question failed");
+        })
+      : Future<Thread>.error(
+          "Cannot see the latest question if you're not logged in!");
 
   Future<Thread> _createNewThread() async {
     final thisUser = _firebaseAuthService.currentUser;
@@ -71,4 +103,6 @@ class HomeViewModel extends ViewModel {
               "Cannot look at your questions if you're not logged in!");
     }
   }
+
+  void logOut() => _firebaseAuthService.signOut();
 }
