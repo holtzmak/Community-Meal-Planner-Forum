@@ -74,6 +74,14 @@ class FirebaseDatabaseService {
               Thread.fromJson(id: doc.id, json: doc.data()!))
           .first);
 
+  Stream<List<Thread>> getUpdatedAnnouncementThreads() => _firestore
+      .collection('announcementThread')
+      .snapshots()
+      .map((QuerySnapshot snapshot) => snapshot.docs
+          .map((QueryDocumentSnapshot doc) =>
+              Thread.fromJson(id: doc.id, json: doc.data()!))
+          .toList());
+
   Stream<List<Thread>> getAllUpdatedThreads() => _firestore
       .collection('thread')
       .snapshots()
