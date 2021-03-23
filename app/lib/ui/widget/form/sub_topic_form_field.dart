@@ -56,7 +56,9 @@ class _CustomFormFieldState extends State<_CustomFormField> {
                           value: label,
                         ))
                     .toList(),
-                onChanged: (String? changed) => setState(() => widget
+                onChanged: (String? changed) => setState(() =>
+                    widget.onSaved(SubTopicString.fromDisplayString(changed!))),
+                onSaved: (String? changed) => setState(() => widget
                     .onSaved(SubTopicString.fromDisplayString(changed!)))),
             trailing: IconButton(
               icon: Icon(Icons.delete_forever, size: 40.0),
@@ -79,6 +81,8 @@ class _CustomFormFieldState extends State<_CustomFormField> {
                     ))
                 .toList(),
             onChanged: (String? changed) => setState(() =>
+                widget.onSaved(SubTopicString.fromDisplayString(changed!))),
+            onSaved: (String? changed) => setState(() =>
                 widget.onSaved(SubTopicString.fromDisplayString(changed!))),
           ));
   }

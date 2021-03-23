@@ -42,23 +42,26 @@ class _CustomFormFieldState extends State<_CustomFormField> {
     return widget.onDelete != null
         ? ListTile(
             title: DropdownButtonFormField(
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(), labelText: "Topic"),
-                value: TopicString.toDisplayString(widget.state.value!),
-                items: [
-                  "Sustainable practices",
-                  "Tools",
-                  "Recipes",
-                  "General practices",
-                  "Education"
-                ]
-                    .map((label) => DropdownMenuItem(
-                          child: Text(label),
-                          value: label,
-                        ))
-                    .toList(),
-                onChanged: (String? changed) => setState(() =>
-                    widget.onSaved(TopicString.fromDisplayString(changed!)))),
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(), labelText: "Topic"),
+              value: TopicString.toDisplayString(widget.state.value!),
+              items: [
+                "Sustainable practices",
+                "Tools",
+                "Recipes",
+                "General practices",
+                "Education"
+              ]
+                  .map((label) => DropdownMenuItem(
+                        child: Text(label),
+                        value: label,
+                      ))
+                  .toList(),
+              onChanged: (String? changed) => setState(() =>
+                  widget.onSaved(TopicString.fromDisplayString(changed!))),
+              onSaved: (String? changed) => setState(() =>
+                  widget.onSaved(TopicString.fromDisplayString(changed!))),
+            ),
             trailing: IconButton(
               icon: Icon(Icons.delete_forever, size: 40.0),
               onPressed: widget.onDelete,
@@ -81,6 +84,8 @@ class _CustomFormFieldState extends State<_CustomFormField> {
                     ))
                 .toList(),
             onChanged: (String? changed) => setState(
+                () => widget.onSaved(TopicString.fromDisplayString(changed!))),
+            onSaved: (String? changed) => setState(
                 () => widget.onSaved(TopicString.fromDisplayString(changed!))),
           ));
   }
