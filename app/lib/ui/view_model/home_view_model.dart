@@ -41,12 +41,9 @@ class HomeViewModel extends ViewModel {
   void _setLatestMyQuestion(User? user) => latestMyQuestion = user != null
       ? _databaseService
           .getLatestAccountSpecificThread(user.uid)
-          .catchError((error) {
-          _dialogService.showDialog(
-              title: "Getting the latest question failed!",
-              description: "Here's what we think went wrong\n${error.message}");
-          return Future<Thread>.error("Getting the latest question failed");
-        })
+          // TODO: Should log the failure reason (don't use dialog pop-up)
+          .catchError((error) => Future<Thread>.error(
+              "It doesn't look like you have any questions!"))
       : Future<Thread>.error(
           "Cannot see the latest question if you're not logged in!");
 

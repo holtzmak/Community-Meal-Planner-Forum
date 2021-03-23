@@ -7,6 +7,8 @@ import 'package:app/ui/widget/thread_preview_card.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
+import '../style.dart';
+
 class MyQuestionsScreen extends StatefulWidget {
   static const route = '/myQuestions';
 
@@ -46,10 +48,12 @@ class _MyQuestionScreenState extends State<MyQuestionsScreen> {
                         title: Text(
                           "You have no questions yet",
                           textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: LargeTextSize),
                         ),
                         subtitle: Text(
-                          "You can ask some using the \"New Question\" button",
+                          "You can ask some using the \"New Question\" button on the home page",
                           textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: MediumTextSize),
                         )),
                   ),
                 ),
