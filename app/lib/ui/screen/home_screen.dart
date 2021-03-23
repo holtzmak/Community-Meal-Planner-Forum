@@ -18,7 +18,103 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  Widget _buildLatestQuestionMaybe(
+  @override
+  Widget build(BuildContext context) {
+    return TemplateViewModel<HomeViewModel>(
+        builder: (context, model, child) => FutureBuilder<Thread>(
+            future: model.latestAnnouncement,
+            builder: (BuildContext context,
+                AsyncSnapshot<Thread> announcementSnapshot) {
+              return FutureBuilder<Thread>(
+                  future: model.latestMyQuestion,
+                  builder: (BuildContext context,
+                      AsyncSnapshot<Thread> questionSnapshot) {
+                    return Scaffold(
+                      appBar: CustomAppBar.get(
+                          leftButtonText: "Signup",
+                          centreButtonText: "Account",
+                          rightButtonText: "FAQ",
+                          leftButtonAction: model.navigateToSignUpScreen,
+                          centreButtonAction: () {
+                            // TODO
+                          },
+                          rightButtonAction: () {
+                            // TODO
+                          }),
+                      bottomNavigationBar: CustomBottomAppBar.get(),
+                      body: Center(
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              stretchedButton(
+                                  text: "Announcements",
+                                  trailing:
+                                      Icon(Icons.arrow_forward_ios_outlined),
+                                  onPressed:
+                                      model.navigateToAnnouncementsScreen,
+                                  color: PersianGreen,
+                                  pressedColor: PersianGreenOpaque),
+                              Padding(
+                                padding: EdgeInsets.only(bottom: 10.0),
+                              ),
+                              ListTile(
+                                title: Text(
+                                  "Since last time...",
+                                  style: GoogleFonts.cabin(color: PersianGreen),
+                                ),
+                                subtitle: _buildLatestWidget(
+                                    model, announcementSnapshot),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(bottom: 15.0),
+                              ),
+                              stretchedButton(
+                                  text: "My Questions",
+                                  trailing:
+                                      Icon(Icons.arrow_forward_ios_outlined),
+                                  onPressed: model.navigateToMyQuestionsScreen,
+                                  color: PersianGreen,
+                                  pressedColor: PersianGreenOpaque),
+                              Padding(
+                                padding: EdgeInsets.only(bottom: 10.0),
+                              ),
+                              ListTile(
+                                title: Text(
+                                  "Since last time...",
+                                  style: GoogleFonts.cabin(color: PersianGreen),
+                                ),
+                                subtitle:
+                                    _buildLatestWidget(model, questionSnapshot),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(bottom: 45.0),
+                              ),
+                              elevatedButton(
+                                  text: "Ask a new question",
+                                  trailing:
+                                      Icon(Icons.arrow_forward_ios_outlined),
+                                  onPressed: model.navigateToNewQuestionScreen,
+                                  color: BurntSienna,
+                                  pressedColor: PersianGreenOpaque),
+                              Padding(
+                                padding: EdgeInsets.only(bottom: 45.0),
+                              ),
+                              elevatedButton(
+                                  text: "Logout (Temporary) ",
+                                  trailing: Icon(Icons.logout),
+                                  onPressed: model.logOut,
+                                  color: BurntSienna,
+                                  pressedColor: PersianGreenOpaque)
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  });
+            }));
+  }
+
+  Widget _buildLatestWidget(
       HomeViewModel model, AsyncSnapshot<Thread> snapshot) {
     if (snapshot.hasData) {
       return ThreadPreviewCard(
@@ -41,70 +137,5 @@ class _HomeScreenState extends State<HomeScreen> {
           childAlignmentInBox: Alignment.center,
           color: PersianGreen);
     }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return TemplateViewModel<HomeViewModel>(
-        builder: (context, model, child) => FutureBuilder<Thread>(
-            future: model.latestMyQuestion,
-            builder: (BuildContext context, AsyncSnapshot<Thread> snapshot) {
-              return Scaffold(
-                appBar: CustomAppBar.get(
-                    leftButtonText: "Signup",
-                    centreButtonText: "Account",
-                    rightButtonText: "FAQ",
-                    leftButtonAction: model.navigateToSignUpScreen,
-                    centreButtonAction: () {
-                      // TODO
-                    },
-                    rightButtonAction: () {
-                      // TODO
-                    }),
-                bottomNavigationBar: CustomBottomAppBar.get(),
-                body: Center(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        stretchedButton(
-                            text: "My Questions",
-                            trailing: Icon(Icons.arrow_forward_ios_outlined),
-                            onPressed: model.navigateToMyQuestionsScreen,
-                            color: PersianGreen,
-                            pressedColor: PersianGreenOpaque),
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 10.0),
-                        ),
-                        ListTile(
-                          title: Text(
-                            "Since last time...",
-                            style: GoogleFonts.cabin(color: PersianGreen),
-                          ),
-                          subtitle: _buildLatestQuestionMaybe(model, snapshot),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 45.0),
-                        ),
-                        elevatedButton(
-                            text: "Ask a new question",
-                            trailing: Icon(Icons.arrow_forward_ios_outlined),
-                            onPressed: model.navigateToNewQuestionScreen,
-                            color: BurntSienna,
-                            pressedColor: PersianGreenOpaque),
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 45.0),
-                        ),
-                        elevatedButton(
-                            text: "Logout (Temporary) ",
-                            trailing: Icon(Icons.logout),
-                            onPressed: model.logOut,
-                            color: BurntSienna,
-                            pressedColor: PersianGreenOpaque)
-                      ],
-                    ),
-                  ),
-                ),
-              );
-            }));
   }
 }
