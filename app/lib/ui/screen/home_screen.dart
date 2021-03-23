@@ -47,20 +47,30 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: Column(
                             children: [
                               stretchedButton(
+                                  text: "All Questions",
+                                  trailing:
+                                      Icon(Icons.arrow_forward_ios_outlined),
+                                  onPressed: model.navigateToAllQuestionsScreen,
+                                  color: PersianGreen,
+                                  pressedColor: PersianGreenOpaque),
+                              Padding(
+                                padding: EdgeInsets.only(bottom: 15.0),
+                              ),
+                              stretchedButton(
                                   text: "Announcements",
                                   trailing:
                                       Icon(Icons.arrow_forward_ios_outlined),
                                   onPressed:
                                       model.navigateToAnnouncementsScreen,
-                                  color: PersianGreen,
-                                  pressedColor: PersianGreenOpaque),
+                                  color: BurntSienna,
+                                  pressedColor: BurntSiennaOpaque),
                               Padding(
                                 padding: EdgeInsets.only(bottom: 10.0),
                               ),
                               ListTile(
                                 title: Text(
                                   "Since last time...",
-                                  style: GoogleFonts.cabin(color: PersianGreen),
+                                  style: GoogleFonts.cabin(color: BurntSienna),
                                 ),
                                 subtitle: _buildLatestWidget(
                                     model, announcementSnapshot),
@@ -87,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     _buildLatestWidget(model, questionSnapshot),
                               ),
                               Padding(
-                                padding: EdgeInsets.only(bottom: 45.0),
+                                padding: EdgeInsets.only(bottom: 25.0),
                               ),
                               elevatedButton(
                                   text: "Ask a new question",
