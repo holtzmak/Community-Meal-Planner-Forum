@@ -5,6 +5,7 @@ import 'package:app/ui/screen/log_in_screen.dart';
 import 'package:app/ui/screen/my_questions_screen.dart';
 import 'package:app/ui/screen/new_question_screen.dart';
 import 'package:app/ui/screen/sign_up_screen.dart';
+import 'package:app/ui/screen/thread_display_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'core/thread.dart';
@@ -26,6 +27,9 @@ class AppRouteGenerator {
             return SignUpScreen();
           case LogInScreen.route:
             return LogInScreen();
+          case ThreadDisplayScreen.route:
+            return ThreadDisplayScreen(initial: settings.arguments as Thread);
+
           // Account-required screens, only available if logged in
           case NewQuestionScreen.route:
             return isLoggedIn()

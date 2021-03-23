@@ -23,9 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (snapshot.hasData) {
       return ThreadPreviewCard(
         thread: snapshot.data!,
-        onTap: () {
-          // TODO
-        },
+        onTap: () => model.navigateToThreadDisplayScreen(snapshot.data!),
       );
     } else if (snapshot.hasError) {
       return outlinedBox(

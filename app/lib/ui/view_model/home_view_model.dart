@@ -10,6 +10,7 @@ import 'package:app/service/service_locator.dart';
 import 'package:app/ui/screen/my_questions_screen.dart';
 import 'package:app/ui/screen/new_question_screen.dart';
 import 'package:app/ui/screen/sign_up_screen.dart';
+import 'package:app/ui/screen/thread_display_screen.dart';
 import 'package:app/ui/widget/template_view_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -100,6 +101,9 @@ class HomeViewModel extends ViewModel {
               "Cannot look at your questions if you're not logged in!");
     }
   }
+
+  void navigateToThreadDisplayScreen(Thread thread) => _navigationService
+      .navigateTo(ThreadDisplayScreen.route, arguments: thread);
 
   void logOut() => _firebaseAuthService.signOut();
 }
