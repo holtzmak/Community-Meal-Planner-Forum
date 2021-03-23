@@ -7,6 +7,7 @@ import 'package:app/service/firebase_auth_service.dart';
 import 'package:app/service/firebase_database_service.dart';
 import 'package:app/service/navigation_service.dart';
 import 'package:app/service/service_locator.dart';
+import 'package:app/ui/screen/all_questions_screen.dart';
 import 'package:app/ui/screen/announcements_screen.dart';
 import 'package:app/ui/screen/my_questions_screen.dart';
 import 'package:app/ui/screen/new_question_screen.dart';
@@ -132,6 +133,9 @@ class HomeViewModel extends ViewModel {
 
   void navigateToAnnouncementsScreen() =>
       _navigationService.navigateTo(AnnouncementsScreen.route);
+
+  void navigateToAllQuestionsScreen() =>
+      _navigationService.navigateTo(AllQuestionsScreen.route);
 
   void logOut() => _firebaseAuthService.signOut();
 }

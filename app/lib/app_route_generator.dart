@@ -1,5 +1,6 @@
 import 'package:app/service/firebase_auth_service.dart';
 import 'package:app/service/service_locator.dart';
+import 'package:app/ui/screen/all_questions_screen.dart';
 import 'package:app/ui/screen/announcements_screen.dart';
 import 'package:app/ui/screen/home_screen.dart';
 import 'package:app/ui/screen/log_in_screen.dart';
@@ -30,6 +31,8 @@ class AppRouteGenerator {
             return LogInScreen();
           case AnnouncementsScreen.route:
             return AnnouncementsScreen();
+          case AllQuestionsScreen.route:
+            return AllQuestionsScreen();
           case ThreadDisplayScreen.route:
             return ThreadDisplayScreen(initial: settings.arguments as Thread);
 
