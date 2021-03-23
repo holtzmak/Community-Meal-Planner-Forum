@@ -59,27 +59,31 @@ class _ThreadDisplayScreenState extends State<ThreadDisplayScreen> {
   }
 
   List<Widget> _buildThreadAndPosts(ThreadViewModel model) {
-    final thread = ThreadWidget(
-      initial: widget.initial,
-      canBeEdited: model.userIsThreadOwner(widget.initial) && !isComplete,
-      onSaved: (Thread? thread) {
-        if (thread != null) model.updateThread(thread);
-      },
-    );
-    final newMessageButton = Align(
-        alignment: Alignment.centerRight,
-        child: elevatedButton(
-            text: "Add a reply",
-            onPressed: () => model.addNewPostToThread(widget.initial),
-            color: BurntSienna,
-            pressedColor: BurntSiennaOpaque));
-    return [
-      thread,
+    final List<Widget> widgets = [];
+    widgets.addAll([
+      ThreadWidget(
+        initial: widget.initial,
+        canBeEdited: model.userIsThreadOwner(widget.initial) && !isComplete,
+        onSaved: (Thread? thread) {
+          if (thread != null) model.updateThread(thread);
+        },
+      ),
       Padding(padding: EdgeInsets.only(bottom: 20.0)),
-      _buildPostsMaybe(model),
-      Padding(padding: EdgeInsets.only(bottom: 20.0)),
-      newMessageButton
-    ];
+      _buildPostsMaybe(model)
+    ]);
+    if (!isComplete) {
+      widgets.addAll([
+        Padding(padding: EdgeInsets.only(bottom: 20.0)),
+        Align(
+            alignment: Alignment.centerRight,
+            child: elevatedButton(
+                text: "Add a reply",
+                onPressed: () => model.addNewPostToThread(widget.initial),
+                color: BurntSienna,
+                pressedColor: BurntSiennaOpaque))
+      ]);
+    }
+    return widgets;
   }
 
   Widget _buildPostsMaybe(ThreadViewModel model) {
