@@ -7,6 +7,7 @@ import 'package:app/ui/view_model/log_in_view_model.dart';
 import 'package:app/ui/view_model/my_questions_view_model.dart';
 import 'package:app/ui/view_model/new_question_view_model.dart';
 import 'package:app/ui/view_model/sign_up_view_model.dart';
+import 'package:app/ui/view_model/thread_view_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
@@ -29,5 +30,6 @@ class ServiceLocator {
     get.registerFactory<HomeViewModel>(() => HomeViewModel());
     get.registerFactory<NewQuestionViewModel>(() => NewQuestionViewModel());
     get.registerFactory<MyQuestionsViewModel>(() => MyQuestionsViewModel());
+    get.registerFactory<ThreadViewModel>(() => ThreadViewModel());
   }
 }

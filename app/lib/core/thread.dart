@@ -98,6 +98,8 @@ class Thread {
   String toString() =>
       'Thread(id: $id, title: $title, topics: $topics, subTopics: $subTopics, authorId: $authorId, startDate: $startDate, completionDate: $completionDate, completionPost: $completionPost, canBeRepliedTo: $canBeRepliedTo)';
 
+  bool isComplete() => completionDate != null;
+
   Thread withDocumentId(String newId) {
     return Thread(
         id: newId,
