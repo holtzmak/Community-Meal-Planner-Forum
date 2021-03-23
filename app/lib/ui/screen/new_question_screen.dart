@@ -27,6 +27,7 @@ class _NewQuestionScreenState extends State<NewQuestionScreen> {
       return PostWidget(
         initial: snapshot.data!,
         canBeEdited: true,
+        isYourPost: true,
         onSaved: (Post? post) {
           if (post != null) model.updatePostInThread(widget.initial, post);
         },

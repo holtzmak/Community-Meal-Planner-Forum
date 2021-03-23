@@ -8,13 +8,15 @@ import 'package:intl/intl.dart';
 class PostWidget extends StatefulWidget {
   final Post initial;
   final bool canBeEdited;
+  final bool isYourPost;
   final FormFieldSetter<Post>? onSaved;
 
   PostWidget(
       {Key? key,
       required this.initial,
       this.onSaved,
-      required this.canBeEdited})
+      required this.canBeEdited,
+      required this.isYourPost})
       : super(key: key);
 
   @override
@@ -47,13 +49,17 @@ class _PostWidgetState extends State<PostWidget> {
           child: Column(children: [
             ListTile(
               title: Text(
-                "Message from: ${widget.initial.authorName}",
+                "${widget.initial.authorName}",
+                textAlign: widget.isYourPost ? TextAlign.right : TextAlign.left,
                 style: GoogleFonts.raleway(color: Charcoal),
               ),
               subtitle: Text(
                   DateFormat('yyyy-MM-dd hh:mm')
                       .format(widget.initial.postDate),
-                  style: GoogleFonts.raleway(color: CharcoalOpaque)),
+                  textAlign:
+                      widget.isYourPost ? TextAlign.right : TextAlign.left,
+                  style: GoogleFonts.raleway(
+                      color: CharcoalOpaque, fontSize: MediumTextSize)),
             ),
             buildTapToEditMultilineTextFormField(
                 label: "Type your message here",

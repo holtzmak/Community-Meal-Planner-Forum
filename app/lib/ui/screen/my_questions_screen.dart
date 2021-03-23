@@ -21,7 +21,7 @@ class _MyQuestionScreenState extends State<MyQuestionsScreen> {
           // Must have unique keys in rebuilding widget lists
           key: ObjectKey(Uuid().v4()),
           thread: thread,
-          onTap: () => model.navigateToThreadScreen(thread));
+          onTap: () => model.navigateToThreadDisplayScreen(thread));
 
   @override
   Widget build(BuildContext context) {
