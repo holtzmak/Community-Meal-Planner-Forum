@@ -7,6 +7,7 @@ import 'package:app/service/firebase_database_service.dart';
 import 'package:app/service/navigation_service.dart';
 import 'package:app/service/service_locator.dart';
 import 'package:app/ui/screen/home_screen.dart';
+import 'package:app/ui/screen/thread_display_screen.dart';
 import 'package:app/ui/widget/template_view_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -67,8 +68,8 @@ class MyQuestionsViewModel extends ViewModel {
     notifyListeners();
   }
 
-  void navigateToThreadScreen(Thread thread) {
-    // _navigationService.navigateTo(ThreadScreen.route, arguments: thread);
+  void navigateToThreadDisplayScreen(Thread thread) {
+    _navigationService.navigateTo(ThreadDisplayScreen.route, arguments: thread);
   }
 
   void navigateToHomeScreen() =>

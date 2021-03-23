@@ -66,11 +66,28 @@ class _ThreadDisplayScreenState extends State<ThreadDisplayScreen> {
         if (thread != null) model.updateThread(thread);
       },
     );
+    final newMessageButton = Align(
+        alignment: Alignment.centerRight,
+        child: elevatedButton(
+            text: "Add a reply",
+            onPressed: () => model.addNewPostToThread(widget.initial),
+            color: BurntSienna,
+            pressedColor: BurntSiennaOpaque));
+    return [
+      thread,
+      Padding(padding: EdgeInsets.only(bottom: 20.0)),
+      _buildPostsMaybe(model),
+      Padding(padding: EdgeInsets.only(bottom: 20.0)),
+      newMessageButton
+    ];
+  }
+
+  Widget _buildPostsMaybe(ThreadViewModel model) {
     // TODO: Move this stream into ViewModel. Need to give the VM the initial thread
     // Unfortunately, this widget and it's behaviour are tightly coupled to the
     // database service such that a view model cannot be between as the design
     // is now (requires a given Thread to start)
-    final posts = StreamBuilder<List<Post>>(
+    return StreamBuilder<List<Post>>(
         stream: model.getUpdatedThreadSpecificPosts(widget.initial),
         builder: (BuildContext context, AsyncSnapshot<List<Post>> snapshot) {
           List<Widget> children = [];
@@ -79,6 +96,7 @@ class _ThreadDisplayScreenState extends State<ThreadDisplayScreen> {
                 snapshot.data!.length,
                 (index) => PostWidget(
                       initial: snapshot.data![index],
+                      isYourPost: model.userIsPostOwner(snapshot.data![index]),
                       canBeEdited:
                           model.userIsPostOwner(snapshot.data![index]) &&
                               !isComplete,
@@ -108,6 +126,5 @@ class _ThreadDisplayScreenState extends State<ThreadDisplayScreen> {
             children: children,
           );
         });
-    return [thread, posts];
   }
 }

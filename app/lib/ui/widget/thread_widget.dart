@@ -134,11 +134,18 @@ class _ThreadWidgetState extends State<ThreadWidget> {
         topicFormField,
         ListTile(title: Text("Sub-topics")),
         subTopicFormField,
-        elevatedButton(
+        Padding(
+          padding: EdgeInsets.only(bottom: 20.0),
+        ),
+        stretchedButton(
             text: "Save any title or topic changes",
             onPressed: saveAll,
             color: PersianGreen,
-            pressedColor: PersianGreenOpaque)
+            pressedColor: PersianGreenOpaque,
+            trailing: Icon(
+              Icons.check_circle,
+              size: 40.0,
+            ))
       ]);
     } else {
       final List<Widget> children = [];
