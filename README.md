@@ -18,7 +18,7 @@ Further documentation and diagrams are available in the [`documentation` folder 
 
 ## Installation and Use
 
- **_Instructions for installing and using this application TBD_** 
+ **_Instructions for installing and using this application TBD_**
 
 ## Project Abstract
 
@@ -51,22 +51,27 @@ Deliverables assigned by the post-secondary course:
 3. Software Design ([scrum slides](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/scrum%20slides/Software%20Design.pdf)) (February 22, 2021)
 * [Lo-fi GUI Prototypes](https://raw.githubusercontent.com/holtzmak/Community-Meal-Planner-Forum/db4d818b13afb5196ab916fee6d15c0b69cd18a3/documentation/software%20design/Lo-Fi%20GUI%20Prototypes.svg) - an activity for quickly drafting up the general appearance of the application
 * [Mid-fi GUI Prototype](https://xd.adobe.com/view/262b07e0-7a00-4e45-a4ed-4d4036fc88d5-7378/) - an activity for previewing the appearance and some interaction of the application
-> See also the [PDF version](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/software%20design/gui%20prototypes/Mid-Fi%20GUI%20Prototype.pdf) and a [recording of the mid-fi prototype](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/software%20design/gui%20prototypes/Mid-Fi%20Prototype%20Recording.mp4)
+> See also the [PDF version](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/software%20design/gui%20prototypes/Mid-Fi%20GUI%20Prototype%20v1.pdf) and a [recording of the mid-fi prototype](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/software%20design/gui%20prototypes/Mid-Fi%20Prototype%20Recording%20v1.mp4)
 * [Application Workflow Diagrams](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/software%20design/Application%20Workflow%20Diagrams.pdf) - diagrams identifying the different application routes between screens
 * [Persona (Roles) Diagram](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/software%20design/client-server-database%20architecture/Persona%20(Roles)%20Diagram.pdf) - a diagram for identifying the workflow differences of the persons (roles) using the application
 * [Context Diagram](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/software%20design/client-server-database%20architecture/Context%20Diagram.pdf) - a diagram for identifying where the application fits among external software systems
 * [Container Diagram](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/software%20design/client-server-database%20architecture/Container%20Diagram.pdf) - a diagram for identifying the different application interfaces (mobile & web) among external software systems
 * [Component Diagram](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/software%20design/client-server-database%20architecture/Component%20Diagram.pdf) - a diagram for offering insight to the internal software design of the application (mobile & web)
 * [Database Conceptual Data Models](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/software%20design/client-server-database%20architecture/Database%20Conceptual%20Data%20Models.pdf) - a diagram identifying the collections and documents of the database (NoSQL database)
-4. MVP 1 Progress (as per project scope document above) 
+4. MVP 1 Progress (as per project scope document above)
 * [Progress status report (scrum) slides](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/scrum%20slides/MVP%201%20Progress%20Status%20Report.pdf) (March 10, 2021)
 * [Progress vlog slides](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/scrum%20slides/MVP%201%20Progress%20Vlog.pdf) (March 17, 2021)
 * [Progress vlog video](https://youtu.be/QH4ZkjJSelE) (March 17, 2021)
+5. MVP 2 Progress (as per project scope document above)
+* [Progress status report (scrum) slides](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/scrum%20slides/MVP%202%20Progress%20Status%20Report.pdf) (March 24, 2021)
+* [Administration Process Design document](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/project%20management/Administration%20Process%20Design.pdf) - an activity for drafting an emerging picture of leadership in the application
+* [Mid-fi GUI Prototype Updated](https://xd.adobe.com/view/262b07e0-7a00-4e45-a4ed-4d4036fc88d5-7378/)
+> See also the updated [PDF version](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/software%20design/gui%20prototypes/Mid-Fi%20GUI%20Prototype%20v2.pdf) and updated [recording of the mid-fi prototype](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/software%20design/gui%20prototypes/Mid-Fi%20Prototype%20Recording%20v2.mp4)
 
 ***
 
 ## Legal Notices
 
-This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/). 
+This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
 
 ![license](https://licensebuttons.net/l/by-sa/4.0/88x31.png)
