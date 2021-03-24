@@ -65,7 +65,7 @@ Deliverables assigned by the post-secondary course:
 5. MVP 2 Progress (as per project scope document above)
 * [Progress status report (scrum) slides](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/scrum%20slides/MVP%202%20Progress%20Status%20Report.pdf) (March 24, 2021)
 * [Administration Process Design document](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/project%20management/Administration%20Process%20Design.pdf) - an activity for drafting an emerging picture of leadership in the application
-* [Mid-fi GUI Prototype Updated](https://xd.adobe.com/view/262b07e0-7a00-4e45-a4ed-4d4036fc88d5-7378/)
+* [Mid-fi GUI Prototype Updated](https://xd.adobe.com/view/262b07e0-7a00-4e45-a4ed-4d4036fc88d5-7378/) - added some leadership process pages
 > See also the updated [PDF version](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/software%20design/gui%20prototypes/Mid-Fi%20GUI%20Prototype%20v2.pdf) and updated [recording of the mid-fi prototype](https://github.com/holtzmak/Community-Meal-Planner-Forum/blob/main/documentation/software%20design/gui%20prototypes/Mid-Fi%20Prototype%20Recording%20v2.mp4)
 
 ***
