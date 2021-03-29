@@ -1,4 +1,11 @@
+import 'dart:async';
+
+import 'package:app/core/account.dart';
+import 'package:app/service/firebase_auth_service.dart';
+import 'package:app/service/firebase_database_service.dart';
+import 'package:app/service/service_locator.dart';
 import 'package:app/ui/style.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,15 +29,18 @@ customAppBar(
         ));
 
 class _CustomAppBarInner extends StatefulWidget {
+  final FirebaseAuthService _firebaseAuthService =
+      ServiceLocator.get<FirebaseAuthService>();
+  final FirebaseDatabaseService _databaseService =
+      ServiceLocator.get<FirebaseDatabaseService>();
   final String leftButtonText;
   final String centreButtonText;
   final String rightButtonText;
-
   final VoidCallback leftButtonAction;
   final VoidCallback centreButtonAction;
   final VoidCallback rightButtonAction;
 
-  const _CustomAppBarInner(
+  _CustomAppBarInner(
       {Key? key,
       required this.leftButtonText,
       required this.centreButtonText,
@@ -45,10 +55,45 @@ class _CustomAppBarInner extends StatefulWidget {
 }
 
 class _CustomAppBarInnerState extends State<_CustomAppBarInner> {
+  // TODO: Move this stream into ViewModel.
+  // Need the view model to listen infinitely for changes.
+  StreamSubscription<User?>? _currentUserSubscription;
+  bool isAdmin = false;
+
+  @override
+  void initState() {
+    final thisUser = widget._firebaseAuthService.currentUser;
+    if (thisUser != null) {
+      widget._databaseService
+          .getAccount(thisUser.uid)
+          .then((Account account) => setState(() => isAdmin = account.isAdmin))
+          .catchError((error) => setState(() => isAdmin = false));
+    }
+    _currentUserSubscription =
+        widget._firebaseAuthService.currentUserChanges.listen((User? user) {
+      if (user != null) {
+        widget._databaseService
+            .getAccount(user.uid)
+            .then(
+                (Account account) => setState(() => isAdmin = account.isAdmin))
+            .catchError((error) => setState(() => isAdmin = false));
+      } else {
+        setState(() => isAdmin = false);
+      }
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    if (_currentUserSubscription != null) _currentUserSubscription!.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: BurntSienna,
+        color: isAdmin ? IndependencePurple : BurntSienna,
         child: Padding(
             padding: EdgeInsets.only(top: 50.0),
             child: Column(mainAxisSize: MainAxisSize.min, children: [
@@ -57,10 +102,15 @@ class _CustomAppBarInnerState extends State<_CustomAppBarInner> {
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                    colors: [
-                      BurntSienna,
-                      SandyBrown,
-                    ],
+                    colors: isAdmin
+                        ? [
+                            IndependencePurple,
+                            TerraCottaPink,
+                          ]
+                        : [
+                            BurntSienna,
+                            SandyBrown,
+                          ],
                   ),
                 ),
                 child: Row(
@@ -87,7 +137,7 @@ class _CustomAppBarInnerState extends State<_CustomAppBarInner> {
                 Expanded(
                     child: Container(
                   decoration: BoxDecoration(
-                      color: PersianGreenOpaque,
+                      color: isAdmin ? TerraCottaPink : PersianGreenOpaque,
                       border: Border.all(color: Colors.white)),
                   child: textButton(
                       text: widget.leftButtonText,
@@ -97,7 +147,7 @@ class _CustomAppBarInnerState extends State<_CustomAppBarInner> {
                 Expanded(
                     child: Container(
                   decoration: BoxDecoration(
-                      color: PersianGreenOpaque,
+                      color: isAdmin ? TerraCottaPink : PersianGreenOpaque,
                       border: Border.all(color: Colors.white)),
                   child: textButton(
                       text: widget.centreButtonText,
@@ -107,14 +157,32 @@ class _CustomAppBarInnerState extends State<_CustomAppBarInner> {
                 Expanded(
                     child: Container(
                   decoration: BoxDecoration(
-                      color: PersianGreenOpaque,
+                      color: isAdmin ? TerraCottaPink : PersianGreenOpaque,
                       border: Border.all(color: Colors.white)),
                   child: textButton(
                       text: widget.rightButtonText,
                       onPressed: widget.rightButtonAction,
                       color: Colors.white),
                 ))
-              ])
+              ]),
+              if (isAdmin == true)
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                          child: Container(
+                        padding: EdgeInsets.all(5.0),
+                        decoration: BoxDecoration(
+                            color: IndependencePurple,
+                            border: Border.all(color: Colors.white)),
+                        child: Text(
+                          "ADMINISTRATION",
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.cabin(
+                              color: Colors.white, fontSize: LargeTextSize),
+                        ),
+                      ))
+                    ])
             ])));
   }
 }
