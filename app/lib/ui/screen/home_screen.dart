@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   builder: (BuildContext context,
                       AsyncSnapshot<Thread> questionSnapshot) {
                     return Scaffold(
-                      appBar: CustomAppBar.get(
+                      appBar: customAppBar(
                           leftButtonText: "Signup",
                           centreButtonText: "Account",
                           rightButtonText: "FAQ",

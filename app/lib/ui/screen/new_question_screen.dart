@@ -57,7 +57,7 @@ class _NewQuestionScreenState extends State<NewQuestionScreen> {
             future: model.addNewPostToThread(widget.initial),
             builder: (BuildContext context, AsyncSnapshot<Post> snapshot) {
               return Scaffold(
-                appBar: CustomAppBar.get(
+                appBar: customAppBar(
                     leftButtonText: "Account",
                     centreButtonText: "Home",
                     rightButtonText: "FAQ",

@@ -38,7 +38,7 @@ class _ThreadDisplayScreenState extends State<ThreadDisplayScreen> {
   Widget build(BuildContext context) {
     return TemplateViewModel<ThreadViewModel>(
         builder: (context, model, child) => Scaffold(
-              appBar: CustomAppBar.get(
+              appBar: customAppBar(
                   leftButtonText: "Account",
                   centreButtonText: "Home",
                   rightButtonText: "FAQ",
