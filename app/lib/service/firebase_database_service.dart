@@ -35,12 +35,33 @@ class FirebaseDatabaseService {
       _firestore.collection('thread').add(placeholder.toJson()).then(
           (DocumentReference docRef) => placeholder.withDocumentId(docRef.id));
 
+  Future<Thread> addAnnouncementThread(Thread placeholder) async => _firestore
+      .collection('announcementThread')
+      .add(placeholder.toJson())
+      .then(
+          (DocumentReference docRef) => placeholder.withDocumentId(docRef.id));
+
   Future<void> updateThread(Thread thread) async =>
       _firestore.collection('thread').doc(thread.id).update(thread.toJson());
+
+  Future<void> updateAnnouncementThread(Thread thread) async => _firestore
+      .collection('announcementThread')
+      .doc(thread.id)
+      .update(thread.toJson());
 
   Future<Post> addPostToThread(Thread thread, Post placeholder) async =>
       _firestore
           .collection('thread')
+          .doc(thread.id)
+          .collection('post')
+          .add(placeholder.toJson())
+          .then((DocumentReference docRef) =>
+              placeholder.withDocumentId(docRef.id));
+
+  Future<Post> addPostToAnnouncementThread(
+          Thread thread, Post placeholder) async =>
+      _firestore
+          .collection('announcementThread')
           .doc(thread.id)
           .collection('post')
           .add(placeholder.toJson())
@@ -53,6 +74,14 @@ class FirebaseDatabaseService {
       .collection('post')
       .doc(post.id)
       .update(post.toJson());
+
+  Future<void> updatePostInAnnouncementThread(Thread thread, Post post) async =>
+      _firestore
+          .collection('announcementThread')
+          .doc(thread.id)
+          .collection('post')
+          .doc(post.id)
+          .update(post.toJson());
 
   Stream<List<Thread>> getUpdatedAccountSpecificThreads(String id) => _firestore
       .collection('thread')
@@ -107,6 +136,13 @@ class FirebaseDatabaseService {
       .map((DocumentSnapshot snapshot) =>
           Thread.fromJson(id: snapshot.id, json: snapshot.data()!));
 
+  Stream<Thread> getUpdatedSpecificAnnouncementThread(String id) => _firestore
+      .collection('announcementThread')
+      .doc(id)
+      .snapshots()
+      .map((DocumentSnapshot snapshot) =>
+          Thread.fromJson(id: snapshot.id, json: snapshot.data()!));
+
   Stream<List<Post>> getUpdatedThreadSpecificPosts(Thread thread) => _firestore
       .collection('thread')
       .doc(thread.id)
@@ -116,4 +152,15 @@ class FirebaseDatabaseService {
           .map((QueryDocumentSnapshot doc) =>
               Post.fromJson(id: doc.id, json: doc.data()!))
           .toList());
+
+  Stream<List<Post>> getUpdatedAnnouncementThreadSpecificPosts(Thread thread) =>
+      _firestore
+          .collection('announcementThread')
+          .doc(thread.id)
+          .collection('post')
+          .snapshots()
+          .map((QuerySnapshot snapshot) => snapshot.docs
+              .map((QueryDocumentSnapshot doc) =>
+                  Post.fromJson(id: doc.id, json: doc.data()!))
+              .toList());
 }
