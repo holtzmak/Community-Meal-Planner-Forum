@@ -105,7 +105,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                       Icon(Icons.arrow_forward_ios_outlined),
                                   onPressed: model.navigateToNewQuestionScreen,
                                   color: BurntSienna,
-                                  pressedColor: PersianGreenOpaque),
+                                  pressedColor: BurntSiennaOpaque),
+                              if (model.currentUserIsAdmin)
+                                _buildNewAnnouncementButton(model),
                               Padding(
                                 padding: EdgeInsets.only(bottom: 45.0),
                               ),
@@ -114,7 +116,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   trailing: Icon(Icons.logout),
                                   onPressed: model.logOut,
                                   color: BurntSienna,
-                                  pressedColor: PersianGreenOpaque)
+                                  pressedColor: BurntSiennaOpaque)
                             ],
                           ),
                         ),
@@ -147,5 +149,21 @@ class _HomeScreenState extends State<HomeScreen> {
           childAlignmentInBox: Alignment.center,
           color: PersianGreen);
     }
+  }
+
+  Widget _buildNewAnnouncementButton(HomeViewModel model) {
+    return Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.only(bottom: 25.0),
+        ),
+        elevatedButton(
+            text: "Make a new announcement",
+            trailing: Icon(Icons.arrow_forward_ios_outlined),
+            onPressed: model.navigateToNewAnnouncementScreen,
+            color: PersianGreen,
+            pressedColor: PersianGreenOpaque),
+      ],
+    );
   }
 }

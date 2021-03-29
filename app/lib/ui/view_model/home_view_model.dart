@@ -10,6 +10,7 @@ import 'package:app/service/service_locator.dart';
 import 'package:app/ui/screen/all_questions_screen.dart';
 import 'package:app/ui/screen/announcements_screen.dart';
 import 'package:app/ui/screen/my_questions_screen.dart';
+import 'package:app/ui/screen/new_announcement_screen.dart';
 import 'package:app/ui/screen/new_question_screen.dart';
 import 'package:app/ui/screen/sign_up_screen.dart';
 import 'package:app/ui/screen/thread_display_screen.dart';
@@ -23,22 +24,32 @@ class HomeViewModel extends ViewModel {
   final _firebaseAuthService = ServiceLocator.get<FirebaseAuthService>();
   final _dialogService = ServiceLocator.get<DialogService>();
   StreamSubscription<User?>? _currentUserSubscription;
+  StreamSubscription<bool>? _currentUserIsAdminSubscription;
+  late bool currentUserIsAdmin;
   late Future<Thread> latestMyQuestion;
   late Future<Thread> latestAnnouncement;
 
   @mustCallSuper
   void dispose() {
     if (_currentUserSubscription != null) _currentUserSubscription!.cancel();
+    if (_currentUserIsAdminSubscription != null)
+      _currentUserIsAdminSubscription!.cancel();
     super.dispose();
   }
 
   HomeViewModel() {
+    currentUserIsAdmin = _firebaseAuthService.currentUserIsAdmin;
     _setLatestMyQuestion(_firebaseAuthService.currentUser);
     _setLatestAnnouncement();
     notifyListeners();
     _currentUserSubscription =
         _firebaseAuthService.currentUserChanges.listen((User? user) {
       _setLatestMyQuestion(user);
+      notifyListeners();
+    });
+    _currentUserIsAdminSubscription =
+        _firebaseAuthService.currentUserIsAdminChanges.listen((bool isAdmin) {
+      currentUserIsAdmin = isAdmin;
       notifyListeners();
     });
   }
@@ -104,6 +115,37 @@ class HomeViewModel extends ViewModel {
     }
   }
 
+  Future<Thread> _createNewAnnouncementThread() async {
+    final thisUser = _firebaseAuthService.currentUser;
+    if (thisUser != null && _firebaseAuthService.currentUserIsAdmin) {
+      return _databaseService.getAccount(thisUser.uid).then((Account account) {
+        final placeholder = Thread(
+            id: "",
+            title: "Enter your title here",
+            topics: [],
+            subTopics: [],
+            authorId: account.id,
+            startDate: DateTime.now(),
+            completionDate: null,
+            completionPost: null,
+            canBeRepliedTo: false);
+        return _databaseService.addAnnouncementThread(placeholder);
+      }).catchError((error) {
+        _dialogService.showDialog(
+            title: "Adding a new announcement failed!",
+            description: "Here's what we think went wrong\n${error.message}");
+        return Future<Thread>.error("Adding a new announcement failed");
+      });
+    } else {
+      _dialogService.showDialog(
+          title: "Adding a new announcement failed!",
+          description:
+              "Cannot add a new announcement if you're not logged in!");
+      return Future<Thread>.error(
+          "Cannot add a new announcement if you're not logged in!");
+    }
+  }
+
   void navigateToSignUpScreen() =>
       _navigationService.navigateTo(SignUpScreen.route);
 
@@ -111,6 +153,15 @@ class HomeViewModel extends ViewModel {
     _createNewThread()
         .then((Thread thread) => _navigationService
             .navigateTo(NewQuestionScreen.route, arguments: thread))
+        .catchError((_) {
+      // do nothing, handled by createNewThread
+    });
+  }
+
+  void navigateToNewAnnouncementScreen() {
+    _createNewAnnouncementThread()
+        .then((Thread thread) => _navigationService
+            .navigateTo(NewAnnouncementScreen.route, arguments: thread))
         .catchError((_) {
       // do nothing, handled by createNewThread
     });
