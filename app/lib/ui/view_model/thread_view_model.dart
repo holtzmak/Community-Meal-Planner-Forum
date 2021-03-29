@@ -22,7 +22,10 @@ class ThreadViewModel extends ViewModel {
 
   bool userIsThreadOwner(Thread thread) {
     final thisUser = _firebaseAuthService.currentUser;
-    return thisUser != null ? thisUser.uid == thread.authorId : false;
+    return thisUser != null
+        ? thisUser.uid == thread.authorId ||
+            _firebaseAuthService.currentUserIsAdmin
+        : false;
   }
 
   bool userIsPostOwner(Post post) {
