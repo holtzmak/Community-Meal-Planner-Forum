@@ -1,16 +1,10 @@
-import 'dart:async';
-
-import 'package:app/core/account.dart';
 import 'package:app/service/firebase_auth_service.dart';
-import 'package:app/service/firebase_database_service.dart';
 import 'package:app/service/service_locator.dart';
 import 'package:app/ui/style.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-customAppBar(
+PreferredSize customAppBar(
         {required String leftButtonText,
         required String centreButtonText,
         required String rightButtonText,
@@ -31,8 +25,6 @@ customAppBar(
 class _CustomAppBarInner extends StatefulWidget {
   final FirebaseAuthService _firebaseAuthService =
       ServiceLocator.get<FirebaseAuthService>();
-  final FirebaseDatabaseService _databaseService =
-      ServiceLocator.get<FirebaseDatabaseService>();
   final String leftButtonText;
   final String centreButtonText;
   final String rightButtonText;
@@ -55,43 +47,26 @@ class _CustomAppBarInner extends StatefulWidget {
 }
 
 class _CustomAppBarInnerState extends State<_CustomAppBarInner> {
-  // TODO: Move this stream into ViewModel.
-  // Need the view model to listen infinitely for changes.
-  StreamSubscription<User?>? _currentUserSubscription;
-  bool isAdmin = false;
-
-  @override
-  void initState() {
-    final thisUser = widget._firebaseAuthService.currentUser;
-    if (thisUser != null) {
-      widget._databaseService
-          .getAccount(thisUser.uid)
-          .then((Account account) => setState(() => isAdmin = account.isAdmin))
-          .catchError((error) => setState(() => isAdmin = false));
-    }
-    _currentUserSubscription =
-        widget._firebaseAuthService.currentUserChanges.listen((User? user) {
-      if (user != null) {
-        widget._databaseService
-            .getAccount(user.uid)
-            .then(
-                (Account account) => setState(() => isAdmin = account.isAdmin))
-            .catchError((error) => setState(() => isAdmin = false));
-      } else {
-        setState(() => isAdmin = false);
-      }
-    });
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    if (_currentUserSubscription != null) _currentUserSubscription!.cancel();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
+    return StreamBuilder<bool>(
+        stream: widget._firebaseAuthService.currentUserIsAdminChanges,
+        initialData: widget._firebaseAuthService.currentUserIsAdmin,
+        builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+          if (snapshot.hasData) {
+            return _buildCustomAppBar(snapshot.data!);
+          } else if (snapshot.hasError) {
+            return Text(
+                "There was a problem building the app bar.\n\nHere's what we think the problem is: ${snapshot.error.toString()}");
+          } else {
+            return CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation(PersianGreen),
+            );
+          }
+        });
+  }
+
+  Widget _buildCustomAppBar(bool isAdmin) {
     return Container(
         color: isAdmin ? IndependencePurple : BurntSienna,
         child: Padding(

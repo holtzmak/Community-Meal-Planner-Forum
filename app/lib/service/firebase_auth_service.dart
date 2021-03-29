@@ -17,30 +17,53 @@ class FirebaseAuthService {
   // The current user information is the same as the Account information
   // but separate for Firebase Authentication
   late User? _currentUser;
+  bool _currentUserIsAdmin = false;
 
   User? get currentUser => _currentUser;
 
+  bool get currentUserIsAdmin => _currentUserIsAdmin;
+
   late Stream<User?> currentUserChanges;
+  late Stream<bool> currentUserIsAdminChanges;
 
   // Also not truly disposed of. See above comment.
   final StreamController<User?> _currentUserChangesStream =
       StreamController<User?>.broadcast();
+  final StreamController<bool> _currentUserIsAdminStream =
+      StreamController<bool>.broadcast();
 
   // Not disposed of in destructor because FirebaseAuthService goes out of scope
   // when app is destroyed. The disposal is handled by garbage cleanup. Also,
   // Dart does not define destructors https://github.com/dart-lang/sdk/issues/3691
   void dispose() async {
     _currentUserChangesStream.close();
+    _currentUserIsAdminStream.close();
     _authStateChanges.cancel();
   }
 
   FirebaseAuthService() {
     _currentUser = _firebaseAuth.currentUser;
     currentUserChanges = _currentUserChangesStream.stream;
+    currentUserIsAdminChanges = _currentUserIsAdminStream.stream;
+
     _authStateChanges =
         _firebaseAuth.authStateChanges().listen((User? userMaybe) async {
       _currentUser = userMaybe;
       _currentUserChangesStream.add(userMaybe);
+
+      if (userMaybe != null) {
+        _databaseService.getAccount(userMaybe.uid).then((Account account) {
+          _currentUserIsAdmin = account.isAdmin;
+          _currentUserIsAdminStream.add(account.isAdmin);
+        }).catchError((_) {
+          // TODO: Should log the hidden error
+          _currentUserIsAdmin = false;
+          _currentUserIsAdminStream.add(false);
+        });
+      } else {
+        _currentUserIsAdmin = false;
+        _currentUserIsAdminStream.add(false);
+      }
     });
   }
 
