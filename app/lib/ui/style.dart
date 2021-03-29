@@ -17,6 +17,8 @@ final SandyBrown = const Color.fromRGBO(244, 162, 97, 1);
 final SandyBrownOpaque = const Color.fromRGBO(244, 162, 97, 50);
 final BurntSienna = const Color.fromRGBO(231, 111, 81, 1);
 final BurntSiennaOpaque = const Color.fromRGBO(231, 111, 81, 50);
+final IndependencePurple = const Color.fromRGBO(61, 64, 91, 1);
+final TerraCottaPink = const Color.fromRGBO(224, 122, 95, 1);
 
 OutlinedButton outlinedButton(
         {required String text,
