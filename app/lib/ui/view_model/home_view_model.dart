@@ -128,7 +128,7 @@ class HomeViewModel extends ViewModel {
             startDate: DateTime.now(),
             completionDate: null,
             completionPost: null,
-            canBeRepliedTo: false);
+            canBeRepliedTo: true);
         return _databaseService.addAnnouncementThread(placeholder);
       }).catchError((error) {
         _dialogService.showDialog(
