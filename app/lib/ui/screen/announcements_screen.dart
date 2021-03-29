@@ -27,7 +27,7 @@ class _AnnouncementsScreenState extends State<AnnouncementsScreen> {
   Widget build(BuildContext context) {
     return TemplateViewModel<AnnouncementsViewModel>(
       builder: (context, model, _) => Scaffold(
-        appBar: CustomAppBar.get(
+        appBar: customAppBar(
             leftButtonText: "Account",
             centreButtonText: "Home",
             rightButtonText: "FAQ",

@@ -26,7 +26,7 @@ class _MyQuestionScreenState extends State<MyQuestionsScreen> {
   Widget build(BuildContext context) {
     return TemplateViewModel<MyQuestionsViewModel>(
       builder: (context, model, _) => Scaffold(
-        appBar: CustomAppBar.get(
+        appBar: customAppBar(
             leftButtonText: "Account",
             centreButtonText: "Home",
             rightButtonText: "FAQ",

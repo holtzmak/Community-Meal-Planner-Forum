@@ -44,7 +44,7 @@ class _LogInScreenState extends State<LogInScreen> {
   Widget build(BuildContext context) {
     return TemplateViewModel<LogInViewModel>(
         builder: (context, model, child) => Scaffold(
-              appBar: CustomAppBar.get(
+              appBar: customAppBar(
                   leftButtonText: "Signup",
                   centreButtonText: "Home",
                   rightButtonText: "FAQ",

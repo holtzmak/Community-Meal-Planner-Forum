@@ -65,7 +65,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     return TemplateViewModel<SignUpViewModel>(
         builder: (context, model, child) => Scaffold(
-              appBar: CustomAppBar.get(
+              appBar: customAppBar(
                   leftButtonText: "Login",
                   centreButtonText: "Home",
                   rightButtonText: "FAQ",
