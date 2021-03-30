@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:app/core/thread.dart';
-import 'package:app/service/firestore_announcement_service.dart';
+import 'package:app/service/firestore_thread_service.dart';
 import 'package:app/service/navigation_service.dart';
 import 'package:app/service/service_locator.dart';
 import 'package:app/ui/screen/home_screen.dart';
@@ -11,7 +11,7 @@ import 'package:flutter/foundation.dart';
 
 class AllQuestionsViewModel extends ViewModel {
   final _navigationService = ServiceLocator.get<NavigationService>();
-  final _databaseService = ServiceLocator.get<FirebaseDatabaseService>();
+  final _threadService = ServiceLocator.get<FirestoreThreadService>();
   StreamSubscription<List<Thread>>? _questionsSubscription;
 
   final List<Thread> _questions = [];
@@ -26,9 +26,8 @@ class AllQuestionsViewModel extends ViewModel {
   }
 
   AllQuestionsViewModel() {
-    _questionsSubscription = _databaseService
-        .getAllUpdatedThreads()
-        .listen((List<Thread> questions) {
+    _questionsSubscription =
+        _threadService.getAllUpdatedThreads().listen((List<Thread> questions) {
       removeAll();
       addAll(questions);
     });

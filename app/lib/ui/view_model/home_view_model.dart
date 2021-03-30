@@ -4,7 +4,9 @@ import 'package:app/core/account.dart';
 import 'package:app/core/thread.dart';
 import 'package:app/service/dialog_service.dart';
 import 'package:app/service/firebase_auth_service.dart';
+import 'package:app/service/firestore_account_service.dart';
 import 'package:app/service/firestore_announcement_service.dart';
+import 'package:app/service/firestore_thread_service.dart';
 import 'package:app/service/navigation_service.dart';
 import 'package:app/service/service_locator.dart';
 import 'package:app/ui/screen/all_questions_screen.dart';
@@ -21,7 +23,10 @@ import 'package:flutter/foundation.dart';
 
 class HomeViewModel extends ViewModel {
   final _navigationService = ServiceLocator.get<NavigationService>();
-  final _databaseService = ServiceLocator.get<FirebaseDatabaseService>();
+  final _threadService = ServiceLocator.get<FirestoreThreadService>();
+  final _accountService = ServiceLocator.get<FirestoreAccountService>();
+  final _announcementService =
+      ServiceLocator.get<FirestoreAnnouncementService>();
   final _firebaseAuthService = ServiceLocator.get<FirebaseAuthService>();
   final _dialogService = ServiceLocator.get<DialogService>();
   StreamSubscription<User?>? _currentUserSubscription;
@@ -56,7 +61,7 @@ class HomeViewModel extends ViewModel {
   }
 
   void _setLatestMyQuestion(User? user) => latestMyQuestion = user != null
-      ? _databaseService
+      ? _threadService
           .getLatestAccountSpecificThread(user.uid)
           .catchError((error) {
           if (error.message == "No element") {
@@ -73,8 +78,9 @@ class HomeViewModel extends ViewModel {
       : Future<Thread>.error(
           "Cannot see the latest question if you're not logged in!");
 
-  void _setLatestAnnouncement() => latestAnnouncement =
-          _databaseService.getLatestAnnouncementThread().catchError((error) {
+  void _setLatestAnnouncement() => latestAnnouncement = _announcementService
+          .getLatestAnnouncementThread()
+          .catchError((error) {
         if (error.message == "No element") {
           return Future<Thread>.error(
               "It looks like there are no announcements yet.");
@@ -89,7 +95,7 @@ class HomeViewModel extends ViewModel {
   Future<Thread> _createNewThread() async {
     final thisUser = _firebaseAuthService.currentUser;
     if (thisUser != null) {
-      return _databaseService.getAccount(thisUser.uid).then((Account account) {
+      return _accountService.getAccount(thisUser.uid).then((Account account) {
         final placeholder = Thread(
             id: "",
             title: "Enter your title here",
@@ -100,7 +106,7 @@ class HomeViewModel extends ViewModel {
             completionDate: null,
             completionPost: null,
             canBeRepliedTo: true);
-        return _databaseService.addThread(placeholder);
+        return _threadService.addThread(placeholder);
       }).catchError((error) {
         _dialogService.showDialog(
             title: "Adding a new thread failed!",
@@ -119,7 +125,7 @@ class HomeViewModel extends ViewModel {
   Future<Thread> _createNewAnnouncementThread() async {
     final thisUser = _firebaseAuthService.currentUser;
     if (thisUser != null && _firebaseAuthService.currentUserIsAdmin) {
-      return _databaseService.getAccount(thisUser.uid).then((Account account) {
+      return _accountService.getAccount(thisUser.uid).then((Account account) {
         final placeholder = Thread(
             id: "",
             title: "Enter your title here",
@@ -130,7 +136,7 @@ class HomeViewModel extends ViewModel {
             completionDate: null,
             completionPost: null,
             canBeRepliedTo: true);
-        return _databaseService.addAnnouncementThread(placeholder);
+        return _announcementService.addThread(placeholder);
       }).catchError((error) {
         _dialogService.showDialog(
             title: "Adding a new announcement failed!",

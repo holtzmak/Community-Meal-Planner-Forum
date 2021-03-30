@@ -96,7 +96,7 @@ class _AnnouncementThreadDisplayScreenState
     // database service such that a view model cannot be between as the design
     // is now (requires a given Thread to start)
     return StreamBuilder<List<Post>>(
-        stream: model.getUpdatedAnnouncementThreadSpecificPosts(widget.initial),
+        stream: model.getUpdatedThreadSpecificPosts(widget.initial),
         builder: (BuildContext context, AsyncSnapshot<List<Post>> snapshot) {
           List<Widget> children = [];
           if (snapshot.hasData) {

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:app/core/account.dart';
 import 'package:app/service/firebase_auth_service.dart';
-import 'package:app/service/firestore_announcement_service.dart';
+import 'package:app/service/firestore_account_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
@@ -14,7 +14,7 @@ import 'firebase_auth_service_test.mocks.dart';
 final testServiceLocator = GetIt.instance;
 
 @GenerateMocks(
-    [UserCredential, User, FirebaseAuth, FirebaseDatabaseService, Account])
+    [UserCredential, User, FirebaseAuth, FirestoreAccountService, Account])
 void main() {
   final testName = "testName";
   final testEmail = "test@mail.com";
@@ -22,7 +22,7 @@ void main() {
   final testAboutMeDesc = "About me...";
   final testTitles = ["Developer", "Student", "Hungry"];
   final testUserId = "test Id";
-  final mockFirebaseDatabaseService = MockFirebaseDatabaseService();
+  final mockFirestoreAccountService = MockFirestoreAccountService();
   final mockFirebaseAuth = MockFirebaseAuth();
   final mockUserCredential = MockUserCredential();
   final mockUser = MockUser();
@@ -41,15 +41,15 @@ void main() {
     when(mockFirebaseAuth.authStateChanges())
         .thenAnswer((_) => mockAuthStateChangesController.stream);
     when(mockFirebaseAuth.currentUser).thenReturn(null);
-    when(mockFirebaseDatabaseService.getAccount(testUserId))
+    when(mockFirestoreAccountService.getAccount(testUserId))
         .thenAnswer((_) => Future.value(mockAccount));
     when(mockAccount.isAdmin).thenReturn(false);
   }
 
   group('Firebase Authentication Service', () {
     setUpAll(() async {
-      testServiceLocator.registerLazySingleton<FirebaseDatabaseService>(
-          () => mockFirebaseDatabaseService);
+      testServiceLocator.registerLazySingleton<FirestoreAccountService>(
+          () => mockFirestoreAccountService);
       testServiceLocator
           .registerLazySingleton<FirebaseAuth>(() => mockFirebaseAuth);
     });
@@ -58,7 +58,7 @@ void main() {
     test('sign up successful calls add account', () async {
       setupAuthStateChangesMock();
       setupMockFirebaseAuthCreateAccount();
-      when(mockFirebaseDatabaseService.addAccount(any))
+      when(mockFirestoreAccountService.addAccount(any))
           .thenAnswer((_) => Future.value()); // do nothing for test
       final authService = FirebaseAuthService();
 
@@ -76,7 +76,7 @@ void main() {
       verify(mockFirebaseAuth.createUserWithEmailAndPassword(
               email: testEmail, password: testPassword))
           .called(1);
-      verify(mockFirebaseDatabaseService.addAccount(any)).called(1);
+      verify(mockFirestoreAccountService.addAccount(any)).called(1);
     });
 
     test('sign up failed, create user failed', () async {
@@ -138,7 +138,7 @@ void main() {
           .thenAnswer((_) => mockAuthStateChangesController.stream);
       when(mockFirebaseAuth.currentUser).thenReturn(null);
       when(mockUser.uid).thenReturn(testUserId);
-      when(mockFirebaseDatabaseService.getAccount(testUserId))
+      when(mockFirestoreAccountService.getAccount(testUserId))
           .thenAnswer((_) => Future.value(mockAccount));
       when(mockAccount.isAdmin).thenReturn(true);
       final authService = FirebaseAuthService();

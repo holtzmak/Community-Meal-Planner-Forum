@@ -1,6 +1,9 @@
 import 'package:app/service/dialog_service.dart';
 import 'package:app/service/firebase_auth_service.dart';
+import 'package:app/service/firestore_account_service.dart';
+import 'package:app/service/firestore_admin_service.dart';
 import 'package:app/service/firestore_announcement_service.dart';
+import 'package:app/service/firestore_thread_service.dart';
 import 'package:app/service/navigation_service.dart';
 import 'package:app/ui/view_model/all_questions_view_model.dart';
 import 'package:app/ui/view_model/announcement_thread_view_model.dart';
@@ -23,8 +26,14 @@ class ServiceLocator {
     get.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
     get.registerLazySingleton<FirebaseFirestore>(
         () => FirebaseFirestore.instance);
-    get.registerLazySingleton<FirebaseDatabaseService>(
-        () => FirebaseDatabaseService());
+    get.registerLazySingleton<FirestoreAccountService>(
+        () => FirestoreAccountService());
+    get.registerLazySingleton<FirestoreAdminService>(
+        () => FirestoreAdminService());
+    get.registerLazySingleton<FirestoreAnnouncementService>(
+        () => FirestoreAnnouncementService());
+    get.registerLazySingleton<FirestoreThreadService>(
+        () => FirestoreThreadService());
     get.registerLazySingleton<FirebaseAuthService>(() => FirebaseAuthService());
     get.registerLazySingleton<DialogService>(() => DialogService());
     get.registerLazySingleton<NavigationService>(() => NavigationService());
