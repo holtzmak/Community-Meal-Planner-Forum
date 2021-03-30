@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:app/core/account.dart';
 import 'package:app/core/post.dart';
 import 'package:app/core/thread.dart';
-import 'package:app/service/firebase_database_service.dart';
+import 'package:app/service/firestore_announcement_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';

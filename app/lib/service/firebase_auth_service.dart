@@ -4,7 +4,7 @@ import 'package:app/core/account.dart';
 import 'package:app/service/service_locator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'firebase_database_service.dart';
+import 'firestore_announcement_service.dart';
 
 /// A service wrapping FirebaseAuth
 /// Sign in persistence is guaranteed default as per https://firebase.flutter.dev/docs/auth/usage/#persisting-authentication-state

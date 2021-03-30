@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:app/core/account.dart';
 import 'package:app/service/firebase_auth_service.dart';
-import 'package:app/service/firebase_database_service.dart';
+import 'package:app/service/firestore_announcement_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
