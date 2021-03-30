@@ -2,11 +2,11 @@ import 'package:app/core/post.dart';
 import 'package:app/core/thread.dart';
 import 'package:app/ui/style.dart';
 import 'package:app/ui/view_model/new_announcement_view_model.dart';
+import 'package:app/ui/widget/announcement_thread_widget.dart';
 import 'package:app/ui/widget/custom_app_bar.dart';
 import 'package:app/ui/widget/custom_bottom_app_bar.dart';
 import 'package:app/ui/widget/post_widget.dart';
 import 'package:app/ui/widget/template_view_model.dart';
-import 'package:app/ui/widget/thread_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -73,7 +73,7 @@ class _NewAnnouncementScreenState extends State<NewAnnouncementScreen> {
                 body: Center(
                   child: SingleChildScrollView(
                     child: Column(children: [
-                      ThreadWidget(
+                      AnnouncementThreadWidget(
                         initial: widget.initial,
                         canBeEdited: true,
                         onSaved: (Thread? thread) {

@@ -4,8 +4,8 @@ import 'package:app/core/thread.dart';
 import 'package:app/service/firebase_database_service.dart';
 import 'package:app/service/navigation_service.dart';
 import 'package:app/service/service_locator.dart';
+import 'package:app/ui/screen/announcement_thread_display_screen.dart';
 import 'package:app/ui/screen/home_screen.dart';
-import 'package:app/ui/screen/thread_display_screen.dart';
 import 'package:app/ui/widget/template_view_model.dart';
 import 'package:flutter/foundation.dart';
 
@@ -45,8 +45,9 @@ class AnnouncementsViewModel extends ViewModel {
     notifyListeners();
   }
 
-  void navigateToThreadDisplayScreen(Thread thread) {
-    _navigationService.navigateTo(ThreadDisplayScreen.route, arguments: thread);
+  void navigateToAnnouncementThreadDisplayScreen(Thread thread) {
+    _navigationService.navigateTo(AnnouncementThreadDisplayScreen.route,
+        arguments: thread);
   }
 
   void navigateToHomeScreen() =>
