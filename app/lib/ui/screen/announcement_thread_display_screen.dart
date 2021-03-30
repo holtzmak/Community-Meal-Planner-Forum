@@ -74,7 +74,7 @@ class _AnnouncementThreadDisplayScreenState
       Padding(padding: EdgeInsets.only(bottom: 20.0)),
       _buildPostsMaybe(model)
     ]);
-    if (!isComplete) {
+    if (!isComplete && canBeRepliedTo && model.userIsLoggedIn()) {
       widgets.addAll([
         Padding(padding: EdgeInsets.only(bottom: 20.0)),
         Align(

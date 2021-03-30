@@ -9,6 +9,7 @@ import 'package:app/ui/widget/form/dynamic_form_field.dart';
 import 'package:app/ui/widget/form/dynamic_sub_topic_form_field.dart';
 import 'package:app/ui/widget/form/dynamic_topic_form_field.dart';
 import 'package:app/ui/widget/form/tap_to_edit_text_form_field.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AnnouncementThreadWidget extends StatefulWidget {
@@ -33,6 +34,7 @@ class AnnouncementThreadWidget extends StatefulWidget {
 class _AnnouncementThreadWidgetState extends State<AnnouncementThreadWidget> {
   final focusNode = FocusNode();
   bool isReadOnly = true;
+  late bool canBeRepliedTo;
   late TextEditingController titleController;
   late List<Topic> topics;
   late DynamicFormField<Topic> topicFormField;
@@ -42,6 +44,7 @@ class _AnnouncementThreadWidgetState extends State<AnnouncementThreadWidget> {
   @override
   void initState() {
     titleController = TextEditingController(text: widget.initial.title);
+    canBeRepliedTo = widget.initial.canBeRepliedTo;
     topics = widget.initial.topics;
     topicFormField = dynamicTopicFormField(
         initialList: widget.initial.topics,
@@ -73,7 +76,7 @@ class _AnnouncementThreadWidgetState extends State<AnnouncementThreadWidget> {
           startDate: widget.initial.startDate,
           completionDate: widget.initial.completionDate,
           completionPost: widget.initial.completionPost,
-          canBeRepliedTo: widget.initial.canBeRepliedTo));
+          canBeRepliedTo: canBeRepliedTo));
     }
   }
 
@@ -123,7 +126,28 @@ class _AnnouncementThreadWidgetState extends State<AnnouncementThreadWidget> {
             setState(() => isReadOnly = true);
           },
           onTap: () => setState(() => isReadOnly = false)),
-      _buildTopicsWidgets()
+      _buildTopicsWidgets(),
+      if (widget.canBeEdited)
+        Column(
+          children: [
+            ListTile(
+              title: Text("Anyone can reply to this thread"),
+              trailing: _buildReplyToggle(),
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 20.0),
+            ),
+            stretchedButton(
+                text: "Save any title or topic changes",
+                onPressed: saveAll,
+                color: PersianGreen,
+                pressedColor: PersianGreenOpaque,
+                trailing: Icon(
+                  Icons.check_circle,
+                  size: 40.0,
+                ))
+          ],
+        )
     ]);
   }
 
@@ -134,18 +158,6 @@ class _AnnouncementThreadWidgetState extends State<AnnouncementThreadWidget> {
         topicFormField,
         ListTile(title: Text("Sub-topics")),
         subTopicFormField,
-        Padding(
-          padding: EdgeInsets.only(bottom: 20.0),
-        ),
-        stretchedButton(
-            text: "Save any title or topic changes",
-            onPressed: saveAll,
-            color: PersianGreen,
-            pressedColor: PersianGreenOpaque,
-            trailing: Icon(
-              Icons.check_circle,
-              size: 40.0,
-            ))
       ]);
     } else {
       final List<Widget> children = [];
@@ -176,5 +188,17 @@ class _AnnouncementThreadWidgetState extends State<AnnouncementThreadWidget> {
             child: Chip(
                 label:
                     Text(SubTopicString.toDisplayString(subTopics[index])))));
+  }
+
+  Widget _buildReplyToggle() {
+    return CupertinoSwitch(
+        activeColor: PersianGreen,
+        value: canBeRepliedTo,
+        onChanged: (bool changed) {
+          if (widget.canBeEdited) {
+            canBeRepliedTo = changed;
+            setState(() => isReadOnly = changed);
+          }
+        });
   }
 }

@@ -17,6 +17,8 @@ class ThreadViewModel extends ViewModel {
   final _databaseService = ServiceLocator.get<FirebaseDatabaseService>();
   final _dialogService = ServiceLocator.get<DialogService>();
 
+  bool userIsLoggedIn() => _firebaseAuthService.currentUser != null;
+
   void navigateToHomeScreen() =>
       _navigationService.navigateBackUntil(HomeScreen.route);
 
