@@ -4,6 +4,7 @@ import 'package:app/core/account.dart';
 import 'package:app/core/administration_application.dart';
 import 'package:app/core/post.dart';
 import 'package:app/core/thread.dart';
+import 'package:app/core/thread_flag.dart';
 import 'package:app/service/service_locator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -189,4 +190,20 @@ class FirebaseDatabaseService {
                   AdministrationApplication.fromJson(
                       id: doc.id, json: doc.data()!))
               .toList());
+
+  Future<void> addThreadFlag(ThreadFlag threadFlag) async => _firestore
+      .collection('threadFlag')
+      .doc(threadFlag.id)
+      .set(threadFlag.toJson());
+
+  Future<void> removeThreadFlag(String id) async =>
+      _firestore.collection('threadFlag').doc(id).delete();
+
+  Stream<List<ThreadFlag>> getAllThreadFlags() => _firestore
+      .collection('threadFlag')
+      .snapshots()
+      .map((QuerySnapshot snapshot) => snapshot.docs
+          .map((QueryDocumentSnapshot doc) =>
+              ThreadFlag.fromJson(id: doc.id, json: doc.data()!))
+          .toList());
 }
