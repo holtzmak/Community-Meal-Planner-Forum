@@ -198,6 +198,8 @@ void main() {
           .thenReturn(mockDocumentReference);
       when(mockDocumentReference.collection('post'))
           .thenReturn(mockCollectionReference);
+      when(mockCollectionReference.orderBy('postDate'))
+          .thenReturn(mockCollectionReference);
       when(mockCollectionReference.snapshots())
           .thenAnswer((_) => mockQuerySnapshotStream.stream);
       when(mockQuerySnapshot.docs).thenReturn([mockQueryDocumentSnapshot]);
