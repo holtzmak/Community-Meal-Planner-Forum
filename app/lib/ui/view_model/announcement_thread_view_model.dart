@@ -20,6 +20,8 @@ class AnnouncementThreadViewModel extends ViewModel {
   void navigateToHomeScreen() =>
       _navigationService.navigateBackUntil(HomeScreen.route);
 
+  bool userIsLoggedIn() => _firebaseAuthService.currentUser != null;
+
   bool userIsThreadOwner(Thread thread) {
     final thisUser = _firebaseAuthService.currentUser;
     return thisUser != null
