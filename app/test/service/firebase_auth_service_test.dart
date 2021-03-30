@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:app/core/account.dart';
 import 'package:app/service/firebase_auth_service.dart';
 import 'package:app/service/firebase_database_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -12,7 +13,8 @@ import 'firebase_auth_service_test.mocks.dart';
 
 final testServiceLocator = GetIt.instance;
 
-@GenerateMocks([UserCredential, User, FirebaseAuth, FirebaseDatabaseService])
+@GenerateMocks(
+    [UserCredential, User, FirebaseAuth, FirebaseDatabaseService, Account])
 void main() {
   final testName = "testName";
   final testEmail = "test@mail.com";
@@ -24,6 +26,7 @@ void main() {
   final mockFirebaseAuth = MockFirebaseAuth();
   final mockUserCredential = MockUserCredential();
   final mockUser = MockUser();
+  final mockAccount = MockAccount();
   final mockAuthStateChangesController = StreamController<User?>.broadcast();
 
   void setupMockFirebaseAuthCreateAccount() {
@@ -38,6 +41,9 @@ void main() {
     when(mockFirebaseAuth.authStateChanges())
         .thenAnswer((_) => mockAuthStateChangesController.stream);
     when(mockFirebaseAuth.currentUser).thenReturn(null);
+    when(mockFirebaseDatabaseService.getAccount(testUserId))
+        .thenAnswer((_) => Future.value(mockAccount));
+    when(mockAccount.isAdmin).thenReturn(false);
   }
 
   group('Firebase Authentication Service', () {
@@ -124,6 +130,29 @@ void main() {
       // Let changes propagate
       await Future.value(Duration(milliseconds: 1));
       expect(authService.currentUser, null);
+    });
+
+    test('current user is admin stream updates when current user changes',
+        () async {
+      when(mockFirebaseAuth.authStateChanges())
+          .thenAnswer((_) => mockAuthStateChangesController.stream);
+      when(mockFirebaseAuth.currentUser).thenReturn(null);
+      when(mockUser.uid).thenReturn(testUserId);
+      when(mockFirebaseDatabaseService.getAccount(testUserId))
+          .thenAnswer((_) => Future.value(mockAccount));
+      when(mockAccount.isAdmin).thenReturn(true);
+      final authService = FirebaseAuthService();
+
+      when(mockUser.toString())
+          .thenReturn("Mock User"); // As needed by emitsInOrder
+      expectLater(authService.currentUserIsAdminChanges,
+          emitsInOrder([false, true, false]));
+
+      // TODO: When we can control when the inner future getAccount completes
+      // Check the state of currentUserIsAdmin between state changes
+      mockAuthStateChangesController.add(null);
+      mockAuthStateChangesController.add(mockUser);
+      mockAuthStateChangesController.add(null);
     });
   });
 }
