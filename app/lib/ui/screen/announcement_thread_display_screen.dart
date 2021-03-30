@@ -15,7 +15,7 @@ import 'package:flutter/material.dart';
 class AnnouncementThreadDisplayScreen extends StatefulWidget {
   final DialogService _dialogService = ServiceLocator.get<DialogService>();
   final Thread initial;
-  static const route = '/thread';
+  static const route = '/announcementThread';
 
   AnnouncementThreadDisplayScreen({Key? key, required this.initial})
       : super(key: key);

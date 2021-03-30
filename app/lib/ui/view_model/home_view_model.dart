@@ -8,6 +8,7 @@ import 'package:app/service/firebase_database_service.dart';
 import 'package:app/service/navigation_service.dart';
 import 'package:app/service/service_locator.dart';
 import 'package:app/ui/screen/all_questions_screen.dart';
+import 'package:app/ui/screen/announcement_thread_display_screen.dart';
 import 'package:app/ui/screen/announcements_screen.dart';
 import 'package:app/ui/screen/my_questions_screen.dart';
 import 'package:app/ui/screen/new_announcement_screen.dart';
@@ -181,6 +182,10 @@ class HomeViewModel extends ViewModel {
 
   void navigateToThreadDisplayScreen(Thread thread) => _navigationService
       .navigateTo(ThreadDisplayScreen.route, arguments: thread);
+
+  void navigateToAnnouncementThreadDisplayScreen(Thread thread) =>
+      _navigationService.navigateTo(AnnouncementThreadDisplayScreen.route,
+          arguments: thread);
 
   void navigateToAnnouncementsScreen() =>
       _navigationService.navigateTo(AnnouncementsScreen.route);
