@@ -149,6 +149,7 @@ class FirebaseDatabaseService {
       .collection('thread')
       .doc(thread.id)
       .collection('post')
+      .orderBy("postDate")
       .snapshots()
       .map((QuerySnapshot snapshot) => snapshot.docs
           .map((QueryDocumentSnapshot doc) =>
@@ -160,6 +161,7 @@ class FirebaseDatabaseService {
           .collection('announcementThread')
           .doc(thread.id)
           .collection('post')
+          .orderBy("postDate")
           .snapshots()
           .map((QuerySnapshot snapshot) => snapshot.docs
               .map((QueryDocumentSnapshot doc) =>
