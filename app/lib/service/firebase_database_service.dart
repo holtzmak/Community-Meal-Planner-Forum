@@ -1,12 +1,14 @@
 import 'dart:async';
 
 import 'package:app/core/account.dart';
+import 'package:app/core/administration_application.dart';
 import 'package:app/core/post.dart';
 import 'package:app/core/thread.dart';
 import 'package:app/service/service_locator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 /// A service wrapping Firebase Firestore, specifically for the app
+/// TODO: Split this service up based on types
 class FirebaseDatabaseService {
   final _firestore = ServiceLocator.get<FirebaseFirestore>();
 
@@ -162,5 +164,27 @@ class FirebaseDatabaseService {
           .map((QuerySnapshot snapshot) => snapshot.docs
               .map((QueryDocumentSnapshot doc) =>
                   Post.fromJson(id: doc.id, json: doc.data()!))
+              .toList());
+
+  Future<void> addAdminApplication(
+          AdministrationApplication application) async =>
+      _firestore
+          .collection('adminApplication')
+          .doc(application.applicantId)
+          .set(application.toJson());
+
+  Future<void> updateAdminApplication(
+          AdministrationApplication application) async =>
+      _firestore
+          .collection('adminApplication')
+          .doc(application.applicantId)
+          .update(application.toJson());
+
+  Stream<List<AdministrationApplication>> getAllUpdatedAdminApplications() =>
+      _firestore.collection('adminApplication').snapshots().map(
+          (QuerySnapshot snapshot) => snapshot.docs
+              .map((QueryDocumentSnapshot doc) =>
+                  AdministrationApplication.fromJson(
+                      id: doc.id, json: doc.data()!))
               .toList());
 }
