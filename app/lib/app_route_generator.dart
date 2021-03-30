@@ -1,6 +1,7 @@
 import 'package:app/service/firebase_auth_service.dart';
 import 'package:app/service/service_locator.dart';
 import 'package:app/ui/screen/all_questions_screen.dart';
+import 'package:app/ui/screen/announcement_thread_display_screen.dart';
 import 'package:app/ui/screen/announcements_screen.dart';
 import 'package:app/ui/screen/home_screen.dart';
 import 'package:app/ui/screen/log_in_screen.dart';
@@ -38,6 +39,9 @@ class AppRouteGenerator {
             return AllQuestionsScreen();
           case ThreadDisplayScreen.route:
             return ThreadDisplayScreen(initial: settings.arguments as Thread);
+          case AnnouncementThreadDisplayScreen.route:
+            return AnnouncementThreadDisplayScreen(
+                initial: settings.arguments as Thread);
 
           // Account-required screens, only available if logged in
           case NewQuestionScreen.route:

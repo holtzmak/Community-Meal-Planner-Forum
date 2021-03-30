@@ -21,7 +21,7 @@ class _AnnouncementsScreenState extends State<AnnouncementsScreen> {
           // Must have unique keys in rebuilding widget lists
           key: ObjectKey(Uuid().v4()),
           thread: thread,
-          onTap: () => model.navigateToThreadDisplayScreen(thread));
+          onTap: () => model.navigateToAnnouncementThreadDisplayScreen(thread));
 
   @override
   Widget build(BuildContext context) {
