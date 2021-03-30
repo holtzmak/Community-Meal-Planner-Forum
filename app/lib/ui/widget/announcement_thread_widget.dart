@@ -2,7 +2,7 @@ import 'package:app/core/subtopic.dart';
 import 'package:app/core/thread.dart';
 import 'package:app/core/topic.dart';
 import 'package:app/service/dialog_service.dart';
-import 'package:app/service/firebase_database_service.dart';
+import 'package:app/service/firestore_announcement_service.dart';
 import 'package:app/service/service_locator.dart';
 import 'package:app/ui/style.dart';
 import 'package:app/ui/widget/form/dynamic_form_field.dart';

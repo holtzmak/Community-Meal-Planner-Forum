@@ -7,7 +7,7 @@ import 'dart:async' as _i11;
 import 'package:app/core/account.dart' as _i7;
 import 'package:app/core/post.dart' as _i9;
 import 'package:app/core/thread.dart' as _i8;
-import 'package:app/service/firebase_database_service.dart' as _i17;
+import 'package:app/service/firestore_announcement_service.dart' as _i17;
 import 'package:firebase_auth/firebase_auth.dart' as _i4;
 import 'package:firebase_auth_platform_interface/src/action_code_info.dart'
     as _i6;

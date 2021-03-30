@@ -1,6 +1,6 @@
 import 'package:app/service/dialog_service.dart';
 import 'package:app/service/firebase_auth_service.dart';
-import 'package:app/service/firebase_database_service.dart';
+import 'package:app/service/firestore_announcement_service.dart';
 import 'package:app/service/navigation_service.dart';
 import 'package:app/ui/view_model/all_questions_view_model.dart';
 import 'package:app/ui/view_model/announcement_thread_view_model.dart';

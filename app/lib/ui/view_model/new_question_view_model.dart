@@ -5,7 +5,7 @@ import 'package:app/core/post.dart';
 import 'package:app/core/thread.dart';
 import 'package:app/service/dialog_service.dart';
 import 'package:app/service/firebase_auth_service.dart';
-import 'package:app/service/firebase_database_service.dart';
+import 'package:app/service/firestore_announcement_service.dart';
 import 'package:app/service/navigation_service.dart';
 import 'package:app/service/service_locator.dart';
 import 'package:app/ui/screen/home_screen.dart';

@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:app/core/thread.dart';
-import 'package:app/service/firebase_database_service.dart';
+import 'package:app/service/firestore_announcement_service.dart';
 import 'package:app/service/navigation_service.dart';
 import 'package:app/service/service_locator.dart';
 import 'package:app/ui/screen/announcement_thread_display_screen.dart';
