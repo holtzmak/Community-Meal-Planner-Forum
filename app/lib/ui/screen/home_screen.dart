@@ -72,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   "Since last time...",
                                   style: GoogleFonts.cabin(color: BurntSienna),
                                 ),
-                                subtitle: _buildLatestWidget(
+                                subtitle: _buildLatestAnnouncementWidget(
                                     model, announcementSnapshot),
                               ),
                               Padding(
@@ -93,8 +93,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   "Since last time...",
                                   style: GoogleFonts.cabin(color: PersianGreen),
                                 ),
-                                subtitle:
-                                    _buildLatestWidget(model, questionSnapshot),
+                                subtitle: _buildLatestQuestionWidget(
+                                    model, questionSnapshot),
                               ),
                               Padding(
                                 padding: EdgeInsets.only(bottom: 25.0),
@@ -126,12 +126,38 @@ class _HomeScreenState extends State<HomeScreen> {
             }));
   }
 
-  Widget _buildLatestWidget(
+  Widget _buildLatestQuestionWidget(
       HomeViewModel model, AsyncSnapshot<Thread> snapshot) {
     if (snapshot.hasData) {
       return ThreadPreviewCard(
         thread: snapshot.data!,
         onTap: () => model.navigateToThreadDisplayScreen(snapshot.data!),
+      );
+    } else if (snapshot.hasError) {
+      return outlinedBox(
+          child: Text(
+            snapshot.error.toString(),
+            style: GoogleFonts.raleway(
+                color: Colors.red, fontSize: MediumTextSize),
+          ),
+          childAlignmentInBox: Alignment.center,
+          color: Colors.red);
+    } else {
+      return outlinedBox(
+          child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation(PersianGreen)),
+          childAlignmentInBox: Alignment.center,
+          color: PersianGreen);
+    }
+  }
+
+  Widget _buildLatestAnnouncementWidget(
+      HomeViewModel model, AsyncSnapshot<Thread> snapshot) {
+    if (snapshot.hasData) {
+      return ThreadPreviewCard(
+        thread: snapshot.data!,
+        onTap: () =>
+            model.navigateToAnnouncementThreadDisplayScreen(snapshot.data!),
       );
     } else if (snapshot.hasError) {
       return outlinedBox(
