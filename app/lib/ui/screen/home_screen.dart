@@ -75,8 +75,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                 subtitle: _buildLatestAnnouncementWidget(
                                     model, announcementSnapshot),
                               ),
+                              if (model.currentUserIsAdmin)
+                                _buildNewAnnouncementButton(model),
                               Padding(
-                                padding: EdgeInsets.only(bottom: 15.0),
+                                padding: EdgeInsets.only(bottom: 25.0),
                               ),
                               stretchedButton(
                                   text: "My Questions",
@@ -104,10 +106,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   trailing:
                                       Icon(Icons.arrow_forward_ios_outlined),
                                   onPressed: model.navigateToNewQuestionScreen,
-                                  color: BurntSienna,
-                                  pressedColor: BurntSiennaOpaque),
-                              if (model.currentUserIsAdmin)
-                                _buildNewAnnouncementButton(model),
+                                  color: PersianGreen,
+                                  pressedColor: PersianGreenOpaque),
                               Padding(
                                 padding: EdgeInsets.only(bottom: 45.0),
                               ),
@@ -187,8 +187,8 @@ class _HomeScreenState extends State<HomeScreen> {
             text: "Make a new announcement",
             trailing: Icon(Icons.arrow_forward_ios_outlined),
             onPressed: model.navigateToNewAnnouncementScreen,
-            color: PersianGreen,
-            pressedColor: PersianGreenOpaque),
+            color: BurntSienna,
+            pressedColor: BurntSiennaOpaque),
       ],
     );
   }
