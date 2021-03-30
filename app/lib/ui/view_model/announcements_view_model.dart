@@ -11,7 +11,8 @@ import 'package:flutter/foundation.dart';
 
 class AnnouncementsViewModel extends ViewModel {
   final _navigationService = ServiceLocator.get<NavigationService>();
-  final _databaseService = ServiceLocator.get<FirebaseDatabaseService>();
+  final _announcementService =
+      ServiceLocator.get<FirestoreAnnouncementService>();
   StreamSubscription<List<Thread>>? _announcementsSubscription;
 
   final List<Thread> _announcements = [];
@@ -27,8 +28,8 @@ class AnnouncementsViewModel extends ViewModel {
   }
 
   AnnouncementsViewModel() {
-    _announcementsSubscription = _databaseService
-        .getUpdatedAnnouncementThreads()
+    _announcementsSubscription = _announcementService
+        .getAllUpdatedThreads()
         .listen((List<Thread> announcements) {
       removeAll();
       addAll(announcements);

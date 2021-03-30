@@ -2,7 +2,7 @@ import 'package:app/core/subtopic.dart';
 import 'package:app/core/thread.dart';
 import 'package:app/core/topic.dart';
 import 'package:app/service/dialog_service.dart';
-import 'package:app/service/firestore_announcement_service.dart';
+import 'package:app/service/firestore_thread_service.dart';
 import 'package:app/service/service_locator.dart';
 import 'package:app/ui/style.dart';
 import 'package:app/ui/widget/form/dynamic_form_field.dart';
@@ -12,8 +12,7 @@ import 'package:app/ui/widget/form/tap_to_edit_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 class ThreadWidget extends StatefulWidget {
-  final FirebaseDatabaseService _databaseService =
-      ServiceLocator.get<FirebaseDatabaseService>();
+  final _databaseService = ServiceLocator.get<FirestoreThreadService>();
   final DialogService _dialogService = ServiceLocator.get<DialogService>();
   final Thread initial;
   final bool canBeEdited;

@@ -13,8 +13,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AnnouncementThreadWidget extends StatefulWidget {
-  final FirebaseDatabaseService _databaseService =
-      ServiceLocator.get<FirebaseDatabaseService>();
+  final _announcementService =
+      ServiceLocator.get<FirestoreAnnouncementService>();
   final DialogService _dialogService = ServiceLocator.get<DialogService>();
   final Thread initial;
   final bool canBeEdited;
@@ -87,8 +87,8 @@ class _AnnouncementThreadWidgetState extends State<AnnouncementThreadWidget> {
     // database service such that a view model cannot be between as the design
     // is now (requires a given Thread to start)
     return StreamBuilder<Thread>(
-        stream: widget._databaseService
-            .getUpdatedSpecificAnnouncementThread(widget.initial.id),
+        stream: widget._announcementService
+            .getUpdatedSpecificThread(widget.initial.id),
         initialData: widget.initial,
         builder: (BuildContext context, AsyncSnapshot<Thread> snapshot) {
           List<Widget> children = [];

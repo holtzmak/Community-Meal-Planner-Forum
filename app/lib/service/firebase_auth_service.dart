@@ -4,12 +4,12 @@ import 'package:app/core/account.dart';
 import 'package:app/service/service_locator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'firestore_announcement_service.dart';
+import 'firestore_account_service.dart';
 
 /// A service wrapping FirebaseAuth
 /// Sign in persistence is guaranteed default as per https://firebase.flutter.dev/docs/auth/usage/#persisting-authentication-state
 class FirebaseAuthService {
-  final _databaseService = ServiceLocator.get<FirebaseDatabaseService>();
+  final _accountService = ServiceLocator.get<FirestoreAccountService>();
   final _firebaseAuth = ServiceLocator.get<FirebaseAuth>();
 
   late StreamSubscription<User?> _authStateChanges;
@@ -52,7 +52,7 @@ class FirebaseAuthService {
       _currentUserChangesStream.add(userMaybe);
 
       if (userMaybe != null) {
-        _databaseService.getAccount(userMaybe.uid).then((Account account) {
+        _accountService.getAccount(userMaybe.uid).then((Account account) {
           _currentUserIsAdmin = account.isAdmin;
           _currentUserIsAdminStream.add(account.isAdmin);
         }).catchError((_) {
@@ -88,7 +88,7 @@ class FirebaseAuthService {
             email: email,
             password: password,
           )
-          .then((UserCredential userCredential) => _databaseService.addAccount(
+          .then((UserCredential userCredential) => _accountService.addAccount(
               Account(
                   id: userCredential.user!.uid,
                   name: name,
@@ -97,7 +97,7 @@ class FirebaseAuthService {
                   joinDate: DateTime.now())));
 
   Future<void> deleteAccount() async => _currentUser != null
-      ? _databaseService
+      ? _accountService
           .removeAccount(_currentUser!.uid)
           .then((_) => _firebaseAuth.currentUser!.delete())
       : Future.error("You cannot delete your account if you are not logged in");
