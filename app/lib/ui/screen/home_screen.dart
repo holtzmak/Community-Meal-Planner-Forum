@@ -74,8 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 subtitle: _buildLatestThreadWidget(
                                     model: model,
-                                    snapshot: announcementSnapshot,
-                                    isAnnouncement: true),
+                                    snapshot: announcementSnapshot),
                               ),
                               if (model.currentUserIsAdmin)
                                 _buildNewAnnouncementButton(model),
@@ -98,9 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   style: GoogleFonts.cabin(color: PersianGreen),
                                 ),
                                 subtitle: _buildLatestThreadWidget(
-                                    model: model,
-                                    snapshot: questionSnapshot,
-                                    isAnnouncement: false),
+                                    model: model, snapshot: questionSnapshot),
                               ),
                               Padding(
                                 padding: EdgeInsets.only(bottom: 25.0),
@@ -131,15 +128,11 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildLatestThreadWidget(
-      {required HomeViewModel model,
-      required AsyncSnapshot<Thread> snapshot,
-      required bool isAnnouncement}) {
+      {required HomeViewModel model, required AsyncSnapshot<Thread> snapshot}) {
     if (snapshot.hasData) {
       return ThreadPreviewCard(
         thread: snapshot.data!,
-        onTap: () => isAnnouncement
-            ? model.navigateToAnnouncementThreadDisplayScreen(snapshot.data!)
-            : model.navigateToThreadDisplayScreen(snapshot.data!),
+        onTap: () => model.navigateToThreadDisplayScreen(snapshot.data!),
       );
     } else if (snapshot.hasError) {
       return outlinedBox(

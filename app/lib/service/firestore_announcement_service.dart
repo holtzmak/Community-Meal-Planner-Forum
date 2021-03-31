@@ -9,7 +9,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class FirestoreAnnouncementService extends TemplateFirestoreThreadService {
   final _firestore = ServiceLocator.get<FirebaseFirestore>();
 
-  FirestoreAnnouncementService() : super('announcementThread');
+  FirestoreAnnouncementService() : super(isForAnnouncements: true);
 
   Future<Thread> getLatestAnnouncementThread() => _firestore
       .collection('announcementThread')
@@ -17,7 +17,7 @@ class FirestoreAnnouncementService extends TemplateFirestoreThreadService {
       .limitToLast(1)
       .get()
       .then((QuerySnapshot snapshot) => snapshot.docs
-          .map((QueryDocumentSnapshot doc) =>
-              Thread.fromJson(id: doc.id, json: doc.data()!))
+          .map((QueryDocumentSnapshot doc) => Thread.fromJson(
+              id: doc.id, isAnnouncement: true, json: doc.data()!))
           .first);
 }

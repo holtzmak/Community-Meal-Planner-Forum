@@ -16,6 +16,7 @@ class Thread {
   final DateTime? completionDate;
   final Post? completionPost;
   final bool canBeRepliedTo;
+  final bool isAnnouncement;
 
   Thread(
       {required this.id,
@@ -26,9 +27,10 @@ class Thread {
       required this.startDate,
       required this.completionDate,
       required this.completionPost,
-      required this.canBeRepliedTo});
+      required this.canBeRepliedTo,
+      required this.isAnnouncement});
 
-  Thread.empty(String id)
+  Thread.empty({required String id, required bool isAnnouncement})
       : id = id,
         title = "",
         topics = [],
@@ -37,9 +39,13 @@ class Thread {
         startDate = DateTime.now(),
         completionDate = null,
         completionPost = null,
-        canBeRepliedTo = false;
+        canBeRepliedTo = false,
+        isAnnouncement = isAnnouncement;
 
-  Thread.fromJson({required String id, required Map<String, dynamic> json})
+  Thread.fromJson(
+      {required String id,
+      required bool isAnnouncement,
+      required Map<String, dynamic> json})
       : id = id,
         title = json['title'],
         topics = json['topics']
@@ -56,7 +62,8 @@ class Thread {
         completionPost = NullableJsonConverter().getFromJsonMaybe(
             json: json['completionPost'],
             transform: (it) => Post.fromJson(json: it)),
-        canBeRepliedTo = json['canBeRepliedTo'];
+        canBeRepliedTo = json['canBeRepliedTo'],
+        isAnnouncement = isAnnouncement;
 
   Map<String, dynamic> toJson() => {
         'title': title,
@@ -79,7 +86,8 @@ class Thread {
       startDate.hashCode ^
       completionDate.hashCode ^
       completionPost.hashCode ^
-      canBeRepliedTo.hashCode;
+      canBeRepliedTo.hashCode ^
+      isAnnouncement.hashCode;
 
   @override
   bool operator ==(other) {
@@ -92,11 +100,12 @@ class Thread {
         other.startDate == startDate &&
         other.completionDate == completionDate &&
         other.completionPost == completionPost &&
-        other.canBeRepliedTo == canBeRepliedTo;
+        other.canBeRepliedTo == canBeRepliedTo &&
+        other.isAnnouncement == isAnnouncement;
   }
 
   String toString() =>
-      'Thread(id: $id, title: $title, topics: $topics, subTopics: $subTopics, authorId: $authorId, startDate: $startDate, completionDate: $completionDate, completionPost: $completionPost, canBeRepliedTo: $canBeRepliedTo)';
+      'Thread(id: $id, isAnnouncement: $isAnnouncement, title: $title, topics: $topics, subTopics: $subTopics, authorId: $authorId, startDate: $startDate, completionDate: $completionDate, completionPost: $completionPost, canBeRepliedTo: $canBeRepliedTo)';
 
   bool isComplete() => completionDate != null;
 
@@ -110,7 +119,8 @@ class Thread {
         startDate: startDate,
         completionDate: completionDate,
         completionPost: completionPost,
-        canBeRepliedTo: canBeRepliedTo);
+        canBeRepliedTo: canBeRepliedTo,
+        isAnnouncement: isAnnouncement);
   }
 
   Thread withTopics(List<Topic> newTopics) {
@@ -126,7 +136,8 @@ class Thread {
         startDate: startDate,
         completionDate: completionDate,
         completionPost: completionPost,
-        canBeRepliedTo: canBeRepliedTo);
+        canBeRepliedTo: canBeRepliedTo,
+        isAnnouncement: isAnnouncement);
   }
 
   Thread withSubTopics(List<SubTopic> newSubTopics) {
@@ -142,7 +153,8 @@ class Thread {
         startDate: startDate,
         completionDate: completionDate,
         completionPost: completionPost,
-        canBeRepliedTo: canBeRepliedTo);
+        canBeRepliedTo: canBeRepliedTo,
+        isAnnouncement: isAnnouncement);
   }
 
   Thread asCompleted(
@@ -157,7 +169,8 @@ class Thread {
           startDate: startDate,
           completionDate: newCompletionDate,
           completionPost: newCompletionPost,
-          canBeRepliedTo: false);
+          canBeRepliedTo: false,
+          isAnnouncement: isAnnouncement);
 
   Thread restoredAsIncomplete({required bool canBeRepliedTo}) => Thread(
       id: id,
@@ -168,5 +181,6 @@ class Thread {
       startDate: startDate,
       completionDate: null,
       completionPost: null,
-      canBeRepliedTo: canBeRepliedTo);
+      canBeRepliedTo: canBeRepliedTo,
+      isAnnouncement: isAnnouncement);
 }

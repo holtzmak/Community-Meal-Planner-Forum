@@ -6,14 +6,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 class PostWidget extends StatefulWidget {
-  final Post initial;
+  final Post post;
   final bool canBeEdited;
   final bool isYourPost;
   final FormFieldSetter<Post>? onSaved;
 
   PostWidget(
       {Key? key,
-      required this.initial,
+      required this.post,
       this.onSaved,
       required this.canBeEdited,
       required this.isYourPost})
@@ -30,7 +30,7 @@ class _PostWidgetState extends State<PostWidget> {
 
   @override
   void initState() {
-    controller = TextEditingController(text: widget.initial.message);
+    controller = TextEditingController(text: widget.post.message);
     super.initState();
   }
 
@@ -49,13 +49,12 @@ class _PostWidgetState extends State<PostWidget> {
           child: Column(children: [
             ListTile(
               title: Text(
-                "${widget.initial.authorName}",
+                "${widget.post.authorName}",
                 textAlign: widget.isYourPost ? TextAlign.right : TextAlign.left,
                 style: GoogleFonts.raleway(color: Charcoal),
               ),
               subtitle: Text(
-                  DateFormat('yyyy-MM-dd hh:mm')
-                      .format(widget.initial.postDate),
+                  DateFormat('yyyy-MM-dd hh:mm').format(widget.post.postDate),
                   textAlign:
                       widget.isYourPost ? TextAlign.right : TextAlign.left,
                   style: GoogleFonts.raleway(
@@ -68,7 +67,7 @@ class _PostWidgetState extends State<PostWidget> {
                 controller: controller,
                 onSaved: (String? changed) {
                   if (widget.onSaved != null && changed != null)
-                    widget.onSaved!(widget.initial.withMessage(changed));
+                    widget.onSaved!(widget.post.withMessage(changed));
                   setState(() => isReadOnly = true);
                 },
                 onTap: () => setState(() => isReadOnly = false)),

@@ -8,9 +8,11 @@ import 'package:flutter/foundation.dart';
 @immutable
 abstract class TemplateFirestoreThreadService {
   final String collection;
+  final bool isForAnnouncements;
   final _firestore = ServiceLocator.get<FirebaseFirestore>();
 
-  TemplateFirestoreThreadService(this.collection);
+  TemplateFirestoreThreadService({required this.isForAnnouncements})
+      : collection = isForAnnouncements ? 'announcementThread' : 'thread';
 
   Future<Thread> addThread(Thread placeholder) async =>
       _firestore.collection(collection).add(placeholder.toJson()).then(
@@ -39,16 +41,20 @@ abstract class TemplateFirestoreThreadService {
       .collection(collection)
       .snapshots()
       .map((QuerySnapshot snapshot) => snapshot.docs
-          .map((QueryDocumentSnapshot doc) =>
-              Thread.fromJson(id: doc.id, json: doc.data()!))
+          .map((QueryDocumentSnapshot doc) => Thread.fromJson(
+              id: doc.id,
+              isAnnouncement: isForAnnouncements,
+              json: doc.data()!))
           .toList());
 
   Stream<Thread> getUpdatedSpecificThread(String id) => _firestore
       .collection(collection)
       .doc(id)
       .snapshots()
-      .map((DocumentSnapshot snapshot) =>
-          Thread.fromJson(id: snapshot.id, json: snapshot.data()!));
+      .map((DocumentSnapshot snapshot) => Thread.fromJson(
+          id: snapshot.id,
+          isAnnouncement: isForAnnouncements,
+          json: snapshot.data()!));
 
   Stream<List<Post>> getUpdatedThreadSpecificPosts(Thread thread) => _firestore
       .collection(collection)
