@@ -2,6 +2,7 @@ import 'package:app/core/thread.dart';
 import 'package:app/core/thread_type.dart';
 import 'package:app/service/firebase_auth_service.dart';
 import 'package:app/service/service_locator.dart';
+import 'package:app/ui/screen/flagged_threads_screen.dart';
 import 'package:app/ui/screen/home_screen.dart';
 import 'package:app/ui/screen/log_in_screen.dart';
 import 'package:app/ui/screen/new_thread_screen.dart';
@@ -11,6 +12,7 @@ import 'package:app/ui/screen/thread_display_screen.dart';
 import 'package:app/ui/view_model/all_questions_view_model.dart';
 import 'package:app/ui/view_model/announcement_view_model.dart';
 import 'package:app/ui/view_model/announcements_view_model.dart';
+import 'package:app/ui/view_model/flagged_threads_view_model.dart';
 import 'package:app/ui/view_model/my_questions_view_model.dart';
 import 'package:app/ui/view_model/new_announcement_view_model.dart';
 import 'package:app/ui/view_model/new_question_view_model.dart';
@@ -74,6 +76,14 @@ class AppRouteGenerator {
             } else {
               throw Exception(
                   'The arguments to view the specific thread screen are invalid!: $threadType');
+            }
+
+          case FlaggedThreadsScreen.route:
+            if (isLoggedIn() && isAdmin()) {
+              return FlaggedThreadsScreen<FlaggedThreadsViewModel>();
+            } else {
+              throw Exception(
+                  'You must be logged in to view this screen: ${settings.name}');
             }
 
           default:

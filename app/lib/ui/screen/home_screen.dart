@@ -46,6 +46,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: SingleChildScrollView(
                           child: Column(
                             children: [
+                              if (model.currentUserIsAdmin)
+                                _buildCallsForReviewButton(model),
                               stretchedButton(
                                   text: "All Questions",
                                   trailing:
@@ -164,6 +166,22 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: model.navigateToNewAnnouncementScreen,
             color: BurntSienna,
             pressedColor: BurntSiennaOpaque),
+      ],
+    );
+  }
+
+  Widget _buildCallsForReviewButton(HomeViewModel model) {
+    return Column(
+      children: [
+        stretchedButton(
+            text: "Calls for question reviews",
+            trailing: Icon(Icons.arrow_forward_ios_outlined),
+            onPressed: model.navigateToFlaggedThreadsScreen,
+            color: BurntSienna,
+            pressedColor: BurntSiennaOpaque),
+        Padding(
+          padding: EdgeInsets.only(bottom: 15.0),
+        ),
       ],
     );
   }
