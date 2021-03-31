@@ -9,13 +9,10 @@ import 'package:app/service/firestore_announcement_service.dart';
 import 'package:app/service/firestore_thread_service.dart';
 import 'package:app/service/navigation_service.dart';
 import 'package:app/service/service_locator.dart';
-import 'package:app/ui/screen/all_questions_screen.dart';
-import 'package:app/ui/screen/announcement_thread_display_screen.dart';
-import 'package:app/ui/screen/announcements_screen.dart';
-import 'package:app/ui/screen/my_questions_screen.dart';
-import 'package:app/ui/screen/new_announcement_screen.dart';
-import 'package:app/ui/screen/new_question_screen.dart';
+import 'package:app/service/template_firestore_thread_service.dart';
+import 'package:app/ui/screen/new_thread_screen.dart';
 import 'package:app/ui/screen/sign_up_screen.dart';
+import 'package:app/ui/screen/specific_threads_screen.dart';
 import 'package:app/ui/screen/thread_display_screen.dart';
 import 'package:app/ui/widget/template_view_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -92,7 +89,8 @@ class HomeViewModel extends ViewModel {
         }
       });
 
-  Future<Thread> _createNewThread() async {
+  Future<Thread> _createNewThread(
+      TemplateFirestoreThreadService service) async {
     final thisUser = _firebaseAuthService.currentUser;
     if (thisUser != null) {
       return _accountService.getAccount(thisUser.uid).then((Account account) {
@@ -106,50 +104,19 @@ class HomeViewModel extends ViewModel {
             completionDate: null,
             completionPost: null,
             canBeRepliedTo: true);
-        return _threadService.addThread(placeholder);
+        return service.addThread(placeholder);
       }).catchError((error) {
         _dialogService.showDialog(
             title: "Adding a new thread failed!",
             description: "Here's what we think went wrong\n${error.message}");
-        return Future<Thread>.error("Asking a new question failed");
+        return Future<Thread>.error("Adding a new thread failed");
       });
     } else {
       _dialogService.showDialog(
           title: "Adding a new thread failed!",
-          description: "Cannot ask a new question if you're not logged in!");
+          description: "Cannot add a new thread if you're not logged in!");
       return Future<Thread>.error(
-          "Cannot ask a new question if you're not logged in!");
-    }
-  }
-
-  Future<Thread> _createNewAnnouncementThread() async {
-    final thisUser = _firebaseAuthService.currentUser;
-    if (thisUser != null && _firebaseAuthService.currentUserIsAdmin) {
-      return _accountService.getAccount(thisUser.uid).then((Account account) {
-        final placeholder = Thread(
-            id: "",
-            title: "Enter your title here",
-            topics: [],
-            subTopics: [],
-            authorId: account.id,
-            startDate: DateTime.now(),
-            completionDate: null,
-            completionPost: null,
-            canBeRepliedTo: true);
-        return _announcementService.addThread(placeholder);
-      }).catchError((error) {
-        _dialogService.showDialog(
-            title: "Adding a new announcement failed!",
-            description: "Here's what we think went wrong\n${error.message}");
-        return Future<Thread>.error("Adding a new announcement failed");
-      });
-    } else {
-      _dialogService.showDialog(
-          title: "Adding a new announcement failed!",
-          description:
-              "Cannot add a new announcement if you're not logged in!");
-      return Future<Thread>.error(
-          "Cannot add a new announcement if you're not logged in!");
+          "Cannot add a new thread if you're not logged in!");
     }
   }
 
@@ -157,18 +124,20 @@ class HomeViewModel extends ViewModel {
       _navigationService.navigateTo(SignUpScreen.route);
 
   void navigateToNewQuestionScreen() {
-    _createNewThread()
-        .then((Thread thread) => _navigationService
-            .navigateTo(NewQuestionScreen.route, arguments: thread))
+    _createNewThread(_threadService)
+        .then((Thread thread) => _navigationService.navigateTo(
+            NewThreadScreen.route,
+            arguments: ThreadToDisplay(thread: thread, isAnnouncement: false)))
         .catchError((_) {
       // do nothing, handled by createNewThread
     });
   }
 
   void navigateToNewAnnouncementScreen() {
-    _createNewAnnouncementThread()
-        .then((Thread thread) => _navigationService
-            .navigateTo(NewAnnouncementScreen.route, arguments: thread))
+    _createNewThread(_announcementService)
+        .then((Thread thread) => _navigationService.navigateTo(
+            NewThreadScreen.route,
+            arguments: ThreadToDisplay(thread: thread, isAnnouncement: true)))
         .catchError((_) {
       // do nothing, handled by createNewThread
     });
@@ -177,7 +146,8 @@ class HomeViewModel extends ViewModel {
   void navigateToMyQuestionsScreen() {
     final thisUser = _firebaseAuthService.currentUser;
     if (thisUser != null) {
-      _navigationService.navigateTo(MyQuestionsScreen.route);
+      _navigationService.navigateTo(SpecificThreadsScreen.route,
+          arguments: ThreadType.myQuestions);
     } else {
       _dialogService.showDialog(
           title: "Cannot go to My Questions screen",
@@ -186,18 +156,21 @@ class HomeViewModel extends ViewModel {
     }
   }
 
-  void navigateToThreadDisplayScreen(Thread thread) => _navigationService
-      .navigateTo(ThreadDisplayScreen.route, arguments: thread);
-
-  void navigateToAnnouncementThreadDisplayScreen(Thread thread) =>
-      _navigationService.navigateTo(AnnouncementThreadDisplayScreen.route,
-          arguments: thread);
-
   void navigateToAnnouncementsScreen() =>
-      _navigationService.navigateTo(AnnouncementsScreen.route);
+      _navigationService.navigateTo(SpecificThreadsScreen.route,
+          arguments: ThreadType.announcements);
 
   void navigateToAllQuestionsScreen() =>
-      _navigationService.navigateTo(AllQuestionsScreen.route);
+      _navigationService.navigateTo(SpecificThreadsScreen.route,
+          arguments: ThreadType.allQuestions);
+
+  void navigateToThreadDisplayScreen(Thread thread) =>
+      _navigationService.navigateTo(ThreadDisplayScreen.route,
+          arguments: ThreadToDisplay(isAnnouncement: false, thread: thread));
+
+  void navigateToAnnouncementThreadDisplayScreen(Thread thread) =>
+      _navigationService.navigateTo(ThreadDisplayScreen.route,
+          arguments: ThreadToDisplay(isAnnouncement: true, thread: thread));
 
   void logOut() => _firebaseAuthService.signOut();
 }
