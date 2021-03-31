@@ -5,13 +5,13 @@ import 'package:app/ui/screen/home_screen.dart';
 import 'package:app/ui/screen/thread_display_screen.dart';
 import 'package:app/ui/widget/template_view_model.dart';
 
-abstract class SpecificThreadViewModel extends ViewModel {
+abstract class SpecificThreadViewModel<T> extends ViewModel {
   final _navigationService = ServiceLocator.get<NavigationService>();
-  final List<Thread> _threads = [];
+  final List<T> _threads = [];
 
-  List<Thread> get threads => List.unmodifiable(_threads);
+  List<T> get threads => List.unmodifiable(_threads);
 
-  void addAll(List<Thread> threads) {
+  void addAll(List<T> threads) {
     _threads.addAll(threads);
     notifyListeners();
   }

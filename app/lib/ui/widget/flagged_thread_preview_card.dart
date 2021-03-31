@@ -86,12 +86,16 @@ class _FlaggedThreadPreviewCardState extends State<FlaggedThreadPreviewCard> {
           children: [
             elevatedButton(
                 text: "Finished",
-                onPressed: () {},
+                onPressed: () {
+                  // TODO
+                },
                 color: PersianGreen,
                 pressedColor: PersianGreenOpaque),
             outlinedButton(
               text: "Delete",
-              onPressed: () {},
+              onPressed: () {
+                // TODO
+              },
               color: Colors.grey,
             )
           ],

@@ -9,7 +9,7 @@ import 'package:app/ui/view_model/specific_thread_view_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 
-class MyQuestionsViewModel extends SpecificThreadViewModel {
+class MyQuestionsViewModel extends SpecificThreadViewModel<Thread> {
   final _threadService = ServiceLocator.get<FirestoreThreadService>();
   final _dialogService = ServiceLocator.get<DialogService>();
   final _firebaseAuthService = ServiceLocator.get<FirebaseAuthService>();
