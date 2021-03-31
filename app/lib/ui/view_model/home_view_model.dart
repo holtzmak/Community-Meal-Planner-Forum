@@ -11,6 +11,7 @@ import 'package:app/service/firestore_thread_service.dart';
 import 'package:app/service/navigation_service.dart';
 import 'package:app/service/service_locator.dart';
 import 'package:app/service/template_firestore_thread_service.dart';
+import 'package:app/ui/screen/flagged_threads_screen.dart';
 import 'package:app/ui/screen/new_thread_screen.dart';
 import 'package:app/ui/screen/sign_up_screen.dart';
 import 'package:app/ui/screen/specific_threads_screen.dart';
@@ -164,6 +165,9 @@ class HomeViewModel extends ViewModel {
   void navigateToAllQuestionsScreen() =>
       _navigationService.navigateTo(SpecificThreadsScreen.route,
           arguments: ThreadType.allQuestions);
+
+  void navigateToFlaggedThreadsScreen() =>
+      _navigationService.navigateTo(FlaggedThreadsScreen.route);
 
   void navigateToThreadDisplayScreen(Thread thread) => _navigationService
       .navigateTo(ThreadDisplayScreen.route, arguments: thread);

@@ -81,24 +81,26 @@ class _FlaggedThreadPreviewCardState extends State<FlaggedThreadPreviewCard> {
           onTap: () => widget._navigationService
               .navigateTo(ThreadDisplayScreen.route, arguments: thread),
         ),
-        ButtonBar(
-          buttonPadding: EdgeInsets.only(left: 20.0),
-          children: [
-            elevatedButton(
-                text: "Finished",
-                onPressed: () {
-                  // TODO
-                },
-                color: PersianGreen,
-                pressedColor: PersianGreenOpaque),
-            outlinedButton(
-              text: "Delete",
-              onPressed: () {
-                // TODO
-              },
-              color: Colors.grey,
-            )
-          ],
-        )
+        Padding(
+            padding: EdgeInsets.all(5.0),
+            child: Row(
+              children: [
+                elevatedButton(
+                    text: "Finished",
+                    onPressed: () {
+                      // TODO
+                    },
+                    color: PersianGreen,
+                    pressedColor: PersianGreenOpaque),
+                Spacer(),
+                outlinedButton(
+                  text: "Delete",
+                  onPressed: () {
+                    // TODO
+                  },
+                  color: Colors.grey,
+                )
+              ],
+            ))
       ]));
 }
