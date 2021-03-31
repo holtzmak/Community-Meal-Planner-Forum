@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:app/core/account.dart';
 import 'package:app/core/thread.dart';
+import 'package:app/core/thread_to_display.dart';
+import 'package:app/core/thread_type.dart';
 import 'package:app/service/dialog_service.dart';
 import 'package:app/service/firebase_auth_service.dart';
 import 'package:app/service/firestore_account_service.dart';

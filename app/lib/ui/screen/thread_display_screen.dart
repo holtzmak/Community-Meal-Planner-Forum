@@ -1,5 +1,6 @@
 import 'package:app/core/post.dart';
 import 'package:app/core/thread.dart';
+import 'package:app/core/thread_to_display.dart';
 import 'package:app/service/dialog_service.dart';
 import 'package:app/service/service_locator.dart';
 import 'package:app/ui/style.dart';
@@ -11,13 +12,6 @@ import 'package:app/ui/widget/template_view_model.dart';
 import 'package:app/ui/widget/thread_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-class ThreadToDisplay {
-  final bool isAnnouncement;
-  final Thread thread;
-
-  ThreadToDisplay({required this.isAnnouncement, required this.thread});
-}
 
 class ThreadDisplayScreen<T extends TemplateThreadViewModel>
     extends StatefulWidget {

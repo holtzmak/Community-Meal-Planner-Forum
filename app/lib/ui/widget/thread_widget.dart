@@ -34,7 +34,7 @@ class ThreadWidget extends StatefulWidget {
         super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _ThreadWidgetState();
+  State<ThreadWidget> createState() => _ThreadWidgetState();
 }
 
 class _ThreadWidgetState extends State<ThreadWidget> {

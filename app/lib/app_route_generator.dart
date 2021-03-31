@@ -15,6 +15,9 @@ import 'package:app/ui/view_model/new_question_view_model.dart';
 import 'package:app/ui/view_model/thread_view_model.dart';
 import 'package:flutter/material.dart';
 
+import 'core/thread_to_display.dart';
+import 'core/thread_type.dart';
+
 class AppRouteGenerator {
   static final _firebaseAuthService = ServiceLocator.get<FirebaseAuthService>();
 
@@ -62,11 +65,17 @@ class AppRouteGenerator {
           case SpecificThreadsScreen.route:
             final threadType = settings.arguments as ThreadType;
             if (isLoggedIn() && threadType == ThreadType.myQuestions) {
-              return SpecificThreadsScreen<MyQuestionsViewModel>();
+              return SpecificThreadsScreen<MyQuestionsViewModel>(
+                isAnnouncements: false,
+              );
             } else if (threadType == ThreadType.announcements) {
-              return SpecificThreadsScreen<AnnouncementsViewModel>();
+              return SpecificThreadsScreen<AnnouncementsViewModel>(
+                isAnnouncements: true,
+              );
             } else if (threadType == ThreadType.allQuestions) {
-              return SpecificThreadsScreen<AllQuestionsViewModel>();
+              return SpecificThreadsScreen<AllQuestionsViewModel>(
+                isAnnouncements: false,
+              );
             } else {
               throw Exception(
                   'The arguments to view the specific thread screen are invalid!: $threadType');
