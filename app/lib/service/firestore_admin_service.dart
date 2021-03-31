@@ -31,10 +31,8 @@ class FirestoreAdminService {
                       id: doc.id, json: doc.data()!))
               .toList());
 
-  Future<void> addThreadFlag(ThreadFlag threadFlag) async => _firestore
-      .collection('threadFlag')
-      .doc(threadFlag.id)
-      .set(threadFlag.toJson());
+  Future<void> addThreadFlag(ThreadFlag threadFlag) async =>
+      _firestore.collection('threadFlag').add(threadFlag.toJson());
 
   Future<void> removeThreadFlag(String id) async =>
       _firestore.collection('threadFlag').doc(id).delete();
