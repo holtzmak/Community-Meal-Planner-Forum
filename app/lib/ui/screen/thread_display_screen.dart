@@ -1,6 +1,5 @@
 import 'package:app/core/post.dart';
 import 'package:app/core/thread.dart';
-import 'package:app/core/thread_to_display.dart';
 import 'package:app/service/dialog_service.dart';
 import 'package:app/service/service_locator.dart';
 import 'package:app/ui/style.dart';
@@ -16,11 +15,10 @@ import 'package:flutter/material.dart';
 class ThreadDisplayScreen<T extends TemplateThreadViewModel>
     extends StatefulWidget {
   final DialogService _dialogService = ServiceLocator.get<DialogService>();
-  final ThreadToDisplay threadToDisplay;
+  final Thread thread;
   static const route = '/thread';
 
-  ThreadDisplayScreen({Key? key, required this.threadToDisplay})
-      : super(key: key);
+  ThreadDisplayScreen({Key? key, required this.thread}) : super(key: key);
 
   @override
   State<ThreadDisplayScreen<T>> createState() => _ThreadDisplayScreenState<T>();
@@ -33,8 +31,8 @@ class _ThreadDisplayScreenState<T extends TemplateThreadViewModel>
 
   @override
   void initState() {
-    canBeRepliedTo = widget.threadToDisplay.thread.canBeRepliedTo;
-    isComplete = widget.threadToDisplay.thread.isComplete();
+    canBeRepliedTo = widget.thread.canBeRepliedTo;
+    isComplete = widget.thread.isComplete();
     super.initState();
   }
 
@@ -66,10 +64,8 @@ class _ThreadDisplayScreenState<T extends TemplateThreadViewModel>
     final List<Widget> widgets = [];
     widgets.addAll([
       ThreadWidget(
-        isAnnouncement: widget.threadToDisplay.isAnnouncement,
-        initial: widget.threadToDisplay.thread,
-        canBeEdited: model.userIsThreadOwner(widget.threadToDisplay.thread) &&
-            !isComplete,
+        thread: widget.thread,
+        canBeEdited: model.userIsThreadOwner(widget.thread) && !isComplete,
         onSaved: (Thread? thread) {
           if (thread != null) model.updateThread(thread);
         },
@@ -84,8 +80,7 @@ class _ThreadDisplayScreenState<T extends TemplateThreadViewModel>
             alignment: Alignment.centerRight,
             child: elevatedButton(
                 text: "Add a reply",
-                onPressed: () =>
-                    model.addNewPostToThread(widget.threadToDisplay.thread),
+                onPressed: () => model.addNewPostToThread(widget.thread),
                 color: BurntSienna,
                 pressedColor: BurntSiennaOpaque))
       ]);
@@ -99,23 +94,21 @@ class _ThreadDisplayScreenState<T extends TemplateThreadViewModel>
     // database service such that a view model cannot be between as the design
     // is now (requires a given Thread to start)
     return StreamBuilder<List<Post>>(
-        stream:
-            model.getUpdatedThreadSpecificPosts(widget.threadToDisplay.thread),
+        stream: model.getUpdatedThreadSpecificPosts(widget.thread),
         builder: (BuildContext context, AsyncSnapshot<List<Post>> snapshot) {
           List<Widget> children = [];
           if (snapshot.hasData) {
             children.addAll(List<PostWidget>.generate(
                 snapshot.data!.length,
                 (index) => PostWidget(
-                      initial: snapshot.data![index],
+                      post: snapshot.data![index],
                       isYourPost: model.userIsPostOwner(snapshot.data![index]),
                       canBeEdited:
                           model.userIsPostOwner(snapshot.data![index]) &&
                               !isComplete,
                       onSaved: (Post? post) {
                         if (post != null)
-                          model.updatePostInThread(
-                              widget.threadToDisplay.thread, post);
+                          model.updatePostInThread(widget.thread, post);
                       },
                     )));
           } else if (snapshot.hasError) {

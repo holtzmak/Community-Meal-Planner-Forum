@@ -40,7 +40,7 @@ void main() {
     test(
         'add thread should add placeholder thread, then return successful thread',
         () async {
-      final placeholder = Thread.empty("test Id");
+      final placeholder = Thread.empty(id: "test Id", isAnnouncement: false);
       when(mockFirebaseFirestore.collection('thread'))
           .thenReturn(mockCollectionReference);
       when(mockCollectionReference.add(placeholder.toJson()))
@@ -52,7 +52,7 @@ void main() {
     });
 
     test('successful update thread', () async {
-      final thread = Thread.empty("thread Id");
+      final thread = Thread.empty(id: "thread Id", isAnnouncement: false);
       when(mockFirebaseFirestore.collection('thread'))
           .thenReturn(mockCollectionReference);
       when(mockCollectionReference.doc("thread Id"))
@@ -65,7 +65,7 @@ void main() {
 
     test('successful add post to thread', () async {
       final post = Post.empty("post Id");
-      final thread = Thread.empty("thread Id");
+      final thread = Thread.empty(id: "thread Id", isAnnouncement: false);
       when(mockFirebaseFirestore.collection('thread'))
           .thenReturn(mockCollectionReference);
       when(mockCollectionReference.doc("thread Id"))
@@ -82,7 +82,7 @@ void main() {
 
     test('successful update post in thread', () async {
       final post = Post.empty("post Id");
-      final thread = Thread.empty("thread Id");
+      final thread = Thread.empty(id: "thread Id", isAnnouncement: false);
       when(mockFirebaseFirestore.collection('thread'))
           .thenReturn(mockCollectionReference);
       when(mockCollectionReference.doc("thread Id"))
@@ -98,7 +98,8 @@ void main() {
     });
 
     test('successful get updated account-specific threads', () async {
-      final expectedThread = Thread.empty("thread Id");
+      final expectedThread =
+          Thread.empty(id: "thread Id", isAnnouncement: false);
       final expectedJson = {
         'title': "",
         'topics': [],
@@ -126,7 +127,8 @@ void main() {
     });
 
     test('successful get all updated threads', () async {
-      final expectedThread = Thread.empty("thread Id");
+      final expectedThread =
+          Thread.empty(id: "thread Id", isAnnouncement: false);
       final expectedJson = {
         'title': "",
         'topics': [],
@@ -150,7 +152,7 @@ void main() {
     });
 
     test('successful get updated thread-specific posts', () async {
-      final thread = Thread.empty("thread Id");
+      final thread = Thread.empty(id: "thread Id", isAnnouncement: false);
       final expectedPost = Post.empty("post Id");
       final expectedJson = {
         'authorName': "",

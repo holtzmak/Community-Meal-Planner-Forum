@@ -1,3 +1,5 @@
+import 'package:app/core/thread.dart';
+import 'package:app/core/thread_type.dart';
 import 'package:app/service/firebase_auth_service.dart';
 import 'package:app/service/service_locator.dart';
 import 'package:app/ui/screen/home_screen.dart';
@@ -14,9 +16,6 @@ import 'package:app/ui/view_model/new_announcement_view_model.dart';
 import 'package:app/ui/view_model/new_question_view_model.dart';
 import 'package:app/ui/view_model/thread_view_model.dart';
 import 'package:flutter/material.dart';
-
-import 'core/thread_to_display.dart';
-import 'core/thread_type.dart';
 
 class AppRouteGenerator {
   static final _firebaseAuthService = ServiceLocator.get<FirebaseAuthService>();
@@ -41,22 +40,18 @@ class AppRouteGenerator {
             return LogInScreen();
 
           case ThreadDisplayScreen.route:
-            final threadToDisplay = settings.arguments as ThreadToDisplay;
-            return threadToDisplay.isAnnouncement
-                ? ThreadDisplayScreen<AnnouncementViewModel>(
-                    threadToDisplay: threadToDisplay)
-                : ThreadDisplayScreen<ThreadViewModel>(
-                    threadToDisplay: threadToDisplay);
+            final thread = settings.arguments as Thread;
+            return thread.isAnnouncement
+                ? ThreadDisplayScreen<AnnouncementViewModel>(thread: thread)
+                : ThreadDisplayScreen<ThreadViewModel>(thread: thread);
 
           // Account-required screens, only available if logged in
           case NewThreadScreen.route:
-            final threadToDisplay = settings.arguments as ThreadToDisplay;
-            if (isLoggedIn() && isAdmin() && threadToDisplay.isAnnouncement) {
-              return NewThreadScreen<NewAnnouncementViewModel>(
-                  threadToDisplay: threadToDisplay);
-            } else if (isLoggedIn() && !threadToDisplay.isAnnouncement) {
-              return NewThreadScreen<NewQuestionViewModel>(
-                  threadToDisplay: threadToDisplay);
+            final thread = settings.arguments as Thread;
+            if (isLoggedIn() && isAdmin() && thread.isAnnouncement) {
+              return NewThreadScreen<NewAnnouncementViewModel>(thread: thread);
+            } else if (isLoggedIn() && !thread.isAnnouncement) {
+              return NewThreadScreen<NewQuestionViewModel>(thread: thread);
             } else {
               throw Exception(
                   'You must be logged in to view this screen: ${settings.name}');

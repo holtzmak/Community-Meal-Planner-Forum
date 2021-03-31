@@ -9,15 +9,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class FirestoreThreadService extends TemplateFirestoreThreadService {
   final _firestore = ServiceLocator.get<FirebaseFirestore>();
 
-  FirestoreThreadService() : super('thread');
+  FirestoreThreadService() : super(isForAnnouncements: false);
 
   Stream<List<Thread>> getUpdatedAccountSpecificThreads(String id) => _firestore
       .collection('thread')
       .where('authorId', isEqualTo: id)
       .snapshots()
       .map((QuerySnapshot snapshot) => snapshot.docs
-          .map((QueryDocumentSnapshot doc) =>
-              Thread.fromJson(id: doc.id, json: doc.data()!))
+          .map((QueryDocumentSnapshot doc) => Thread.fromJson(
+              id: doc.id, isAnnouncement: false, json: doc.data()!))
           .toList());
 
   Future<Thread> getLatestAccountSpecificThread(String id) => _firestore
@@ -27,7 +27,7 @@ class FirestoreThreadService extends TemplateFirestoreThreadService {
       .limitToLast(1)
       .get()
       .then((QuerySnapshot snapshot) => snapshot.docs
-          .map((QueryDocumentSnapshot doc) =>
-              Thread.fromJson(id: doc.id, json: doc.data()!))
+          .map((QueryDocumentSnapshot doc) => Thread.fromJson(
+              id: doc.id, isAnnouncement: false, json: doc.data()!))
           .first);
 }

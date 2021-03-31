@@ -21,18 +21,16 @@ class ThreadWidget extends StatefulWidget {
   final TemplateFirestoreThreadService _threadService;
   final _adminService = ServiceLocator.get<FirestoreAdminService>();
   final _dialogService = ServiceLocator.get<DialogService>();
-  final Thread initial;
+  final Thread thread;
   final bool canBeEdited;
-  final bool isAnnouncement;
   final FormFieldSetter<Thread>? onSaved;
 
   ThreadWidget({
     Key? key,
-    required this.initial,
+    required this.thread,
     required this.canBeEdited,
-    required this.isAnnouncement,
     this.onSaved,
-  })  : _threadService = isAnnouncement
+  })  : _threadService = thread.isAnnouncement
             ? ServiceLocator.get<FirestoreAnnouncementService>()
             : ServiceLocator.get<FirestoreThreadService>(),
         super(key: key);
@@ -53,15 +51,15 @@ class _ThreadWidgetState extends State<ThreadWidget> {
 
   @override
   void initState() {
-    titleController = TextEditingController(text: widget.initial.title);
-    canBeRepliedTo = widget.initial.canBeRepliedTo;
-    topics = widget.initial.topics;
+    titleController = TextEditingController(text: widget.thread.title);
+    canBeRepliedTo = widget.thread.canBeRepliedTo;
+    topics = widget.thread.topics;
     topicFormField = dynamicTopicFormField(
-        initialList: widget.initial.topics,
+        initialList: widget.thread.topics,
         onSaved: (List<Topic> changed) => topics = changed);
-    subTopics = widget.initial.subTopics;
+    subTopics = widget.thread.subTopics;
     subTopicFormField = dynamicSubTopicFormField(
-        initialList: widget.initial.subTopics,
+        initialList: widget.thread.subTopics,
         onSaved: (List<SubTopic> changed) => subTopics = changed);
     super.initState();
   }
@@ -78,15 +76,16 @@ class _ThreadWidgetState extends State<ThreadWidget> {
       topicFormField.save();
       subTopicFormField.save();
       widget.onSaved!(Thread(
-          id: widget.initial.id,
+          id: widget.thread.id,
           title: titleController.text.trim(),
           topics: topics,
           subTopics: subTopics,
-          authorId: widget.initial.authorId,
-          startDate: widget.initial.startDate,
-          completionDate: widget.initial.completionDate,
-          completionPost: widget.initial.completionPost,
-          canBeRepliedTo: canBeRepliedTo));
+          authorId: widget.thread.authorId,
+          startDate: widget.thread.startDate,
+          completionDate: widget.thread.completionDate,
+          completionPost: widget.thread.completionPost,
+          canBeRepliedTo: canBeRepliedTo,
+          isAnnouncement: widget.thread.isAnnouncement));
     }
   }
 
@@ -98,8 +97,8 @@ class _ThreadWidgetState extends State<ThreadWidget> {
     // is now (requires a given Thread to start)
     return StreamBuilder<Thread>(
         stream:
-            widget._threadService.getUpdatedSpecificThread(widget.initial.id),
-        initialData: widget.initial,
+            widget._threadService.getUpdatedSpecificThread(widget.thread.id),
+        initialData: widget.thread,
         builder: (BuildContext context, AsyncSnapshot<Thread> snapshot) {
           List<Widget> children = [];
           if (snapshot.hasData) {
@@ -142,7 +141,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
           },
           onTap: () => setState(() => isReadOnly = false)),
       _buildTopicsWidgets(),
-      if (widget.canBeEdited && widget.isAnnouncement)
+      if (widget.canBeEdited && widget.thread.isAnnouncement)
         ListTile(
           title: Text("Anyone can reply to this thread"),
           trailing: _buildReplyToggle(),
@@ -228,7 +227,8 @@ class _ThreadWidgetState extends State<ThreadWidget> {
             widget._adminService.addThreadFlag(ThreadFlag(
                 // Unused ID here, used in other screens
                 id: "unused",
-                threadId: widget.initial.id,
+                threadId: widget.thread.id,
+                isAnnouncement: widget.thread.isAnnouncement,
                 flagReason: reason)),
         itemBuilder: (BuildContext context) => <PopupMenuEntry<FlagReason>>[
               PopupMenuItem<FlagReason>(

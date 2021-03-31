@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:app/core/account.dart';
 import 'package:app/core/thread.dart';
-import 'package:app/core/thread_to_display.dart';
 import 'package:app/core/thread_type.dart';
 import 'package:app/service/dialog_service.dart';
 import 'package:app/service/firebase_auth_service.dart';
@@ -92,7 +91,8 @@ class HomeViewModel extends ViewModel {
       });
 
   Future<Thread> _createNewThread(
-      TemplateFirestoreThreadService service) async {
+      {required TemplateFirestoreThreadService service,
+      required bool isAnnouncement}) async {
     final thisUser = _firebaseAuthService.currentUser;
     if (thisUser != null) {
       return _accountService.getAccount(thisUser.uid).then((Account account) {
@@ -105,7 +105,8 @@ class HomeViewModel extends ViewModel {
             startDate: DateTime.now(),
             completionDate: null,
             completionPost: null,
-            canBeRepliedTo: true);
+            canBeRepliedTo: true,
+            isAnnouncement: isAnnouncement);
         return service.addThread(placeholder);
       }).catchError((error) {
         _dialogService.showDialog(
@@ -126,20 +127,18 @@ class HomeViewModel extends ViewModel {
       _navigationService.navigateTo(SignUpScreen.route);
 
   void navigateToNewQuestionScreen() {
-    _createNewThread(_threadService)
-        .then((Thread thread) => _navigationService.navigateTo(
-            NewThreadScreen.route,
-            arguments: ThreadToDisplay(thread: thread, isAnnouncement: false)))
+    _createNewThread(service: _threadService, isAnnouncement: false)
+        .then((Thread thread) => _navigationService
+            .navigateTo(NewThreadScreen.route, arguments: thread))
         .catchError((_) {
       // do nothing, handled by createNewThread
     });
   }
 
   void navigateToNewAnnouncementScreen() {
-    _createNewThread(_announcementService)
-        .then((Thread thread) => _navigationService.navigateTo(
-            NewThreadScreen.route,
-            arguments: ThreadToDisplay(thread: thread, isAnnouncement: true)))
+    _createNewThread(service: _announcementService, isAnnouncement: true)
+        .then((Thread thread) => _navigationService
+            .navigateTo(NewThreadScreen.route, arguments: thread))
         .catchError((_) {
       // do nothing, handled by createNewThread
     });
@@ -166,13 +165,8 @@ class HomeViewModel extends ViewModel {
       _navigationService.navigateTo(SpecificThreadsScreen.route,
           arguments: ThreadType.allQuestions);
 
-  void navigateToThreadDisplayScreen(Thread thread) =>
-      _navigationService.navigateTo(ThreadDisplayScreen.route,
-          arguments: ThreadToDisplay(isAnnouncement: false, thread: thread));
-
-  void navigateToAnnouncementThreadDisplayScreen(Thread thread) =>
-      _navigationService.navigateTo(ThreadDisplayScreen.route,
-          arguments: ThreadToDisplay(isAnnouncement: true, thread: thread));
+  void navigateToThreadDisplayScreen(Thread thread) => _navigationService
+      .navigateTo(ThreadDisplayScreen.route, arguments: thread);
 
   void logOut() => _firebaseAuthService.signOut();
 }

@@ -1,5 +1,4 @@
 import 'package:app/core/thread.dart';
-import 'package:app/core/thread_to_display.dart';
 import 'package:app/service/navigation_service.dart';
 import 'package:app/service/service_locator.dart';
 import 'package:app/ui/screen/home_screen.dart';
@@ -24,9 +23,7 @@ abstract class SpecificThreadViewModel extends ViewModel {
 
   void navigateToThreadDisplayScreen(
       {required Thread thread, required bool isAnnouncement}) {
-    _navigationService.navigateTo(ThreadDisplayScreen.route,
-        arguments:
-            ThreadToDisplay(isAnnouncement: isAnnouncement, thread: thread));
+    _navigationService.navigateTo(ThreadDisplayScreen.route, arguments: thread);
   }
 
   void navigateToHomeScreen() =>
