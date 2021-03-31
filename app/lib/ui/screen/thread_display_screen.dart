@@ -3,7 +3,7 @@ import 'package:app/core/thread.dart';
 import 'package:app/service/dialog_service.dart';
 import 'package:app/service/service_locator.dart';
 import 'package:app/ui/style.dart';
-import 'package:app/ui/view_model/thread_view_model.dart';
+import 'package:app/ui/view_model/template_thread_view_model.dart';
 import 'package:app/ui/widget/custom_app_bar.dart';
 import 'package:app/ui/widget/custom_bottom_app_bar.dart';
 import 'package:app/ui/widget/post_widget.dart';
@@ -12,31 +12,41 @@ import 'package:app/ui/widget/thread_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ThreadDisplayScreen extends StatefulWidget {
-  final DialogService _dialogService = ServiceLocator.get<DialogService>();
-  final Thread initial;
-  static const route = '/thread';
+class ThreadToDisplay {
+  final bool isAnnouncement;
+  final Thread thread;
 
-  ThreadDisplayScreen({Key? key, required this.initial}) : super(key: key);
-
-  @override
-  State<StatefulWidget> createState() => _ThreadDisplayScreenState();
+  ThreadToDisplay({required this.isAnnouncement, required this.thread});
 }
 
-class _ThreadDisplayScreenState extends State<ThreadDisplayScreen> {
+class ThreadDisplayScreen<T extends TemplateThreadViewModel>
+    extends StatefulWidget {
+  final DialogService _dialogService = ServiceLocator.get<DialogService>();
+  final ThreadToDisplay threadToDisplay;
+  static const route = '/thread';
+
+  ThreadDisplayScreen({Key? key, required this.threadToDisplay})
+      : super(key: key);
+
+  @override
+  State<ThreadDisplayScreen<T>> createState() => _ThreadDisplayScreenState<T>();
+}
+
+class _ThreadDisplayScreenState<T extends TemplateThreadViewModel>
+    extends State<ThreadDisplayScreen<T>> {
   late bool canBeRepliedTo;
   late bool isComplete;
 
   @override
   void initState() {
-    canBeRepliedTo = widget.initial.canBeRepliedTo;
-    isComplete = widget.initial.isComplete();
+    canBeRepliedTo = widget.threadToDisplay.thread.canBeRepliedTo;
+    isComplete = widget.threadToDisplay.thread.isComplete();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return TemplateViewModel<ThreadViewModel>(
+    return TemplateViewModel<T>(
         builder: (context, model, child) => Scaffold(
               appBar: customAppBar(
                   leftButtonText: "Account",
@@ -58,12 +68,14 @@ class _ThreadDisplayScreenState extends State<ThreadDisplayScreen> {
             ));
   }
 
-  List<Widget> _buildThreadAndPosts(ThreadViewModel model) {
+  List<Widget> _buildThreadAndPosts(T model) {
     final List<Widget> widgets = [];
     widgets.addAll([
       ThreadWidget(
-        initial: widget.initial,
-        canBeEdited: model.userIsThreadOwner(widget.initial) && !isComplete,
+        isAnnouncement: widget.threadToDisplay.isAnnouncement,
+        initial: widget.threadToDisplay.thread,
+        canBeEdited: model.userIsThreadOwner(widget.threadToDisplay.thread) &&
+            !isComplete,
         onSaved: (Thread? thread) {
           if (thread != null) model.updateThread(thread);
         },
@@ -78,7 +90,8 @@ class _ThreadDisplayScreenState extends State<ThreadDisplayScreen> {
             alignment: Alignment.centerRight,
             child: elevatedButton(
                 text: "Add a reply",
-                onPressed: () => model.addNewPostToThread(widget.initial),
+                onPressed: () =>
+                    model.addNewPostToThread(widget.threadToDisplay.thread),
                 color: BurntSienna,
                 pressedColor: BurntSiennaOpaque))
       ]);
@@ -86,13 +99,14 @@ class _ThreadDisplayScreenState extends State<ThreadDisplayScreen> {
     return widgets;
   }
 
-  Widget _buildPostsMaybe(ThreadViewModel model) {
+  Widget _buildPostsMaybe(T model) {
     // TODO: Move this stream into ViewModel. Need to give the VM the initial thread
     // Unfortunately, this widget and it's behaviour are tightly coupled to the
     // database service such that a view model cannot be between as the design
     // is now (requires a given Thread to start)
     return StreamBuilder<List<Post>>(
-        stream: model.getUpdatedThreadSpecificPosts(widget.initial),
+        stream:
+            model.getUpdatedThreadSpecificPosts(widget.threadToDisplay.thread),
         builder: (BuildContext context, AsyncSnapshot<List<Post>> snapshot) {
           List<Widget> children = [];
           if (snapshot.hasData) {
@@ -106,7 +120,8 @@ class _ThreadDisplayScreenState extends State<ThreadDisplayScreen> {
                               !isComplete,
                       onSaved: (Post? post) {
                         if (post != null)
-                          model.updatePostInThread(widget.initial, post);
+                          model.updatePostInThread(
+                              widget.threadToDisplay.thread, post);
                       },
                     )));
           } else if (snapshot.hasError) {
