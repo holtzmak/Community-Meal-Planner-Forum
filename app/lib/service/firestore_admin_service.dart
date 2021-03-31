@@ -37,7 +37,7 @@ class FirestoreAdminService {
   Future<void> removeThreadFlag(String id) async =>
       _firestore.collection('threadFlag').doc(id).delete();
 
-  Stream<List<ThreadFlag>> getAllThreadFlags() => _firestore
+  Stream<List<ThreadFlag>> getAllUpdatedThreadFlags() => _firestore
       .collection('threadFlag')
       .snapshots()
       .map((QuerySnapshot snapshot) => snapshot.docs

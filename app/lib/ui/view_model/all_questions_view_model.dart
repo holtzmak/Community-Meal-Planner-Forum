@@ -6,7 +6,7 @@ import 'package:app/service/service_locator.dart';
 import 'package:app/ui/view_model/specific_thread_view_model.dart';
 import 'package:flutter/foundation.dart';
 
-class AllQuestionsViewModel extends SpecificThreadViewModel {
+class AllQuestionsViewModel extends SpecificThreadViewModel<Thread> {
   final _threadService = ServiceLocator.get<FirestoreThreadService>();
   StreamSubscription<List<Thread>>? _questionsSubscription;
 
