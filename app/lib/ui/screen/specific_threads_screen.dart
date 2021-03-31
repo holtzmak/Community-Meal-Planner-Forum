@@ -1,6 +1,5 @@
 import 'package:app/core/thread.dart';
 import 'package:app/ui/style.dart';
-import 'package:app/ui/view_model/announcements_view_model.dart';
 import 'package:app/ui/view_model/specific_thread_view_model.dart';
 import 'package:app/ui/widget/custom_app_bar.dart';
 import 'package:app/ui/widget/custom_bottom_app_bar.dart';
@@ -9,11 +8,13 @@ import 'package:app/ui/widget/thread_preview_card.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
-enum ThreadType { allQuestions, announcements, myQuestions }
-
 class SpecificThreadsScreen<T extends SpecificThreadViewModel>
     extends StatefulWidget {
+  final bool isAnnouncements;
   static const route = '/specificThreads';
+
+  const SpecificThreadsScreen({Key? key, required this.isAnnouncements})
+      : super(key: key);
 
   @override
   _SpecificThreadsScreenState<T> createState() =>
@@ -27,7 +28,7 @@ class _SpecificThreadsScreenState<T extends SpecificThreadViewModel>
       key: ObjectKey(Uuid().v4()),
       thread: thread,
       onTap: () => model.navigateToThreadDisplayScreen(
-          thread: thread, isAnnouncement: T is AnnouncementsViewModel));
+          thread: thread, isAnnouncement: widget.isAnnouncements));
 
   @override
   Widget build(BuildContext context) {

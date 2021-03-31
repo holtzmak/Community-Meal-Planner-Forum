@@ -1,6 +1,6 @@
 import 'package:app/core/post.dart';
 import 'package:app/core/thread.dart';
-import 'package:app/ui/screen/thread_display_screen.dart';
+import 'package:app/core/thread_to_display.dart';
 import 'package:app/ui/style.dart';
 import 'package:app/ui/view_model/new_thread_view_model.dart';
 import 'package:app/ui/widget/custom_app_bar.dart';
