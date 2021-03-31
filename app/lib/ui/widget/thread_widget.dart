@@ -1,7 +1,10 @@
+import 'package:app/core/flag_reason.dart';
 import 'package:app/core/subtopic.dart';
 import 'package:app/core/thread.dart';
+import 'package:app/core/thread_flag.dart';
 import 'package:app/core/topic.dart';
 import 'package:app/service/dialog_service.dart';
+import 'package:app/service/firestore_admin_service.dart';
 import 'package:app/service/firestore_announcement_service.dart';
 import 'package:app/service/firestore_thread_service.dart';
 import 'package:app/service/service_locator.dart';
@@ -16,7 +19,8 @@ import 'package:flutter/material.dart';
 
 class ThreadWidget extends StatefulWidget {
   final TemplateFirestoreThreadService _threadService;
-  final DialogService _dialogService = ServiceLocator.get<DialogService>();
+  final _adminService = ServiceLocator.get<FirestoreAdminService>();
+  final _dialogService = ServiceLocator.get<DialogService>();
   final Thread initial;
   final bool canBeEdited;
   final bool isAnnouncement;
@@ -121,7 +125,12 @@ class _ThreadWidgetState extends State<ThreadWidget> {
 
   Widget _buildThreadWidget() {
     return Column(children: [
-      ListTile(title: Text("Title")),
+      widget.canBeEdited
+          ? ListTile(title: Text("Title"))
+          : ListTile(
+              title: Text("Title"),
+              trailing: _buildFlagMenu(),
+            ),
       buildTapToEditTextFormField(
           label: "Type your question title here",
           isReadOnly: isReadOnly || !widget.canBeEdited,
@@ -207,5 +216,37 @@ class _ThreadWidgetState extends State<ThreadWidget> {
             setState(() => isReadOnly = changed);
           }
         });
+  }
+
+  Widget _buildFlagMenu() {
+    return PopupMenuButton<FlagReason>(
+        icon: Icon(
+          Icons.warning,
+          size: 30.0,
+        ),
+        onSelected: (FlagReason reason) =>
+            widget._adminService.addThreadFlag(ThreadFlag(
+                // Unused ID here, used in other screens
+                id: "unused",
+                threadId: widget.initial.id,
+                flagReason: reason)),
+        itemBuilder: (BuildContext context) => <PopupMenuEntry<FlagReason>>[
+              PopupMenuItem<FlagReason>(
+                value: FlagReason.unsure,
+                child: Text('Something is wrong'),
+              ),
+              PopupMenuItem<FlagReason>(
+                value: FlagReason.incorrectInformation,
+                child: Text('This information is wrong'),
+              ),
+              PopupMenuItem<FlagReason>(
+                value: FlagReason.incorrectLabel,
+                child: Text('This is labelled wrong'),
+              ),
+              PopupMenuItem<FlagReason>(
+                value: FlagReason.policyViolation,
+                child: Text('This violates policy'),
+              ),
+            ]);
   }
 }
