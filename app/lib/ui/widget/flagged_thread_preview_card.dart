@@ -1,6 +1,7 @@
 import 'package:app/core/flag_reason.dart';
 import 'package:app/core/thread.dart';
 import 'package:app/core/thread_flag.dart';
+import 'package:app/service/firestore_admin_service.dart';
 import 'package:app/service/firestore_announcement_service.dart';
 import 'package:app/service/firestore_thread_service.dart';
 import 'package:app/service/navigation_service.dart';
@@ -13,6 +14,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class FlaggedThreadPreviewCard extends StatefulWidget {
   final TemplateFirestoreThreadService _threadService;
+  final _adminService = ServiceLocator.get<FirestoreAdminService>();
   final _navigationService = ServiceLocator.get<NavigationService>();
   final ThreadFlag threadFlag;
 
@@ -87,17 +89,16 @@ class _FlaggedThreadPreviewCardState extends State<FlaggedThreadPreviewCard> {
               children: [
                 elevatedButton(
                     text: "Finished",
-                    onPressed: () {
-                      // TODO
-                    },
+                    // TODO: Should keep finished requests maybe
+                    onPressed: () => widget._adminService
+                        .removeThreadFlag(widget.threadFlag.id),
                     color: PersianGreen,
                     pressedColor: PersianGreenOpaque),
                 Spacer(),
                 outlinedButton(
                   text: "Delete",
-                  onPressed: () {
-                    // TODO
-                  },
+                  onPressed: () => widget._adminService
+                      .removeThreadFlag(widget.threadFlag.id),
                   color: Colors.grey,
                 )
               ],
