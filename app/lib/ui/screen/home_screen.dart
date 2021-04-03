@@ -111,8 +111,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                   onPressed: model.navigateToNewQuestionScreen,
                                   color: PersianGreen,
                                   pressedColor: PersianGreenOpaque),
+                              if (model.currentUserIsLoggedIn &&
+                                  !model.currentUserIsAdmin)
+                                _buildApplicationButton(model),
                               Padding(
-                                padding: EdgeInsets.only(bottom: 45.0),
+                                padding: EdgeInsets.only(bottom: 65.0),
                               ),
                               elevatedButton(
                                   text: "Logout (Temporary) ",
@@ -182,6 +185,22 @@ class _HomeScreenState extends State<HomeScreen> {
         Padding(
           padding: EdgeInsets.only(bottom: 15.0),
         ),
+      ],
+    );
+  }
+
+  Widget _buildApplicationButton(HomeViewModel model) {
+    return Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.only(bottom: 65.0),
+        ),
+        elevatedButton(
+            text: "Would you like to help with this application?",
+            trailing: Icon(Icons.arrow_forward_ios_outlined),
+            onPressed: model.navigateToApplicationConsentScreen,
+            color: Charcoal,
+            pressedColor: CharcoalOpaque),
       ],
     );
   }
