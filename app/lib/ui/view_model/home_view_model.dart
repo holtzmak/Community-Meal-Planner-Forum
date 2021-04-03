@@ -11,6 +11,7 @@ import 'package:app/service/firestore_thread_service.dart';
 import 'package:app/service/navigation_service.dart';
 import 'package:app/service/service_locator.dart';
 import 'package:app/service/template_firestore_thread_service.dart';
+import 'package:app/ui/screen/application_screen.dart';
 import 'package:app/ui/screen/flagged_threads_screen.dart';
 import 'package:app/ui/screen/new_thread_screen.dart';
 import 'package:app/ui/screen/sign_up_screen.dart';
@@ -31,6 +32,7 @@ class HomeViewModel extends ViewModel {
   StreamSubscription<User?>? _currentUserSubscription;
   StreamSubscription<bool>? _currentUserIsAdminSubscription;
   late bool currentUserIsAdmin;
+  late bool currentUserIsLoggedIn;
   late Future<Thread> latestMyQuestion;
   late Future<Thread> latestAnnouncement;
 
@@ -44,11 +46,13 @@ class HomeViewModel extends ViewModel {
 
   HomeViewModel() {
     currentUserIsAdmin = _firebaseAuthService.currentUserIsAdmin;
+    currentUserIsLoggedIn = _firebaseAuthService.currentUser != null;
     _setLatestMyQuestion(_firebaseAuthService.currentUser);
     _setLatestAnnouncement();
     notifyListeners();
     _currentUserSubscription =
         _firebaseAuthService.currentUserChanges.listen((User? user) {
+      currentUserIsLoggedIn = user != null;
       _setLatestMyQuestion(user);
       notifyListeners();
     });
@@ -171,6 +175,9 @@ class HomeViewModel extends ViewModel {
 
   void navigateToThreadDisplayScreen(Thread thread) => _navigationService
       .navigateTo(ThreadDisplayScreen.route, arguments: thread);
+
+  void navigateToApplicationConsentScreen() =>
+      _navigationService.navigateTo(ApplicationScreen.route);
 
   void logOut() => _firebaseAuthService.signOut();
 }
