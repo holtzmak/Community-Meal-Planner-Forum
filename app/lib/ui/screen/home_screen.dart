@@ -195,10 +195,10 @@ class _HomeScreenState extends State<HomeScreen> {
         Padding(
           padding: EdgeInsets.only(bottom: 65.0),
         ),
-        elevatedButton(
-            text: "Would you like to help with this application?",
+        stretchedButton(
+            text: "Would you like to help with this app?",
             trailing: Icon(Icons.arrow_forward_ios_outlined),
-            onPressed: model.navigateToApplicationConsentScreen,
+            onPressed: model.navigateToApplicationConfirmationScreen,
             color: Charcoal,
             pressedColor: CharcoalOpaque),
       ],
