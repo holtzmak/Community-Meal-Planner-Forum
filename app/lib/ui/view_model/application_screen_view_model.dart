@@ -9,6 +9,7 @@ import 'package:app/service/firestore_account_service.dart';
 import 'package:app/service/firestore_admin_service.dart';
 import 'package:app/service/navigation_service.dart';
 import 'package:app/service/service_locator.dart';
+import 'package:app/ui/screen/application_screen.dart';
 import 'package:app/ui/screen/home_screen.dart';
 import 'package:app/ui/widget/template_view_model.dart';
 
@@ -30,7 +31,7 @@ class ApplicationViewModel extends ViewModel {
                   applicantId: account.id,
                   submissionDate: DateTime.now(),
                   approvalStatus: ApprovalStatus.nothing)))
-          .then((_) => _navigateToHomeScreen())
+          .then((_) => navigateToHomeScreen())
           .then((_) => _dialogService.showDialog(
               title: "Thank you for submitting a leadership application",
               description: "Please give us some time to respond"))
@@ -46,6 +47,9 @@ class ApplicationViewModel extends ViewModel {
     }
   }
 
-  void _navigateToHomeScreen() =>
+  void navigateToHomeScreen() =>
       _navigationService.navigateBackUntil(HomeScreen.route);
+
+  void navigateToApplicationScreen() =>
+      _navigationService.navigateTo(ApplicationScreen.route);
 }

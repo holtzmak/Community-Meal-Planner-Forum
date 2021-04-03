@@ -12,6 +12,7 @@ final Charcoal = const Color.fromRGBO(38, 70, 83, 1);
 final CharcoalOpaque = const Color.fromRGBO(38, 70, 83, 50);
 final PersianGreen = const Color.fromRGBO(42, 157, 143, 1);
 final PersianGreenOpaque = const Color.fromRGBO(42, 157, 143, 50);
+final PersianGreenVeryOpaque = const Color.fromRGBO(35, 140, 125, 90);
 final OrangeYellowCrayola = const Color.fromRGBO(233, 196, 106, 1);
 final SandyBrown = const Color.fromRGBO(244, 162, 97, 1);
 final SandyBrownOpaque = const Color.fromRGBO(244, 162, 97, 50);
