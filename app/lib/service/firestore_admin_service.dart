@@ -24,8 +24,11 @@ class FirestoreAdminService {
           .update(application.toJson());
 
   Stream<List<AdministrationApplication>> getAllUpdatedAdminApplications() =>
-      _firestore.collection('adminApplication').snapshots().map(
-          (QuerySnapshot snapshot) => snapshot.docs
+      _firestore
+          .collection('adminApplication')
+          .orderBy("submissionDate")
+          .snapshots()
+          .map((QuerySnapshot snapshot) => snapshot.docs
               .map((QueryDocumentSnapshot doc) =>
                   AdministrationApplication.fromJson(
                       id: doc.id, json: doc.data()!))
