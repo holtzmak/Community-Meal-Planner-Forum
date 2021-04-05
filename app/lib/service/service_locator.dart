@@ -9,6 +9,7 @@ import 'package:app/ui/view_model/all_questions_view_model.dart';
 import 'package:app/ui/view_model/announcement_view_model.dart';
 import 'package:app/ui/view_model/announcements_view_model.dart';
 import 'package:app/ui/view_model/application_view_model.dart';
+import 'package:app/ui/view_model/applications_to_review_view_model.dart';
 import 'package:app/ui/view_model/flagged_threads_view_model.dart';
 import 'package:app/ui/view_model/home_view_model.dart';
 import 'package:app/ui/view_model/log_in_view_model.dart';
@@ -54,5 +55,7 @@ class ServiceLocator {
     get.registerFactory<FlaggedThreadsViewModel>(
         () => FlaggedThreadsViewModel());
     get.registerFactory<ApplicationViewModel>(() => ApplicationViewModel());
+    get.registerFactory<ApplicationsToReviewViewModel>(
+        () => ApplicationsToReviewViewModel());
   }
 }

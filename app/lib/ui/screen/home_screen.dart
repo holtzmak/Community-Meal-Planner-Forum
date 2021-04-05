@@ -48,6 +48,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             children: [
                               if (model.currentUserIsAdmin)
                                 _buildCallsForReviewButton(model),
+                              if (model.currentUserIsAdmin)
+                                _buildReviewApplicationsButton(model),
                               stretchedButton(
                                   text: "All Questions",
                                   trailing:
@@ -180,8 +182,8 @@ class _HomeScreenState extends State<HomeScreen> {
             text: "Calls for question reviews",
             trailing: Icon(Icons.arrow_forward_ios_outlined),
             onPressed: model.navigateToFlaggedThreadsScreen,
-            color: BurntSienna,
-            pressedColor: BurntSiennaOpaque),
+            color: PersianGreen,
+            pressedColor: PersianGreenOpaque),
         Padding(
           padding: EdgeInsets.only(bottom: 15.0),
         ),
@@ -201,6 +203,22 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: model.navigateToApplicationConfirmationScreen,
             color: Charcoal,
             pressedColor: CharcoalOpaque),
+      ],
+    );
+  }
+
+  Widget _buildReviewApplicationsButton(HomeViewModel model) {
+    return Column(
+      children: [
+        stretchedButton(
+            text: "Review admin applications",
+            trailing: Icon(Icons.arrow_forward_ios_outlined),
+            onPressed: model.navigateToApplicationsToReviewScreen,
+            color: BurntSienna,
+            pressedColor: BurntSiennaOpaque),
+        Padding(
+          padding: EdgeInsets.only(bottom: 15.0),
+        ),
       ],
     );
   }
