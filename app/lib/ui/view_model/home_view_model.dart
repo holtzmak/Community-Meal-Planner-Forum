@@ -12,6 +12,7 @@ import 'package:app/service/navigation_service.dart';
 import 'package:app/service/service_locator.dart';
 import 'package:app/service/template_firestore_thread_service.dart';
 import 'package:app/ui/screen/application_confirmation_screen.dart';
+import 'package:app/ui/screen/applications_to_review_screen.dart';
 import 'package:app/ui/screen/flagged_threads_screen.dart';
 import 'package:app/ui/screen/new_thread_screen.dart';
 import 'package:app/ui/screen/sign_up_screen.dart';
@@ -178,6 +179,9 @@ class HomeViewModel extends ViewModel {
 
   void navigateToApplicationConfirmationScreen() =>
       _navigationService.navigateTo(ApplicationConfirmationScreen.route);
+
+  void navigateToApplicationsToReviewScreen() =>
+      _navigationService.navigateTo(ApplicationsToReviewScreen.route);
 
   void logOut() => _firebaseAuthService.signOut();
 }

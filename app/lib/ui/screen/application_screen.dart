@@ -4,7 +4,7 @@ import 'package:app/core/thread.dart';
 import 'package:app/service/service_locator.dart';
 import 'package:app/ui/style.dart';
 import 'package:app/ui/view_model/application_view_model.dart';
-import 'package:app/ui/view_model/specific_thread_view_model.dart';
+import 'package:app/ui/view_model/specific_item_view_model.dart';
 import 'package:app/ui/widget/custom_app_bar.dart';
 import 'package:app/ui/widget/custom_bottom_app_bar.dart';
 import 'package:app/ui/widget/template_view_model.dart';
@@ -13,7 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:uuid/uuid.dart';
 
-class ApplicationScreen<T extends SpecificThreadViewModel>
+class ApplicationScreen<T extends SpecificItemViewModel>
     extends StatefulWidget {
   final _applicationScreenViewModel =
       ServiceLocator.get<ApplicationViewModel>();
@@ -25,14 +25,13 @@ class ApplicationScreen<T extends SpecificThreadViewModel>
   _ApplicationScreenState<T> createState() => _ApplicationScreenState<T>();
 }
 
-class _ApplicationScreenState<T extends SpecificThreadViewModel>
+class _ApplicationScreenState<T extends SpecificItemViewModel>
     extends State<ApplicationScreen<T>> {
   ThreadPreviewCard createPreview(T model, Thread thread) => ThreadPreviewCard(
       // Must have unique keys in rebuilding widget lists
       key: ObjectKey(Uuid().v4()),
       thread: thread,
-      onTap: () => model.navigateToThreadDisplayScreen(
-          thread: thread, isAnnouncement: false));
+      onTap: () => model.navigateToThreadDisplayScreen(thread));
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +60,7 @@ class _ApplicationScreenState<T extends SpecificThreadViewModel>
               ),
             ),
           ),
-          model.threads.isEmpty
+          model.items.isEmpty
               ? Center(
                   child: Container(
                   margin: EdgeInsets.all(50.0),
@@ -77,9 +76,9 @@ class _ApplicationScreenState<T extends SpecificThreadViewModel>
                 ))
               : Expanded(
                   child: ListView.builder(
-                    itemCount: model.threads.length,
+                    itemCount: model.items.length,
                     itemBuilder: (context, index) =>
-                        createPreview(model, model.threads[index]),
+                        createPreview(model, model.items[index]),
                   ),
                 ),
           elevatedButton(

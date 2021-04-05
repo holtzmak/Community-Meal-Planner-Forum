@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:app/core/thread_flag.dart';
 import 'package:app/service/firestore_admin_service.dart';
 import 'package:app/service/service_locator.dart';
-import 'package:app/ui/view_model/specific_thread_view_model.dart';
+import 'package:app/ui/view_model/specific_item_view_model.dart';
 import 'package:flutter/foundation.dart';
 
-class FlaggedThreadsViewModel extends SpecificThreadViewModel<ThreadFlag> {
+class FlaggedThreadsViewModel extends SpecificItemViewModel<ThreadFlag> {
   final _adminService = ServiceLocator.get<FirestoreAdminService>();
   StreamSubscription<List<ThreadFlag>>? _flaggedThreadsSubscription;
 

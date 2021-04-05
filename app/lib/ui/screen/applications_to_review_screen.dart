@@ -1,37 +1,35 @@
-import 'package:app/core/thread.dart';
+import 'package:app/core/administration_application.dart';
 import 'package:app/ui/style.dart';
-import 'package:app/ui/view_model/specific_item_view_model.dart';
+import 'package:app/ui/view_model/applications_to_review_view_model.dart';
+import 'package:app/ui/widget/application_preview_card.dart';
 import 'package:app/ui/widget/custom_app_bar.dart';
 import 'package:app/ui/widget/custom_bottom_app_bar.dart';
 import 'package:app/ui/widget/template_view_model.dart';
-import 'package:app/ui/widget/thread_preview_card.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
-class SpecificThreadsScreen<T extends SpecificItemViewModel>
-    extends StatefulWidget {
-  final bool isAnnouncements;
-  static const route = '/specificThreads';
+class ApplicationsToReviewScreen extends StatefulWidget {
+  static const route = '/applicationsToReview';
 
-  const SpecificThreadsScreen({Key? key, required this.isAnnouncements})
-      : super(key: key);
+  const ApplicationsToReviewScreen({Key? key}) : super(key: key);
 
   @override
-  _SpecificThreadsScreenState<T> createState() =>
-      _SpecificThreadsScreenState<T>();
+  _ApplicationsToReviewScreenState createState() =>
+      _ApplicationsToReviewScreenState();
 }
 
-class _SpecificThreadsScreenState<T extends SpecificItemViewModel>
-    extends State<SpecificThreadsScreen<T>> {
-  ThreadPreviewCard createPreview(T model, Thread thread) => ThreadPreviewCard(
-      // Must have unique keys in rebuilding widget lists
-      key: ObjectKey(Uuid().v4()),
-      thread: thread,
-      onTap: () => model.navigateToThreadDisplayScreen(thread));
+class _ApplicationsToReviewScreenState
+    extends State<ApplicationsToReviewScreen> {
+  ApplicationPreviewCard createPreview(AdministrationApplication application) =>
+      ApplicationPreviewCard(
+        // Must have unique keys in rebuilding widget lists
+        key: ObjectKey(Uuid().v4()),
+        application: application,
+      );
 
   @override
   Widget build(BuildContext context) {
-    return TemplateViewModel<T>(
+    return TemplateViewModel<ApplicationsToReviewViewModel>(
       builder: (context, model, _) => Scaffold(
         appBar: customAppBar(
             leftButtonText: "Account",
@@ -62,7 +60,7 @@ class _SpecificThreadsScreenState<T extends SpecificItemViewModel>
             : ListView.builder(
                 itemCount: model.items.length,
                 itemBuilder: (context, index) =>
-                    createPreview(model, model.items[index]),
+                    createPreview(model.items[index]),
               ),
       ),
     );

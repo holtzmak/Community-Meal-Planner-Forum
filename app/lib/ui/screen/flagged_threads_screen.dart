@@ -1,6 +1,6 @@
 import 'package:app/core/thread_flag.dart';
 import 'package:app/ui/style.dart';
-import 'package:app/ui/view_model/specific_thread_view_model.dart';
+import 'package:app/ui/view_model/specific_item_view_model.dart';
 import 'package:app/ui/widget/custom_app_bar.dart';
 import 'package:app/ui/widget/custom_bottom_app_bar.dart';
 import 'package:app/ui/widget/flagged_thread_preview_card.dart';
@@ -8,7 +8,7 @@ import 'package:app/ui/widget/template_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
-class FlaggedThreadsScreen<T extends SpecificThreadViewModel>
+class FlaggedThreadsScreen<T extends SpecificItemViewModel>
     extends StatefulWidget {
   static const route = '/flaggedThreads';
 
@@ -19,9 +19,9 @@ class FlaggedThreadsScreen<T extends SpecificThreadViewModel>
       _FlaggedThreadsScreenState<T>();
 }
 
-class _FlaggedThreadsScreenState<T extends SpecificThreadViewModel>
+class _FlaggedThreadsScreenState<T extends SpecificItemViewModel>
     extends State<FlaggedThreadsScreen<T>> {
-  FlaggedThreadPreviewCard createPreview(T model, ThreadFlag threadFlag) =>
+  FlaggedThreadPreviewCard createPreview(ThreadFlag threadFlag) =>
       FlaggedThreadPreviewCard(
         // Must have unique keys in rebuilding widget lists
         key: ObjectKey(Uuid().v4()),
@@ -44,7 +44,7 @@ class _FlaggedThreadsScreenState<T extends SpecificThreadViewModel>
               // TODO
             }),
         bottomNavigationBar: CustomBottomAppBar.get(),
-        body: model.threads.isEmpty
+        body: model.items.isEmpty
             ? Center(
                 child: Container(
                 margin: EdgeInsets.all(50.0),
@@ -59,9 +59,9 @@ class _FlaggedThreadsScreenState<T extends SpecificThreadViewModel>
                 ),
               ))
             : ListView.builder(
-                itemCount: model.threads.length,
+                itemCount: model.items.length,
                 itemBuilder: (context, index) =>
-                    createPreview(model, model.threads[index]),
+                    createPreview(model.items[index]),
               ),
       ),
     );

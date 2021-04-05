@@ -34,6 +34,16 @@ class FirestoreAdminService {
                       id: doc.id, json: doc.data()!))
               .toList());
 
+  Stream<AdministrationApplication> getUpdatedSpecificApplication(
+          AdministrationApplication application) =>
+      _firestore
+          .collection('adminApplication')
+          .doc(application.applicantId)
+          .snapshots()
+          .map((DocumentSnapshot snapshot) =>
+              AdministrationApplication.fromJson(
+                  id: snapshot.id, json: snapshot.data()!));
+
   Future<void> addThreadFlag(ThreadFlag threadFlag) async =>
       _firestore.collection('threadFlag').add(threadFlag.toJson());
 

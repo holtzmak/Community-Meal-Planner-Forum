@@ -5,11 +5,11 @@ import 'package:app/service/dialog_service.dart';
 import 'package:app/service/firebase_auth_service.dart';
 import 'package:app/service/firestore_thread_service.dart';
 import 'package:app/service/service_locator.dart';
-import 'package:app/ui/view_model/specific_thread_view_model.dart';
+import 'package:app/ui/view_model/specific_item_view_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 
-class MyQuestionsViewModel extends SpecificThreadViewModel<Thread> {
+class MyQuestionsViewModel extends SpecificItemViewModel<Thread> {
   final _threadService = ServiceLocator.get<FirestoreThreadService>();
   final _dialogService = ServiceLocator.get<DialogService>();
   final _firebaseAuthService = ServiceLocator.get<FirebaseAuthService>();
