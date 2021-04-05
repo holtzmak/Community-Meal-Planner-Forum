@@ -1,8 +1,10 @@
+import 'package:app/core/administration_application.dart';
 import 'package:app/core/thread.dart';
 import 'package:app/core/thread_type.dart';
 import 'package:app/service/firebase_auth_service.dart';
 import 'package:app/service/service_locator.dart';
 import 'package:app/ui/screen/application_confirmation_screen.dart';
+import 'package:app/ui/screen/application_review_screen.dart';
 import 'package:app/ui/screen/application_screen.dart';
 import 'package:app/ui/screen/flagged_threads_screen.dart';
 import 'package:app/ui/screen/home_screen.dart';
@@ -99,6 +101,15 @@ class AppRouteGenerator {
           case ApplicationScreen.route:
             if (isLoggedIn()) {
               return ApplicationScreen<MyQuestionsViewModel>();
+            } else {
+              throw Exception(
+                  'You must be logged in to view this screen: ${settings.name}');
+            }
+
+          case ApplicationReviewScreen.route:
+            if (isLoggedIn() && isAdmin()) {
+              return ApplicationReviewScreen(
+                  application: settings.arguments as AdministrationApplication);
             } else {
               throw Exception(
                   'You must be logged in to view this screen: ${settings.name}');
