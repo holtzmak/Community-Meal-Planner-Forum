@@ -10,6 +10,7 @@ import 'package:app/service/firestore_admin_service.dart';
 import 'package:app/service/navigation_service.dart';
 import 'package:app/service/service_locator.dart';
 import 'package:app/ui/screen/application_screen.dart';
+import 'package:app/ui/screen/applications_to_review_screen.dart';
 import 'package:app/ui/screen/home_screen.dart';
 import 'package:app/ui/widget/template_view_model.dart';
 
@@ -70,9 +71,8 @@ class ApplicationViewModel extends ViewModel {
               description:
                   "Here's what we think went wrong:\n${error.message}"));
 
-  void navigateToApplicationsToReviewScreen() {
-    // TODO
-  }
+  void navigateToApplicationsToReviewScreen() =>
+      _navigationService.navigateBackUntil(ApplicationsToReviewScreen.route);
 
   void navigateToHomeScreen() =>
       _navigationService.navigateBackUntil(HomeScreen.route);

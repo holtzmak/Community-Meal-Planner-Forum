@@ -82,8 +82,15 @@ class _ApplicationPreviewCardState extends State<ApplicationPreviewCard> {
               children: [
                 Spacer(),
                 outlinedBox(
-                    child: Text(ApprovalStatusString.toDisplayString(
-                        application.approvalStatus)),
+                    child: Text(
+                      ApprovalStatusString.toDisplayString(
+                          application.approvalStatus),
+                      style: TextStyle(
+                          color: application.approvalStatus ==
+                                  ApprovalStatus.approved
+                              ? PersianGreen
+                              : Charcoal),
+                    ),
                     childAlignmentInBox: Alignment.center,
                     color: application.approvalStatus == ApprovalStatus.approved
                         ? PersianGreen

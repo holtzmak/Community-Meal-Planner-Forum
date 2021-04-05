@@ -91,16 +91,36 @@ class _ApplicationReviewScreenState extends State<ApplicationReviewScreen> {
 
   Widget _buildReviewScreen(List<Thread> threads) {
     return Column(children: [
-      Padding(
-        padding: EdgeInsets.all(20.0),
-        child: Text(
-          '''Review ${widget.application.applicantName}'s application to become a member of the leadership team
-              \nHere's their content so far:''',
-          style: GoogleFonts.raleway(
-            color: Charcoal,
-            fontSize: MediumTextSize,
+      Container(
+        margin: EdgeInsets.all(20.0),
+        color: PersianGreenVeryOpaque,
+        child: Column(children: [
+          Container(
+            color: Colors.white,
+            margin: EdgeInsets.all(10.0),
+            padding: EdgeInsets.all(10.0),
+            child: Text(
+              "Review ${widget.application.applicantName}'s application to become a member of the leadership team",
+              textAlign: TextAlign.center,
+              style: GoogleFonts.raleway(
+                color: Charcoal,
+                fontWeight: FontWeight.bold,
+                fontSize: MediumTextSize,
+              ),
+            ),
           ),
-        ),
+          Padding(
+            padding: EdgeInsets.all(20.0),
+            child: Text(
+              "Here's their content so far",
+              style: GoogleFonts.raleway(
+                color: Charcoal,
+                fontWeight: FontWeight.bold,
+                fontSize: MediumTextSize,
+              ),
+            ),
+          ),
+        ]),
       ),
       threads.isEmpty
           ? Center(
@@ -121,7 +141,7 @@ class _ApplicationReviewScreenState extends State<ApplicationReviewScreen> {
                   threads.length, (index) => createPreview(threads[index])),
             ),
       Padding(
-        padding: EdgeInsets.only(bottom: 10.0),
+        padding: EdgeInsets.only(bottom: 15.0),
       ),
       Align(
           alignment: Alignment.topLeft,
@@ -134,7 +154,7 @@ class _ApplicationReviewScreenState extends State<ApplicationReviewScreen> {
                 color: Charcoal),
           )),
       Padding(
-        padding: EdgeInsets.all(25.0),
+        padding: EdgeInsets.all(20.0),
       ),
       Align(
           alignment: Alignment.bottomRight,
