@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:app/ui/style.dart';
-import 'package:app/ui/view_model/application_screen_view_model.dart';
+import 'package:app/ui/view_model/application_view_model.dart';
 import 'package:app/ui/widget/custom_app_bar.dart';
 import 'package:app/ui/widget/custom_bottom_app_bar.dart';
 import 'package:app/ui/widget/template_view_model.dart';

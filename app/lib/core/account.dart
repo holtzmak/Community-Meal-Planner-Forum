@@ -81,4 +81,12 @@ class Account {
       aboutMeDescription: newDescription,
       joinDate: joinDate,
       isAdmin: isAdmin);
+
+  Account asAdmin() => Account(
+      id: id,
+      name: name,
+      titles: titles,
+      aboutMeDescription: aboutMeDescription,
+      joinDate: joinDate,
+      isAdmin: true);
 }

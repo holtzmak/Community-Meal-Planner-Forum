@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:app/core/administration_application.dart';
 import 'package:app/core/thread.dart';
 import 'package:app/service/service_locator.dart';
 import 'package:app/ui/style.dart';
@@ -13,20 +14,23 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:uuid/uuid.dart';
 
-class ApplicationScreen<T extends SpecificThreadViewModel>
+class ApplicationReviewScreen<T extends SpecificThreadViewModel>
     extends StatefulWidget {
   final _applicationScreenViewModel =
       ServiceLocator.get<ApplicationViewModel>();
-  static const route = '/application';
+  static const route = '/applicationReview';
+  final AdministrationApplication application;
 
-  ApplicationScreen({Key? key}) : super(key: key);
+  ApplicationReviewScreen({Key? key, required this.application})
+      : super(key: key);
 
   @override
-  _ApplicationScreenState<T> createState() => _ApplicationScreenState<T>();
+  _ApplicationReviewScreenState<T> createState() =>
+      _ApplicationReviewScreenState<T>();
 }
 
-class _ApplicationScreenState<T extends SpecificThreadViewModel>
-    extends State<ApplicationScreen<T>> {
+class _ApplicationReviewScreenState<T extends SpecificThreadViewModel>
+    extends State<ApplicationReviewScreen<T>> {
   ThreadPreviewCard createPreview(T model, Thread thread) => ThreadPreviewCard(
       // Must have unique keys in rebuilding widget lists
       key: ObjectKey(Uuid().v4()),
@@ -54,7 +58,8 @@ class _ApplicationScreenState<T extends SpecificThreadViewModel>
           Padding(
             padding: EdgeInsets.all(20.0),
             child: Text(
-              "A member of the existing team will review your questions and replies of yours to determinea good placement for you.",
+              '''Review ${widget.application.applicantName}'s application to become a member of the leadership team
+              \nHere's their content so far:''',
               style: GoogleFonts.raleway(
                 color: Charcoal,
                 fontSize: MediumTextSize,
@@ -68,7 +73,7 @@ class _ApplicationScreenState<T extends SpecificThreadViewModel>
                   child: Card(
                     child: ListTile(
                       title: Text(
-                        "You have no questions yet",
+                        "There are no questions yet",
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: LargeTextSize),
                       ),
@@ -82,32 +87,25 @@ class _ApplicationScreenState<T extends SpecificThreadViewModel>
                         createPreview(model, model.threads[index]),
                   ),
                 ),
-          elevatedButton(
-              text: "Works for me!",
-              onPressed: widget._applicationScreenViewModel.sendApplication,
-              color: PersianGreen,
-              pressedColor: PersianGreenOpaque),
-          Padding(
-            padding: EdgeInsets.all(20.0),
-            child: Text(
-              "Team members will not contact you about the contents of your questions as part of the application process.",
-              style: GoogleFonts.raleway(
-                color: Charcoal,
-                fontWeight: FontWeight.w300,
-                fontSize: MediumTextSize,
-              ),
-            ),
+          Align(
+            alignment: Alignment.topLeft,
+            child: outlinedButton(
+                text: "Not a good fit yet",
+                onPressed: () => widget._applicationScreenViewModel
+                    .denyApplication(widget.application),
+                color: Charcoal),
           ),
           Padding(
-            padding: EdgeInsets.all(20.0),
-            child: Text(
-              "For further information about becoming a member of the team and associated responsibilities, please see the FAQ page.",
-              style: GoogleFonts.raleway(
-                color: Charcoal,
-                fontWeight: FontWeight.w300,
-                fontSize: MediumTextSize,
-              ),
-            ),
+            padding: EdgeInsets.all(65.0),
+          ),
+          Align(
+            alignment: Alignment.bottomRight,
+            child: elevatedButton(
+                text: "Yes! They should join the team!",
+                onPressed: () => widget._applicationScreenViewModel
+                    .approveApplication(widget.application),
+                color: PersianGreen,
+                pressedColor: PersianGreenOpaque),
           ),
         ]),
       ),

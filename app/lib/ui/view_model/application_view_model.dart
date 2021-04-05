@@ -47,6 +47,33 @@ class ApplicationViewModel extends ViewModel {
     }
   }
 
+  Future<void> approveApplication(AdministrationApplication application) =>
+      _accountService
+          .getAccount(application.applicantId)
+          .then((Account account) =>
+              _accountService.updateAccount(account.asAdmin()))
+          .then((_) => _adminService.updateAdminApplication(
+              application.withApprovalStatus(ApprovalStatus.approved)))
+          .then((_) => navigateToApplicationsToReviewScreen())
+          .catchError((error) => _dialogService.showDialog(
+              title: "Could not complete approval of the application",
+              description:
+                  "Here's what we think went wrong:\n${error.message}"));
+
+  Future<void> denyApplication(AdministrationApplication application) =>
+      _adminService
+          .updateAdminApplication(
+              application.withApprovalStatus(ApprovalStatus.denied))
+          .then((_) => navigateToApplicationsToReviewScreen())
+          .catchError((error) => _dialogService.showDialog(
+              title: "Could not complete updating the application",
+              description:
+                  "Here's what we think went wrong:\n${error.message}"));
+
+  void navigateToApplicationsToReviewScreen() {
+    // TODO
+  }
+
   void navigateToHomeScreen() =>
       _navigationService.navigateBackUntil(HomeScreen.route);
 
