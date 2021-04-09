@@ -493,4 +493,8 @@ class MockQueryDocumentSnapshot extends _i1.Mock
   _i4.SnapshotMetadata get metadata =>
       (super.noSuchMethod(Invocation.getter(#metadata),
           returnValue: _FakeSnapshotMetadata()) as _i4.SnapshotMetadata);
+  @override
+  Map<String, dynamic> data() =>
+      (super.noSuchMethod(Invocation.method(#data, []),
+          returnValue: <String, dynamic>{}) as Map<String, dynamic>);
 }
