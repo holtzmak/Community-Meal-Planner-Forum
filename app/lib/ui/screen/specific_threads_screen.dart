@@ -45,25 +45,37 @@ class _SpecificThreadsScreenState<T extends SpecificItemViewModel>
               // TODO
             }),
         bottomNavigationBar: CustomBottomAppBar.get(),
-        body: model.items.isEmpty
-            ? Center(
-                child: Container(
-                margin: EdgeInsets.all(50.0),
-                child: Card(
-                  child: ListTile(
-                    title: Text(
-                      "There is no information to show yet",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: LargeTextSize),
+        body: Column(children: [
+          Card(
+              child: Padding(
+                  padding: EdgeInsets.all(5.0),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(), labelText: "Search"),
+                    onFieldSubmitted: (String searchTerm) =>
+                        model.filterBySearchTerm(searchTerm),
+                  ))),
+          model.items.isEmpty
+              ? Center(
+                  child: Container(
+                  margin: EdgeInsets.all(50.0),
+                  child: Card(
+                    child: ListTile(
+                      title: Text(
+                        "There is no information to show yet",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: LargeTextSize),
+                      ),
                     ),
                   ),
-                ),
-              ))
-            : ListView.builder(
-                itemCount: model.items.length,
-                itemBuilder: (context, index) =>
-                    createPreview(model, model.items[index]),
-              ),
+                ))
+              : Expanded(
+                  child: ListView.builder(
+                  itemCount: model.filteredItems.length,
+                  itemBuilder: (context, index) =>
+                      createPreview(model, model.filteredItems[index]),
+                )),
+        ]),
       ),
     );
   }
