@@ -5,6 +5,7 @@ import 'package:app/service/firestore_admin_service.dart';
 import 'package:app/service/firestore_announcement_service.dart';
 import 'package:app/service/firestore_thread_service.dart';
 import 'package:app/service/navigation_service.dart';
+import 'package:app/ui/view_model/about_and_legal_view_model.dart';
 import 'package:app/ui/view_model/all_questions_view_model.dart';
 import 'package:app/ui/view_model/announcement_view_model.dart';
 import 'package:app/ui/view_model/announcements_view_model.dart';
@@ -57,5 +58,6 @@ class ServiceLocator {
     get.registerFactory<ApplicationViewModel>(() => ApplicationViewModel());
     get.registerFactory<ApplicationsToReviewViewModel>(
         () => ApplicationsToReviewViewModel());
+    get.registerFactory<AboutAndLegalViewModel>(() => AboutAndLegalViewModel());
   }
 }

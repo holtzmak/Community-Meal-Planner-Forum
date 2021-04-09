@@ -3,6 +3,7 @@ import 'package:app/core/thread.dart';
 import 'package:app/core/thread_type.dart';
 import 'package:app/service/firebase_auth_service.dart';
 import 'package:app/service/service_locator.dart';
+import 'package:app/ui/screen/about_and_legal_screen.dart';
 import 'package:app/ui/screen/application_confirmation_screen.dart';
 import 'package:app/ui/screen/application_review_screen.dart';
 import 'package:app/ui/screen/application_screen.dart';
@@ -51,6 +52,9 @@ class AppRouteGenerator {
             return thread.isAnnouncement
                 ? ThreadDisplayScreen<AnnouncementViewModel>(thread: thread)
                 : ThreadDisplayScreen<ThreadViewModel>(thread: thread);
+
+          case AboutAndLegalScreen.route:
+            return AboutAndLegalScreen();
 
           // Account-required screens, only available if logged in
           case NewThreadScreen.route:

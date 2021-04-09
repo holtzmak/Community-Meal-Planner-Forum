@@ -14,6 +14,7 @@ class CommunityMealPlannerForumApp extends StatelessWidget {
     return MaterialApp(
       title: 'Community of Meal Planners Forums',
       theme: ThemeData(
+          primaryColor: PersianGreen,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           textTheme: TextTheme(
               bodyText2:
