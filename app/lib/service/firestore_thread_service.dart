@@ -17,7 +17,7 @@ class FirestoreThreadService extends TemplateFirestoreThreadService {
       .snapshots()
       .map((QuerySnapshot snapshot) => snapshot.docs
           .map((QueryDocumentSnapshot doc) => Thread.fromJson(
-              id: doc.id, isAnnouncement: false, json: doc.data()!))
+              id: doc.id, isAnnouncement: false, json: doc.data()))
           .toList());
 
   Future<Thread> getLatestAccountSpecificThread(String id) => _firestore
@@ -28,6 +28,6 @@ class FirestoreThreadService extends TemplateFirestoreThreadService {
       .get()
       .then((QuerySnapshot snapshot) => snapshot.docs
           .map((QueryDocumentSnapshot doc) => Thread.fromJson(
-              id: doc.id, isAnnouncement: false, json: doc.data()!))
+              id: doc.id, isAnnouncement: false, json: doc.data()))
           .first);
 }

@@ -31,7 +31,7 @@ class FirestoreAdminService {
           .map((QuerySnapshot snapshot) => snapshot.docs
               .map((QueryDocumentSnapshot doc) =>
                   AdministrationApplication.fromJson(
-                      id: doc.id, json: doc.data()!))
+                      id: doc.id, json: doc.data()))
               .toList());
 
   Stream<AdministrationApplication> getUpdatedSpecificApplication(
@@ -55,6 +55,6 @@ class FirestoreAdminService {
       .snapshots()
       .map((QuerySnapshot snapshot) => snapshot.docs
           .map((QueryDocumentSnapshot doc) =>
-              ThreadFlag.fromJson(id: doc.id, json: doc.data()!))
+              ThreadFlag.fromJson(id: doc.id, json: doc.data()))
           .toList());
 }

@@ -4,6 +4,7 @@ import 'package:app/core/thread_type.dart';
 import 'package:app/service/firebase_auth_service.dart';
 import 'package:app/service/service_locator.dart';
 import 'package:app/ui/screen/about_and_legal_screen.dart';
+import 'package:app/ui/screen/admin_screen.dart';
 import 'package:app/ui/screen/application_confirmation_screen.dart';
 import 'package:app/ui/screen/application_review_screen.dart';
 import 'package:app/ui/screen/application_screen.dart';
@@ -57,6 +58,14 @@ class AppRouteGenerator {
             return AboutAndLegalScreen();
 
           // Account-required screens, only available if logged in
+          case AdminScreen.route:
+            if (isLoggedIn() && isAdmin()) {
+              return AdminScreen();
+            } else {
+              throw Exception(
+                  'You must be logged in to view this screen: ${settings.name}');
+            }
+
           case NewThreadScreen.route:
             final thread = settings.arguments as Thread;
             if (isLoggedIn() && isAdmin() && thread.isAnnouncement) {

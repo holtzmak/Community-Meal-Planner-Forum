@@ -46,17 +46,23 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: SingleChildScrollView(
                           child: Column(
                             children: [
-                              if (model.currentUserIsAdmin)
-                                _buildCallsForReviewButton(model),
-                              if (model.currentUserIsAdmin)
-                                _buildReviewApplicationsButton(model),
-                              stretchedButton(
-                                  text: "All Questions",
-                                  trailing:
-                                      Icon(Icons.arrow_forward_ios_outlined),
+                              ElevatedButton(
                                   onPressed: model.navigateToAllQuestionsScreen,
-                                  color: PersianGreen,
-                                  pressedColor: PersianGreenOpaque),
+                                  style: ElevatedButton.styleFrom(
+                                    minimumSize: Size(100.0, 80.0),
+                                    primary: PersianGreen,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        "All Questions",
+                                        style: GoogleFonts.cabin(
+                                            fontSize: LargeTextSize),
+                                      ),
+                                      Spacer(),
+                                      Icon(Icons.arrow_forward_ios_outlined),
+                                    ],
+                                  )),
                               Padding(
                                 padding: EdgeInsets.only(bottom: 15.0),
                               ),
@@ -175,22 +181,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildCallsForReviewButton(HomeViewModel model) {
-    return Column(
-      children: [
-        stretchedButton(
-            text: "Calls for question reviews",
-            trailing: Icon(Icons.arrow_forward_ios_outlined),
-            onPressed: model.navigateToFlaggedThreadsScreen,
-            color: PersianGreen,
-            pressedColor: PersianGreenOpaque),
-        Padding(
-          padding: EdgeInsets.only(bottom: 15.0),
-        ),
-      ],
-    );
-  }
-
   Widget _buildApplicationButton(HomeViewModel model) {
     return Column(
       children: [
@@ -203,22 +193,6 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: model.navigateToApplicationConfirmationScreen,
             color: Charcoal,
             pressedColor: CharcoalOpaque),
-      ],
-    );
-  }
-
-  Widget _buildReviewApplicationsButton(HomeViewModel model) {
-    return Column(
-      children: [
-        stretchedButton(
-            text: "Review admin applications",
-            trailing: Icon(Icons.arrow_forward_ios_outlined),
-            onPressed: model.navigateToApplicationsToReviewScreen,
-            color: BurntSienna,
-            pressedColor: BurntSiennaOpaque),
-        Padding(
-          padding: EdgeInsets.only(bottom: 15.0),
-        ),
       ],
     );
   }

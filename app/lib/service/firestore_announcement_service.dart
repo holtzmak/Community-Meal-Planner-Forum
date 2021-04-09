@@ -18,6 +18,6 @@ class FirestoreAnnouncementService extends TemplateFirestoreThreadService {
       .get()
       .then((QuerySnapshot snapshot) => snapshot.docs
           .map((QueryDocumentSnapshot doc) => Thread.fromJson(
-              id: doc.id, isAnnouncement: true, json: doc.data()!))
+              id: doc.id, isAnnouncement: true, json: doc.data()))
           .first);
 }
