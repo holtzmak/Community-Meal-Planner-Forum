@@ -42,9 +42,7 @@ abstract class TemplateFirestoreThreadService {
       .snapshots()
       .map((QuerySnapshot snapshot) => snapshot.docs
           .map((QueryDocumentSnapshot doc) => Thread.fromJson(
-              id: doc.id,
-              isAnnouncement: isForAnnouncements,
-              json: doc.data()!))
+              id: doc.id, isAnnouncement: isForAnnouncements, json: doc.data()))
           .toList());
 
   Stream<Thread> getUpdatedSpecificThread(String id) => _firestore
@@ -64,6 +62,6 @@ abstract class TemplateFirestoreThreadService {
       .snapshots()
       .map((QuerySnapshot snapshot) => snapshot.docs
           .map((QueryDocumentSnapshot doc) =>
-              Post.fromJson(id: doc.id, json: doc.data()!))
+              Post.fromJson(id: doc.id, json: doc.data()))
           .toList());
 }
