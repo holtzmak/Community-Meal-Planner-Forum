@@ -465,4 +465,7 @@ class MockAccount extends _i1.Mock implements _i7.Account {
       (super.noSuchMethod(
           Invocation.method(#withAboutMeDescription, [newDescription]),
           returnValue: _FakeAccount()) as _i7.Account);
+  @override
+  _i7.Account asAdmin() => (super.noSuchMethod(Invocation.method(#asAdmin, []),
+      returnValue: _FakeAccount()) as _i7.Account);
 }
