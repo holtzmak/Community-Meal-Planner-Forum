@@ -1,14 +1,15 @@
-# Community of Meal Planners Forums
+![Community of Meal Planners Forums](https://user-images.githubusercontent.com/32527219/114757123-b36d6900-9d18-11eb-8596-3c244c4f97a2.png)
+
 ![Build and integration tests](https://github.com/holtzmak/Community-Meal-Planner-Forum/actions/workflows/flutter-build-and-integration-test.yml/badge.svg)
 ![Unit tests](https://github.com/holtzmak/Community-Meal-Planner-Forum/actions/workflows/flutter-unit-test.yml/badge.svg)
 ![Formatting and Dart analysis](https://github.com/holtzmak/Community-Meal-Planner-Forum/actions/workflows/flutter-formatting-and-dart-analysis.yml/badge.svg)
 
 A [Flutter](https://flutter.dev/) and [Firebase](https://firebase.google.com/) forum application to support community discussion for meal planning, sustainable practices, development, and education.
 
-For an interactable mock-up of the application, see [the Adobe XD Prototype](https://xd.adobe.com/view/262b07e0-7a00-4e45-a4ed-4d4036fc88d5-7378/). You can leave feedback if you like!
+Got questions? Use the [Discussions](https://github.com/holtzmak/Community-Meal-Planner-Forum/discussions) tab and post a question or suggestion there.
 
 **This project's main source of process-related documentation is the [Wiki](https://github.com/holtzmak/Community-Meal-Planner-Forum/wiki).** See the Wiki for the following information and more:
-1. Project deliverables as set out by the post-secondary course
+1. Project documentation as set out by the post-secondary course
 2. Project presentation and progress slides
 3. Application architecture and software design documents
 
@@ -18,7 +19,20 @@ Further documentation and diagrams are available in the [`documentation` folder 
 
 ## Installation and Use
 
- **_Instructions for installing and using this application TBD_**
+1. Install `Git`, the version control system used by GitHub. I have a [repository dedicated to these instructions](https://github.com/holtzmak/Git-Pre-Commit-and-IntelliJ-Settings)!
+2. Install `Flutter`, the application framework. Google has [very thorough instructions here](https://flutter.dev/docs/get-started/install).
+3. Install a Interactive Development Environment (IDE). This is like Microsoft Word, but for programming. I use [Android Studio](https://developer.android.com/studio).
+4. Clone this project using `Git` into a directory of your choice.
+
+`git clone https://github.com/holtzmak/Community-Meal-Planner-Forum.git`
+
+5. Start your IDE, and follow the set up wizard. 
+6. Open the Community Meal Planner Forum as an `existing project`.
+
+You're now ready to play with the source code! If you're interested in running the app on an emulated, or real device:
+1. In Android Studio, you can make an emulated Android device using [these instructions](https://developer.android.com/studio/run/emulator)
+2. *ONLY* if you have an Apple device can you use an iOS simulator. You need [XCode](https://developer.apple.com/xcode/) installed, too. Once you do, [try these instructions](https://stackoverflow.com/a/50865726)
+3. Finally, you can also deploy the app on the web. [Use these instructions](https://flutter.dev/docs/get-started/web) by Google to do so.
 
 ## Project Abstract
 
@@ -33,6 +47,8 @@ The meal planning market consists of convenience tools rather than educational t
 This project aims to provide members of the meal planning community with a space (forum) for relevant discussion and critique of recipes, practices, and tools that can be received by meal planning companies/tool developers so as to incite community-led change in the status quo.
 
 ## Project Deliverables
+
+For an interactable mock-up of the application, see [the Adobe XD Prototype](https://xd.adobe.com/view/262b07e0-7a00-4e45-a4ed-4d4036fc88d5-7378/). You can leave feedback if you like!
 
 Deliverables assigned by the post-secondary course:
 
